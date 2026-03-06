@@ -67,3 +67,20 @@ Realizar este taller me permitió aprender y afianzar los siguientes conceptos:
 ## Dificultades
 
 **Comandos de Git:** Al principio, recordar la secuencia exacta de comandos para conectar el repositorio local con el remoto (git remote add origin [url] y git push -u origin main) fue un poco confuso, pero después de practicarlo un par de veces me quedo un poco mas claro por que me enredaba tambien con las rams si era main o master
+
+
+## Cuestionario clase #3
+
+FastAPI
+## Preguntas sobre concurrencia
+
+### ¿Es seguro usar variable global?
+No es seguro. Cuando varios usuarios usan la API al mismo tiempo, las variables globales pueden causar problemas como condiciones de carrera donde los datos se corrompen.
+
+### ¿Dónde aparece el recurso compartido?
+Los recursos compartidos son la lista 'clientes' y el 'contador_clientes' que están en memoria y son accedidos por todas las peticiones.
+
+### ¿Se debería usar lock en producción?
+No es recomendable porque crea cuellos de botella. En producción se usan bases de datos como PostgreSQL o MySQL.
+
+
