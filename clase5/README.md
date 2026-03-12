@@ -6,10 +6,10 @@
 -  Juan Felipe Rojas
 -  Sebastian Perez
 
-## 📋 Descripción
+##  Descripción
 Microservicio que implementa la funcionalidad completa de los 6 grupos del sistema de citas médicas. Este servicio maneja desde el registro de pacientes hasta la cancelación de citas.
 
-## 🔗 Endpoint Implementados
+##  Endpoint Implementados
 
 | Grupo | Método | Endpoint | Descripción |
 |-------|--------|----------|-------------|
@@ -21,7 +21,7 @@ Microservicio que implementa la funcionalidad completa de los 6 grupos del siste
 | **Grupo 6** | `POST` | `/hacer/reservar-cita` | API Gateway para reservar citas |
 
 ---
-`POST` | `/crear/pacientes`
+## `POST` | `/crear/pacientes`
 
 ###  Parámetros (TODOS)
 | Parámetro | Tipo | Obligatorio | Descripción | Validación | Ejemplo |
@@ -31,14 +31,14 @@ Microservicio que implementa la funcionalidad completa de los 6 grupos del siste
 
 
 
-`GET /listar/pacientes/{id}`
+## `GET /listar/pacientes/{id}`
 
 | Parámetro | Tipo | Obligatorio | Descripción | Validación | Ejemplo |
 |-----------|------|-------------|-------------|------------|---------|
 | id | integer | **SÍ** | ID único del paciente | • Debe ser un número entero positivo<br>• Debe existir en la base de datos<br>• Mayor a 0 | `5` |
 
 
-`POST` | `/crear/citas`
+## `POST` | `/crear/citas`
 
 | Parámetro | Tipo | Obligatorio | Descripción |
 |-----------|------|-------------|-------------|
@@ -46,7 +46,7 @@ Microservicio que implementa la funcionalidad completa de los 6 grupos del siste
 | fecha | string | Sí | Fecha de la cita (formato: DD-MM-YYYY) |
 
 
-`GET` | `/listar/citas/{paciente_id}`
+## `GET` | `/listar/citas/{paciente_id}`
 
 | Parámetro | Tipo | Obligatorio | Descripción | Validación | Ejemplo |
 |-----------|------|-------------|-------------|------------|---------|
@@ -54,7 +54,7 @@ Microservicio que implementa la funcionalidad completa de los 6 grupos del siste
 
 
 
-`DELETE` | `/cancelar/citas/{id}`
+## `DELETE` | `/cancelar/citas/{id}`
 
 | Parámetro | Tipo | Obligatorio | Descripción | Validación | Ejemplo |
 |-----------|------|-------------|-------------|------------|---------|
@@ -64,16 +64,16 @@ Microservicio que implementa la funcionalidad completa de los 6 grupos del siste
 ##  Ejemplo de Request
 
 # Crear paciente
-- ```bash
+ ```bash
 curl -X POST "http://172.20.197.180:8001/crear/pacientes?nombre=Juan%20Carlos%20Perez%20Gomez&email=juan.perez@email.com"
 
 # Listar paciente
--```bash
+```bash
 curl "http://172.20.197.180:8001/listar/pacientes/5"
 
 #  Crear cita
 
-- ```bash
+ ```bash
 curl -X POST "http://172.20.197.180:8001/crear/citas?paciente_id=1&fecha=15-03-2026"
 
 # Listar cita
@@ -82,7 +82,7 @@ curl -X POST "http://172.20.197.180:8001/crear/citas?paciente_id=1&fecha=15-03-2
 curl "http://172.20.197.180:8001/listar/citas/5"
 
 
-#Eliminar cita
+# Eliminar cita
 
 ```bash
 curl -X DELETE "http://172.20.197.180:8001/cancelar/citas/1"
@@ -152,7 +152,7 @@ curl -X DELETE "http://172.20.197.180:8001/cancelar/citas/1"
 } 
 
 
-## **IP Y PUERTO DEL SERVICIO**
+## IP Y PUERTO DEL SERVICIO
 
 | **IP del Servidor** | `172.20.197.180` |
 | **Puerto** | `8001` |
