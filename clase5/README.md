@@ -63,26 +63,26 @@ Microservicio que implementa la funcionalidad completa de los 6 grupos del siste
 
 ##  Ejemplo de Request
 
-# Crear paciente
+## Crear paciente
  ```bash
 curl -X POST "http://172.20.197.180:8001/crear/pacientes?nombre=Juan%20Carlos%20Perez%20Gomez&email=juan.perez@email.com"
 
-# Listar paciente
+## Listar paciente
 ```bash
 curl "http://172.20.197.180:8001/listar/pacientes/5"
 
-#  Crear cita
+##  Crear cita
 
  ```bash
 curl -X POST "http://172.20.197.180:8001/crear/citas?paciente_id=1&fecha=15-03-2026"
 
-# Listar cita
+## Listar cita
 
 ```bash
 curl "http://172.20.197.180:8001/listar/citas/5"
 
 
-# Eliminar cita
+## Eliminar cita
 
 ```bash
 curl -X DELETE "http://172.20.197.180:8001/cancelar/citas/1"
@@ -91,13 +91,13 @@ curl -X DELETE "http://172.20.197.180:8001/cancelar/citas/1"
 
 ## Ejemplo Response 
 
-# Crear paciente
+## Crear paciente
 {
   "mensaje": "Paciente registrado"
 }
 
 
-# listar paciente
+## listar paciente
 
 {
   "id": 5,
@@ -106,7 +106,7 @@ curl -X DELETE "http://172.20.197.180:8001/cancelar/citas/1"
 } 
 
 
-# Crear Cita 
+## Crear Cita 
 
 {
   "mensaje": "Cita creada exitosamente",
@@ -115,7 +115,7 @@ curl -X DELETE "http://172.20.197.180:8001/cancelar/citas/1"
 }
 
 
-# Listar cita
+## Listar cita
 
 [
   {
@@ -145,14 +145,14 @@ curl -X DELETE "http://172.20.197.180:8001/cancelar/citas/1"
 ]
 
 
-# Eliminar cita
+## Eliminar cita
 
 {
   "mensaje": "Cita cancelada"
 } 
 
 
-## IP Y PUERTO DEL SERVICIO
+### IP Y PUERTO DEL SERVICIO
 
 | **IP del Servidor** | `172.20.197.180` |
 | **Puerto** | `8001` |
