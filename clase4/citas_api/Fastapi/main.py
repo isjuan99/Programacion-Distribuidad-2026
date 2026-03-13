@@ -64,7 +64,7 @@ async def listar_citas():
     cursor = None
     try:
         conn = await get_connection()
-        if not conn:
+        if not co6nn:
             raise HTTPException(status_code=500, detail="No se pudo conectar a la base de datos")
             
         cursor = await conn.cursor()
@@ -294,3 +294,4 @@ async def reactivar_cita(id: int):
                 conn.close()
             except:
                 pass
+
