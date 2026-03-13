@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi import HTTPException
 import asyncio
 
+
 from database import get_connection
 
 app = FastAPI()
@@ -188,14 +189,14 @@ async def contar_citas():
 #===================================
 
 
-@app.get("/citas/{paciente}")
-async def buscar_cita(paciente: str):
+@app.get("/citas/{id}")
+async def buscar_cita(id: str):
     conn = await get_connection()
     cursor = await conn.cursor()
     
-    query = "SELECT * FROM citas WHERE paciente=%s"
+    query = "SELECT * FROM citas WHERE id=%s"
     
-    await cursor.execute(query, (paciente,))
+    await cursor.execute(query, (id,))
     
     cita = await cursor.fetchone()
     

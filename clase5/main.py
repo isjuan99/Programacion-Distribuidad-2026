@@ -3,7 +3,7 @@ import mysql.connector
 import requests
 import asyncio
 
-app = FastAPI()
+app = FastAPI(title="API de Citas Médicas   Grupo 3",    )
 
 # ============================================================
 # CONFIGURACION DE BASE DE DATOS

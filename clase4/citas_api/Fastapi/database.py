@@ -2,7 +2,7 @@
 # IMPORTACIONES
 #=================================
 
-import aiomysql # libreria async para Mysql
+#import aiomysql # libreria async para Mysql
 
 #=================================
 # CONFIGURACION DE  CONEXION
@@ -21,7 +21,7 @@ import aiomysql
 DB_CONFIG = {
     'host': 'localhost',
     'user': 'root',  # Nuevo usuario creado
-    'password': '',  # Contraseña que definiste
+    'password': 'juan',  # Contraseña que definiste
     'db': 'citas_db',  # Tu base de datos
     'port': 3306,
     'autocommit': False
