@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from clase6.fastapi import FastAPI, HTTPException
 import mysql.connector
 import requests
 import asyncio

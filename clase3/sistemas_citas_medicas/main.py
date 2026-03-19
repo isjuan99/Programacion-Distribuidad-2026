@@ -4,7 +4,7 @@
 # ============================================
 
 # Importamos las herramientas que necesitamos
-from fastapi import FastAPI, HTTPException  # FastAPI para el servidor, HTTPException para manejar errores
+from clase6.fastapi import FastAPI, HTTPException  # FastAPI para el servidor, HTTPException para manejar errores
 from typing import List, Optional  # Para definir tipos de datos (ayuda a documentar el código)
 import asyncio  # Para simular delays sin bloquear el servidor
 from datetime import datetime  # Para manejar fechas y horas de las citas

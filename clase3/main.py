@@ -1,7 +1,7 @@
 #importaciones
 
 
-from fastapi import FastAPI # import propio del framework FasAPI
+from clase6.fastapi import FastAPI # import propio del framework FasAPI
 from typing import List     # import estandar de python para tipado
 
 

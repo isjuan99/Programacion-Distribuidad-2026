@@ -1,6 +1,6 @@
 
-from fastapi import FastAPI
-from fastapi import HTTPException
+from clase6.fastapi import FastAPI
+from clase6.fastapi import HTTPException
 import asyncio
 
 
