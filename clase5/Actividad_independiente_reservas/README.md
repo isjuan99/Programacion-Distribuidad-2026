@@ -1,8 +1,8 @@
 # Sistema de Reservas Concurrente
 
 Actividad Independiente — Programación Concurrente
-Institución: COTECNOVA
-Lenguaje: Python 3
+
+
 
 ---
 
@@ -14,22 +14,13 @@ Este proyecto simula 50 usuarios intentando reservar 10 cursos, comparando tres 
 
 ---
 
-## Estructura del Repositorio
 
-sistema_reservas/
-├── sistema_reservas.py
-└── README.md
-
----
-
-## Requisitos
-
-- Python 3.6 o superior
-- Librería threading (incluida en Python)
 
 ## Cómo ejecutar
 
-python sistema_reservas.py
+-python3 sin_lock.py
+-python3 con_lock.py
+-python3 con_semaforo.py
 
 ---
 
@@ -160,6 +151,4 @@ Con Semáforo — Hasta 3 hilos simultáneos, datos controlados
 - Lock: la solución más simple y segura para exclusión mutua total.
 - Semáforo: ideal cuando se quiere limitar la concurrencia sin eliminarla.
 
----
 
-Desarrollado como actividad independiente — COTECNOVA 2025
