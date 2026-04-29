@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:     #0E0B08;
+  --bg2:    #161210;
+  --surf:   #1E1914;
+  --b1:     #2E2820;
+  --b2:     #3D3428;
+  --gold:   #C9A84C;
+  --gold2:  #E8D5A3;
+  --rose:   #C47B74;
+  --sage:   #7A8C6E;
+  --t1:     #E8E0D5;
+  --t2:     #9A8E84;
+  --t3:     #5A504A;
+}
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--bg);
+  color: var(--t1);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+}
+
+button, input {
+  font-family: 'Jost', sans-serif;
+}
+
+input::placeholder {
+  color: var(--t3);
+}

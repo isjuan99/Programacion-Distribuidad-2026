@@ -1,0 +1,390 @@
+-- ================================================================
+--  AromaDistribuido — Base de Datos MySQL
+--  E-commerce Perfumería · Sistemas Distribuidos
+--  Grupo 7: Juan Camilo González / Juan David Ríos
+-- ================================================================
+--
+--  INSTRUCCIONES DE USO:
+--  1. Abre tu terminal Ubuntu (WSL)
+--  2. Conéctate a MySQL:
+--       mysql -u root -p
+--  3. Ejecuta este archivo:
+--       source /ruta/al/archivo/schema.sql
+--     O desde terminal:
+--       mysql -u root -p < schema.sql
+--
+-- ================================================================
+
+
+-- ----------------------------------------------------------------
+-- 1. BASE DE DATOS
+-- ----------------------------------------------------------------
+DROP DATABASE IF EXISTS perfumeria_db;
+
+CREATE DATABASE perfumeria_db
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE perfumeria_db;
+
+
+-- ----------------------------------------------------------------
+-- 2. TABLA: usuarios
+--    Almacena clientes y administradores del sistema.
+--    La contraseña se guarda como hash bcrypt (nunca en texto plano).
+-- ----------------------------------------------------------------
+CREATE TABLE usuarios (
+  id          INT           NOT NULL AUTO_INCREMENT,
+  nombre      VARCHAR(100)  NOT NULL,
+  email       VARCHAR(150)  NOT NULL,
+  password    VARCHAR(255)  NOT NULL,        -- hash bcrypt generado por auth.py
+  rol         ENUM('admin','cliente')
+              NOT NULL DEFAULT 'cliente',
+  activo      TINYINT(1)   NOT NULL DEFAULT 1,
+  creado_en   DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  actualizado DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP
+              ON UPDATE CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_email (email),
+  INDEX idx_rol (rol)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci
+  COMMENT='Usuarios del sistema: clientes y administradores';
+
+
+-- ----------------------------------------------------------------
+-- 3. TABLA: inventario
+--    Catálogo de perfumes con precio y stock disponible.
+-- ----------------------------------------------------------------
+CREATE TABLE inventario (
+  id          INT              NOT NULL AUTO_INCREMENT,
+  nombre      VARCHAR(100)     NOT NULL,
+  marca       VARCHAR(100)     NOT NULL,
+  precio      DECIMAL(10,2)    NOT NULL CHECK (precio > 0),
+  stock       INT              NOT NULL DEFAULT 0 CHECK (stock >= 0),
+  descripcion TEXT             DEFAULT NULL,
+  activo      TINYINT(1)       NOT NULL DEFAULT 1,
+  creado_en   DATETIME         NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  actualizado DATETIME         NOT NULL DEFAULT CURRENT_TIMESTAMP
+              ON UPDATE CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (id),
+  INDEX idx_marca (marca),
+  INDEX idx_activo (activo)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci
+  COMMENT='Inventario de perfumes del e-commerce';
+
+
+-- ----------------------------------------------------------------
+-- 4. TABLA: ordenes
+--    Cabecera de cada compra realizada por un cliente.
+-- ----------------------------------------------------------------
+CREATE TABLE ordenes (
+  id          INT              NOT NULL AUTO_INCREMENT,
+  usuario_id  INT              NOT NULL,
+  total       DECIMAL(10,2)    NOT NULL CHECK (total >= 0),
+  estado      ENUM('pendiente','confirmada','entregada','cancelada')
+              NOT NULL DEFAULT 'confirmada',
+  creado_en   DATETIME         NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  actualizado DATETIME         NOT NULL DEFAULT CURRENT_TIMESTAMP
+              ON UPDATE CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (id),
+  INDEX idx_usuario  (usuario_id),
+  INDEX idx_estado   (estado),
+  INDEX idx_creado   (creado_en),
+
+  CONSTRAINT fk_orden_usuario
+    FOREIGN KEY (usuario_id)
+    REFERENCES usuarios (id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci
+  COMMENT='Órdenes de compra de los clientes';
+
+
+-- ----------------------------------------------------------------
+-- 5. TABLA: orden_items
+--    Detalle de cada perfume dentro de una orden.
+--    Guarda precio_unit para mantener el precio histórico de venta.
+-- ----------------------------------------------------------------
+CREATE TABLE orden_items (
+  id          INT           NOT NULL AUTO_INCREMENT,
+  orden_id    INT           NOT NULL,
+  perfume_id  INT           NOT NULL,
+  cantidad    INT           NOT NULL CHECK (cantidad > 0),
+  precio_unit DECIMAL(10,2) NOT NULL CHECK (precio_unit > 0),
+  subtotal    DECIMAL(10,2) GENERATED ALWAYS AS (cantidad * precio_unit) STORED,
+
+  PRIMARY KEY (id),
+  INDEX idx_orden   (orden_id),
+  INDEX idx_perfume (perfume_id),
+
+  CONSTRAINT fk_item_orden
+    FOREIGN KEY (orden_id)
+    REFERENCES ordenes (id)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+
+  CONSTRAINT fk_item_perfume
+    FOREIGN KEY (perfume_id)
+    REFERENCES inventario (id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci
+  COMMENT='Detalle de perfumes por orden de compra';
+
+
+-- ================================================================
+-- 6. DATOS DE PRUEBA
+-- ================================================================
+
+-- ----------------------------------------------------------------
+-- 6.1 Usuarios
+--     Contraseña de todos: admin123
+--     Hashes generados con bcrypt (rounds=12)
+-- ----------------------------------------------------------------
+INSERT INTO usuarios (nombre, email, password, rol) VALUES
+  (
+    'Administrador',
+    'admin@aroma.com',
+    '$2b$12$JPqN7JspfLqdTj8NRd0Pve3wVoUncd9Ub2P22.IdkZhsyzuVM2mK2',
+    'admin'
+  ),
+  (
+    'Juan Camilo González',
+    'cliente@aroma.com',
+    '$2b$12$.tNC.05NsKODhYbzhGHW/.RB9dLbd8PyhAFt0SuWFU8Jk.mCNH8Gm',
+    'cliente'
+  ),
+  (
+    'Juan David Ríos',
+    'juan.rios@aroma.com',
+    '$2b$12$xKA9pfs2sM1hXRwLQdb1puG0dmrK8K/wJUhBL3kdFguafMvLXkMNe',
+    'cliente'
+  );
+
+
+-- ----------------------------------------------------------------
+-- 6.2 Inventario de perfumes
+-- ----------------------------------------------------------------
+INSERT INTO inventario (nombre, marca, precio, stock, descripcion) VALUES
+  (
+    'Sauvage',
+    'Dior',
+    120.00,
+    15,
+    'Fresco y salvaje a la vez. Notas de bergamota calabresa, pimienta de Sichuan y ambroxan.'
+  ),
+  (
+    'Chanel No. 5',
+    'Chanel',
+    150.00,
+    8,
+    'El perfume más icónico del mundo. Floral aldehydic con notas de jazmín, rosa y sándalo.'
+  ),
+  (
+    'Black Opium',
+    'YSL',
+    110.00,
+    20,
+    'Fragancia femenina y adictiva con notas de café negro, vainilla y flor de naranjo.'
+  ),
+  (
+    'Acqua di Gio',
+    'Armani',
+    95.00,
+    12,
+    'Fragancia acuática inspirada en el Mar Mediterráneo. Notas de bergamota, romero y madera de cedro.'
+  ),
+  (
+    'La Vie Est Belle',
+    'Lancôme',
+    105.00,
+    5,
+    'Una declaración de libertad y felicidad. Notas de iris, pralinés y vainilla.'
+  ),
+  (
+    'Bleu de Chanel',
+    'Chanel',
+    145.00,
+    0,
+    'Fragancia woody-aromatic para el hombre moderno. Notas de limón, jengibre y vetiver.'
+  ),
+  (
+    'Good Girl',
+    'Carolina Herrera',
+    130.00,
+    18,
+    'Icónico frasco en forma de stiletto. Notas de jazmín, cacao, tonka y almendra.'
+  ),
+  (
+    'Libre',
+    'YSL',
+    125.00,
+    10,
+    'Fragancia floral-oriental con lavanda de Francia y flores de naranjo de Marruecos.'
+  ),
+  (
+    'Angel',
+    'Mugler',
+    98.00,
+    14,
+    'La fragancia oriental-gourmand icónica. Notas de helecho, pachulí y caramelo.'
+  ),
+  (
+    '212 Sexy',
+    'Carolina Herrera',
+    88.00,
+    9,
+    'Sensual y elegante. Notas de magnolia, maderas exóticas y almizcle.'
+  );
+
+
+-- ----------------------------------------------------------------
+-- 6.3 Órdenes de prueba
+-- ----------------------------------------------------------------
+INSERT INTO ordenes (usuario_id, total, estado) VALUES
+  (2, 265.00, 'entregada'),   -- Juan Camilo: Sauvage + Black Opium
+  (3, 150.00, 'confirmada'),  -- Juan David:  Chanel No. 5
+  (2, 393.00, 'confirmada'),  -- Juan Camilo: Good Girl + Libre + 212 Sexy
+  (3,  95.00, 'pendiente');   -- Juan David:  Acqua di Gio
+
+
+-- ----------------------------------------------------------------
+-- 6.4 Detalle de órdenes
+-- ----------------------------------------------------------------
+-- Orden 1: Sauvage (1ud × $120) + Black Opium (1ud × $110) = $230 + envío = $265
+INSERT INTO orden_items (orden_id, perfume_id, cantidad, precio_unit) VALUES
+  (1, 1, 1, 120.00),   -- Sauvage
+  (1, 3, 1, 110.00);   -- Black Opium
+
+-- Orden 2: Chanel No. 5 (1ud × $150) = $150
+INSERT INTO orden_items (orden_id, perfume_id, cantidad, precio_unit) VALUES
+  (2, 2, 1, 150.00);   -- Chanel No. 5
+
+-- Orden 3: Good Girl (1ud × $130) + Libre (1ud × $125) + 212 Sexy (1ud × $88) = $343
+INSERT INTO orden_items (orden_id, perfume_id, cantidad, precio_unit) VALUES
+  (3, 7, 1, 130.00),   -- Good Girl
+  (3, 8, 1, 125.00),   -- Libre
+  (3, 10, 1, 88.00);   -- 212 Sexy
+
+-- Orden 4: Acqua di Gio (1ud × $95) = $95
+INSERT INTO orden_items (orden_id, perfume_id, cantidad, precio_unit) VALUES
+  (4, 4, 1, 95.00);    -- Acqua di Gio
+
+
+-- ================================================================
+-- 7. VISTAS ÚTILES PARA EL SISTEMA
+-- ================================================================
+
+-- Vista: inventario con estado de stock legible
+CREATE OR REPLACE VIEW vista_inventario AS
+SELECT
+  id,
+  nombre,
+  marca,
+  precio,
+  stock,
+  CASE
+    WHEN stock = 0      THEN 'Sin stock'
+    WHEN stock <= 5     THEN 'Stock bajo'
+    WHEN stock <= 10    THEN 'Stock medio'
+    ELSE                     'Stock alto'
+  END AS estado_stock,
+  descripcion,
+  creado_en
+FROM inventario
+WHERE activo = 1
+ORDER BY marca, nombre;
+
+
+-- Vista: resumen del inventario (para el Dashboard admin)
+CREATE OR REPLACE VIEW vista_resumen_inventario AS
+SELECT
+  COUNT(*)                              AS total_perfumes,
+  SUM(stock)                            AS stock_total,
+  ROUND(SUM(precio * stock), 2)         AS valor_total_inventario,
+  COUNT(DISTINCT marca)                 AS total_marcas,
+  SUM(CASE WHEN stock = 0 THEN 1 ELSE 0 END) AS perfumes_sin_stock,
+  SUM(CASE WHEN stock <= 5 AND stock > 0 THEN 1 ELSE 0 END) AS perfumes_stock_bajo
+FROM inventario
+WHERE activo = 1;
+
+
+-- Vista: órdenes con nombre de cliente (para AdminOrdenesPage)
+CREATE OR REPLACE VIEW vista_ordenes AS
+SELECT
+  o.id          AS orden_id,
+  o.total,
+  o.estado,
+  o.creado_en,
+  u.id          AS usuario_id,
+  u.nombre      AS usuario_nombre,
+  u.email       AS usuario_email
+FROM ordenes o
+JOIN usuarios u ON u.id = o.usuario_id
+ORDER BY o.creado_en DESC;
+
+
+-- Vista: detalle completo de una orden
+CREATE OR REPLACE VIEW vista_orden_detalle AS
+SELECT
+  oi.orden_id,
+  oi.id          AS item_id,
+  inv.nombre     AS perfume_nombre,
+  inv.marca      AS perfume_marca,
+  oi.cantidad,
+  oi.precio_unit,
+  oi.subtotal,
+  o.estado       AS orden_estado,
+  o.creado_en    AS orden_fecha,
+  u.nombre       AS cliente_nombre
+FROM orden_items oi
+JOIN inventario inv ON inv.id = oi.perfume_id
+JOIN ordenes    o   ON o.id   = oi.orden_id
+JOIN usuarios   u   ON u.id   = o.usuario_id;
+
+
+-- ================================================================
+-- 8. USUARIO DE BASE DE DATOS (opcional — para producción)
+--    Ejecuta esto si quieres un usuario dedicado en lugar de root
+-- ================================================================
+-- CREATE USER IF NOT EXISTS 'admin_user'@'localhost' IDENTIFIED BY 'admin123';
+-- GRANT ALL PRIVILEGES ON perfumeria_db.* TO 'admin_user'@'localhost';
+-- FLUSH PRIVILEGES;
+
+
+-- ================================================================
+-- 9. VERIFICACIÓN — muestra un resumen al final
+-- ================================================================
+SELECT '======================================' AS '';
+SELECT '  AromaDistribuido — DB creada OK     ' AS '';
+SELECT '======================================' AS '';
+
+SELECT 'TABLAS:' AS '';
+SHOW TABLES;
+
+SELECT '' AS '';
+SELECT 'USUARIOS DE PRUEBA:' AS '';
+SELECT id, nombre, email, rol, creado_en FROM usuarios;
+
+SELECT '' AS '';
+SELECT 'INVENTARIO:' AS '';
+SELECT id, nombre, marca, precio, stock FROM inventario;
+
+SELECT '' AS '';
+SELECT 'RESUMEN DEL INVENTARIO:' AS '';
+SELECT * FROM vista_resumen_inventario;
+
+SELECT '' AS '';
+SELECT 'ÓRDENES:' AS '';
+SELECT orden_id, usuario_nombre, total, estado, creado_en FROM vista_ordenes;

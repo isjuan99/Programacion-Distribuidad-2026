@@ -1,0 +1,133 @@
+
+============================================================
+✓ MÓDULOS CARGADOS - REDIS INICIALIZANDO...
+============================================================
+
+INFO:     Will watch for changes in these directories: ['/home/juan/programacion-distribuida/inventario']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [71096] using StatReload
+INFO:     Started server process [71099]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+
+============================================================
+✓ MÓDULOS CARGADOS - REDIS INICIALIZANDO...
+============================================================
+
+
+============================================================
+✓ MÓDULOS CARGADOS - REDIS INICIALIZANDO...
+============================================================
+
+INFO:     127.0.0.1:51412 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51412 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46990 - "OPTIONS /inventario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47004 - "OPTIONS /inventario HTTP/1.1" 200 OK
+✓ [REDIS] Conectado a localhost:6379 (DB 0)
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type Decimal is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:46990 - "GET /inventario HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type Decimal is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:47004 - "GET /inventario HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type Decimal is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:51416 - "GET /inventario HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'perfumeria_api/redis_client.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [71099]
+INFO:     Started server process [71172]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'perfumeria_api/redis_client.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [71172]
+INFO:     Started server process [71178]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'test_endpoint_redis.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [71178]
+INFO:     Started server process [71193]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+
+============================================================
+✓ MÓDULOS CARGADOS - REDIS INICIALIZANDO...
+============================================================
+
+
+============================================================
+✓ MÓDULOS CARGADOS - REDIS INICIALIZANDO...
+============================================================
+
+✓ [REDIS] Conectado a localhost:6379 (DB 0)
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type datetime is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:48484 - "GET /inventario HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:resumen
+✓ [REDIS] GUARDADO: inventario:resumen con TTL=60s
+INFO:     127.0.0.1:58096 - "GET /inventario/resumen HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type datetime is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:36254 - "GET /inventario HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49664 - "POST /login HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type datetime is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:49678 - "GET /inventario HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type datetime is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:42442 - "GET /inventario HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type datetime is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:40816 - "GET /inventario HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type datetime is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:40816 - "GET /inventario HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type datetime is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:40816 - "GET /inventario HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type datetime is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:40816 - "GET /inventario HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:resumen
+✓ [REDIS] GUARDADO: inventario:resumen con TTL=60s
+INFO:     127.0.0.1:40816 - "GET /inventario/resumen HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type datetime is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:41216 - "GET /inventario HTTP/1.1" 200 OK
+✗ [REDIS] CACHE MISS: inventario:todos
+✗ [REDIS CACHE MISS] Consultando base de datos para: inventario:todos
+✗ [REDIS] Error SET inventario:todos: Object of type datetime is not JSON serializable
+✓ [REDIS] Datos guardados en caché: inventario:todos (11 items)
+INFO:     127.0.0.1:35430 - "GET /inventario HTTP/1.1" 200 OK

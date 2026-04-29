@@ -1,0 +1,3 @@
+"""
+Perfumeria API helpers package
+"""
