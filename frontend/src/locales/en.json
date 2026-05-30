@@ -147,7 +147,15 @@
     "check_email_message": "We've sent a verification link to {email}. Please click the link to activate your account before signing in.",
     "or_continue_with": "Or continue with",
     "continue_google": "Continue with Google",
-    "continue_apple": "Continue with Apple"
+    "continue_apple": "Continue with Apple",
+    "verify_email_title": "Verify your email",
+    "verifying": "Verifying your account...",
+    "verified_title": "Account verified!",
+    "verified_message": "Your account has been verified. You can now explore our collection.",
+    "verify_error_title": "Invalid link",
+    "verify_error_message": "This verification link is invalid or has already been used. Request a new one from the login screen.",
+    "go_to_shop": "Explore the shop",
+    "register_error": "Error creating account"
   },
   "account": {
     "title": "My Account",

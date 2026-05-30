@@ -147,7 +147,15 @@
     "check_email_message": "Hemos enviado un enlace de verificación a {email}. Haz clic en el enlace para activar tu cuenta antes de iniciar sesión.",
     "or_continue_with": "O continúa con",
     "continue_google": "Continuar con Google",
-    "continue_apple": "Continuar con Apple"
+    "continue_apple": "Continuar con Apple",
+    "verify_email_title": "Verifica tu correo",
+    "verifying": "Verificando tu cuenta...",
+    "verified_title": "¡Cuenta verificada!",
+    "verified_message": "Tu cuenta ha sido verificada exitosamente. Ya puedes explorar nuestra colección.",
+    "verify_error_title": "Enlace inválido",
+    "verify_error_message": "Este enlace de verificación es inválido o ya fue utilizado. Solicita uno nuevo desde la pantalla de inicio de sesión.",
+    "go_to_shop": "Explorar la tienda",
+    "register_error": "Error al crear la cuenta"
   },
   "account": {
     "title": "Mi Cuenta",
