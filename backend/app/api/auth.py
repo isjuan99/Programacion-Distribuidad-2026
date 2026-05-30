@@ -140,6 +140,7 @@ async def google_login(
         if not user.google_id:
             user.google_id = google_id
             db.commit()
+            db.refresh(user)
     else:
         user = User(
             email=email,
@@ -173,6 +174,9 @@ async def apple_login(
 ):
     try:
         import jwt as pyjwt
+        # NOTE: Full Apple token verification requires fetching Apple's JWKS from
+        # https://appleid.apple.com/auth/keys and verifying the RS256 signature.
+        # This simplified version should be hardened before production use.
         decoded = pyjwt.decode(
             body.get("identity_token"),
             options={"verify_signature": False},
@@ -191,6 +195,7 @@ async def apple_login(
         if not user.apple_id:
             user.apple_id = apple_id
             db.commit()
+            db.refresh(user)
     else:
         name_obj = body.get("fullName", {})
         user = User(
