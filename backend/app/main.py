@@ -9,7 +9,7 @@ from app.api.auth import router as auth_router
 from app.api.products import router as products_router
 from app.api.orders import router as orders_router
 from app.api.categories import (
-    categories_router, brands_router, coupons_router, reviews_router
+    categories_router, brands_router, coupons_router, reviews_router, filters_router
 )
 from app.api.upload import router as upload_router
 from app.api.reports import router as reports_router
@@ -52,6 +52,7 @@ app.include_router(categories_router, prefix="/api/v1")
 app.include_router(brands_router, prefix="/api/v1")
 app.include_router(coupons_router, prefix="/api/v1")
 app.include_router(reviews_router, prefix="/api/v1")
+app.include_router(filters_router, prefix="/api/v1")
 app.include_router(upload_router, prefix="/api/v1")
 app.include_router(reports_router, prefix="/api/v1")
 app.include_router(admin_router, prefix="/api/v1")
