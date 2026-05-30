@@ -6,9 +6,21 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref(JSON.parse(localStorage.getItem('aroma_user') || 'null'))
   const accessToken = ref(localStorage.getItem('aroma_access') || '')
   const refreshToken = ref(localStorage.getItem('aroma_refresh') || '')
+  const adminSessionActive = ref(localStorage.getItem('aroma_admin_session') === '1')
 
   const isAuthenticated = computed(() => !!accessToken.value && !!user.value)
   const isAdmin = computed(() => user.value?.is_admin === true)
+  // True ONLY when the user explicitly logged in via /admin/login
+  const isAdminSession = computed(() => isAdmin.value && adminSessionActive.value)
+
+  function setAdminSession(active) {
+    adminSessionActive.value = active
+    if (active) {
+      localStorage.setItem('aroma_admin_session', '1')
+    } else {
+      localStorage.removeItem('aroma_admin_session')
+    }
+  }
 
   function _persist() {
     localStorage.setItem('aroma_user', JSON.stringify(user.value))
@@ -38,9 +50,11 @@ export const useAuthStore = defineStore('auth', () => {
     user.value = null
     accessToken.value = ''
     refreshToken.value = ''
+    adminSessionActive.value = false
     localStorage.removeItem('aroma_user')
     localStorage.removeItem('aroma_access')
     localStorage.removeItem('aroma_refresh')
+    localStorage.removeItem('aroma_admin_session')
   }
 
   async function refreshAccessToken() {
@@ -85,10 +99,11 @@ export const useAuthStore = defineStore('auth', () => {
 
   return {
     user, accessToken, refreshToken,
-    isAuthenticated, isAdmin,
+    isAuthenticated, isAdmin, isAdminSession,
     login, register, logout,
     refreshAccessToken, fetchMe,
     forgotPassword, resetPassword,
     verifyEmail, resendVerification, googleLogin,
+    setAdminSession,
   }
 })

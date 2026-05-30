@@ -134,6 +134,8 @@ async function handleLogin() {
   loading.value = true
   try {
     await auth.login(form.value.email, form.value.password)
+    // Catalog login never grants admin panel access
+    auth.setAdminSession(false)
     const redirect = route.query.redirect || '/'
     router.push(redirect)
   } catch (e) {
