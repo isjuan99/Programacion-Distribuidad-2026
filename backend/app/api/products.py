@@ -108,71 +108,6 @@ async def list_products(
     )
 
 
-@router.get("/{product_id}", response_model=ProductResponse)
-async def get_product(product_id: int, db: Session = Depends(get_db)):
-    product = db.query(Product).options(
-        joinedload(Product.variants),
-        joinedload(Product.brand),
-        joinedload(Product.category),
-    ).filter(Product.id == product_id).first()
-    if not product:
-        raise HTTPException(status_code=404, detail="Producto no encontrado")
-    return ProductResponse.model_validate(_enrich(product, db))
-
-
-@router.post("", response_model=ProductResponse, status_code=201)
-async def create_product(
-    data: ProductCreate,
-    db: Session = Depends(get_db),
-    _: object = Depends(get_current_admin),
-):
-    slug = _slugify(data.name)
-    base = slug
-    n = 1
-    while db.query(Product).filter(Product.slug == slug).first():
-        slug = f"{base}-{n}"
-        n += 1
-    product = Product(**data.model_dump(exclude={"variants"}), slug=slug)
-    db.add(product)
-    db.flush()
-    for v in data.variants:
-        variant = ProductVariant(**v.model_dump(), product_id=product.id)
-        db.add(variant)
-    db.commit()
-    db.refresh(product)
-    return ProductResponse.model_validate(_enrich(product, db))
-
-
-@router.put("/{product_id}", response_model=ProductResponse)
-async def update_product(
-    product_id: int,
-    data: ProductUpdate,
-    db: Session = Depends(get_db),
-    _: object = Depends(get_current_admin),
-):
-    product = db.query(Product).filter(Product.id == product_id).first()
-    if not product:
-        raise HTTPException(status_code=404, detail="Producto no encontrado")
-    for field, value in data.model_dump(exclude_none=True).items():
-        setattr(product, field, value)
-    db.commit()
-    db.refresh(product)
-    return ProductResponse.model_validate(_enrich(product, db))
-
-
-@router.delete("/{product_id}", status_code=204)
-async def delete_product(
-    product_id: int,
-    db: Session = Depends(get_db),
-    _: object = Depends(get_current_admin),
-):
-    product = db.query(Product).filter(Product.id == product_id).first()
-    if not product:
-        raise HTTPException(status_code=404, detail="Producto no encontrado")
-    db.delete(product)
-    db.commit()
-
-
 @router.get("/suggestions")
 async def search_suggestions(
     q: str = Query(..., min_length=1),
@@ -238,6 +173,71 @@ async def list_bundles(
         total=total, page=page, per_page=per_page,
         pages=(total + per_page - 1) // per_page,
     )
+
+
+@router.get("/{product_id}", response_model=ProductResponse)
+async def get_product(product_id: int, db: Session = Depends(get_db)):
+    product = db.query(Product).options(
+        joinedload(Product.variants),
+        joinedload(Product.brand),
+        joinedload(Product.category),
+    ).filter(Product.id == product_id).first()
+    if not product:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+    return ProductResponse.model_validate(_enrich(product, db))
+
+
+@router.post("", response_model=ProductResponse, status_code=201)
+async def create_product(
+    data: ProductCreate,
+    db: Session = Depends(get_db),
+    _: object = Depends(get_current_admin),
+):
+    slug = _slugify(data.name)
+    base = slug
+    n = 1
+    while db.query(Product).filter(Product.slug == slug).first():
+        slug = f"{base}-{n}"
+        n += 1
+    product = Product(**data.model_dump(exclude={"variants"}), slug=slug)
+    db.add(product)
+    db.flush()
+    for v in data.variants:
+        variant = ProductVariant(**v.model_dump(), product_id=product.id)
+        db.add(variant)
+    db.commit()
+    db.refresh(product)
+    return ProductResponse.model_validate(_enrich(product, db))
+
+
+@router.put("/{product_id}", response_model=ProductResponse)
+async def update_product(
+    product_id: int,
+    data: ProductUpdate,
+    db: Session = Depends(get_db),
+    _: object = Depends(get_current_admin),
+):
+    product = db.query(Product).filter(Product.id == product_id).first()
+    if not product:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+    for field, value in data.model_dump(exclude_none=True).items():
+        setattr(product, field, value)
+    db.commit()
+    db.refresh(product)
+    return ProductResponse.model_validate(_enrich(product, db))
+
+
+@router.delete("/{product_id}", status_code=204)
+async def delete_product(
+    product_id: int,
+    db: Session = Depends(get_db),
+    _: object = Depends(get_current_admin),
+):
+    product = db.query(Product).filter(Product.id == product_id).first()
+    if not product:
+        raise HTTPException(status_code=404, detail="Producto no encontrado")
+    db.delete(product)
+    db.commit()
 
 
 @router.get("/{product_id}/related", response_model=ProductListResponse)
