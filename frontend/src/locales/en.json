@@ -52,7 +52,12 @@
     "no_reviews": "No reviews yet. Be the first!",
     "related_products": "You may also like",
     "if_you_like": "If you like this, also try",
-    "fragrance_match_subtitle": "Fragrances with similar notes to {name}"
+    "fragrance_match_subtitle": "Fragrances with similar notes to {name}",
+    "add_review_photos": "Add photos of your purchase (optional)",
+    "add_photo": "Add",
+    "review_photo_hint": "Max 3 photos · JPG, PNG, WEBP · 2MB each",
+    "review_image_too_large": "Image exceeds 2MB",
+    "review_image_upload_error": "Error uploading image"
   },
   "cart": {
     "title": "Your Cart",

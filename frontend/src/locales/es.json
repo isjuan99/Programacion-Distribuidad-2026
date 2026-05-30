@@ -52,7 +52,12 @@
     "no_reviews": "Sin reseñas aún. ¡Sé el primero!",
     "related_products": "También te puede interesar",
     "if_you_like": "Si te gusta, también prueba",
-    "fragrance_match_subtitle": "Fragancias con notas similares a {name}"
+    "fragrance_match_subtitle": "Fragancias con notas similares a {name}",
+    "add_review_photos": "Agrega fotos de tu compra (opcional)",
+    "add_photo": "Agregar",
+    "review_photo_hint": "Máx. 3 fotos · JPG, PNG, WEBP · 2MB c/u",
+    "review_image_too_large": "La imagen supera 2MB",
+    "review_image_upload_error": "Error al subir la imagen"
   },
   "cart": {
     "title": "Tu Carrito",
