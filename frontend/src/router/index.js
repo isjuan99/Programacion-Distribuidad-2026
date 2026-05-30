@@ -11,6 +11,7 @@ const routes = [
   { path: '/terms', name: 'Terms', component: () => import('../pages/TermsPage.vue') },
   { path: '/privacy', name: 'Privacy', component: () => import('../pages/PrivacyPage.vue') },
   { path: '/shipping', name: 'Shipping', component: () => import('../pages/ShippingPage.vue') },
+  { path: '/order/success/:orderId', name: 'OrderSuccess', component: () => import('../pages/OrderSuccessPage.vue') },
 
   // Auth
   { path: '/login', name: 'Login', component: () => import('../pages/LoginPage.vue'), meta: { guestOnly: true } },
@@ -49,6 +50,7 @@ const routes = [
       { path: 'reviews', name: 'AdminReviews', component: () => import('../pages/admin/AdminReviews.vue') },
       { path: 'reports', name: 'AdminReports', component: () => import('../pages/admin/AdminReports.vue') },
       { path: 'settings', name: 'AdminSettings', component: () => import('../pages/admin/AdminSettings.vue') },
+      { path: 'returns', name: 'AdminReturns', component: () => import('../pages/admin/AdminReturns.vue') },
     ],
   },
   { path: '/admin/login', name: 'AdminLogin', component: () => import('../pages/admin/AdminLoginPage.vue') },

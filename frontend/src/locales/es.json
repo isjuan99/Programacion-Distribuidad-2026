@@ -77,7 +77,8 @@
     "remove": "Eliminar",
     "free_shipping": "Envío gratis en pedidos sobre $250",
     "coupon_placeholder": "Tarjeta regalo o código de descuento",
-    "apply": "Aplicar"
+    "apply": "Aplicar",
+    "discount": "Descuento"
   },
   "checkout": {
     "title": "Compra Segura",
@@ -263,9 +264,22 @@
     "yes": "Sí",
     "no": "No",
     "free": "Gratis",
+    "qty": "Cant.",
+    "go_home": "Ir al inicio",
     "active": "Activo",
     "inactive": "Inactivo",
     "draft": "Borrador"
+  },
+  "order_success": {
+    "title": "¡Pedido Confirmado!",
+    "subtitle": "Gracias por tu compra en Aroma-Distribuido",
+    "order_number": "NÚMERO DE PEDIDO",
+    "email_sent": "Hemos enviado una confirmación a {email}",
+    "your_order": "Tu Pedido",
+    "shipping_to": "Dirección de Envío",
+    "track_order": "Seguir mi Pedido",
+    "continue_shopping": "Seguir Comprando",
+    "not_found": "Pedido no encontrado"
   },
   "search": {
     "view_all_results": "Ver todos los resultados para \"{q}\"",

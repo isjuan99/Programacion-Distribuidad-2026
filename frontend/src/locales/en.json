@@ -77,7 +77,8 @@
     "remove": "Remove",
     "free_shipping": "Free shipping on orders over $250",
     "coupon_placeholder": "Gift card or discount code",
-    "apply": "Apply"
+    "apply": "Apply",
+    "discount": "Discount"
   },
   "checkout": {
     "title": "Secure Checkout",
@@ -263,9 +264,22 @@
     "yes": "Yes",
     "no": "No",
     "free": "Free",
+    "qty": "Qty.",
+    "go_home": "Go to home",
     "active": "Active",
     "inactive": "Inactive",
     "draft": "Draft"
+  },
+  "order_success": {
+    "title": "Order Confirmed!",
+    "subtitle": "Thank you for shopping at Aroma-Distribuido",
+    "order_number": "ORDER NUMBER",
+    "email_sent": "We sent a confirmation to {email}",
+    "your_order": "Your Order",
+    "shipping_to": "Shipping Address",
+    "track_order": "Track My Order",
+    "continue_shopping": "Continue Shopping",
+    "not_found": "Order not found"
   },
   "search": {
     "view_all_results": "View all results for \"{q}\"",
