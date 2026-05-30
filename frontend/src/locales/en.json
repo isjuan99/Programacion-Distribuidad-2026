@@ -37,7 +37,8 @@
     "new_badge": "NEW",
     "offer_badge": "OFFER",
     "sold_out_badge": "SOLD OUT",
-    "olfactory_notes": "Olfactory Notes"
+    "olfactory_notes": "Olfactory Notes",
+    "clear_notes": "Clear notes"
   },
   "product": {
     "brand": "Brand",
@@ -57,7 +58,9 @@
     "add_photo": "Add",
     "review_photo_hint": "Max 3 photos · JPG, PNG, WEBP · 2MB each",
     "review_image_too_large": "Image exceeds 2MB",
-    "review_image_upload_error": "Error uploading image"
+    "review_image_upload_error": "Error uploading image",
+    "bundle_label": "Gift Set",
+    "bundle_includes": "This set includes several curated products"
   },
   "cart": {
     "title": "Your Cart",
@@ -237,7 +240,11 @@
     "total_revenue": "Total Revenue",
     "monthly_revenue": "Monthly Revenue",
     "total_orders": "Total Orders",
-    "total_customers": "Total Customers"
+    "total_customers": "Total Customers",
+    "brands": "Brands",
+    "categories": "Categories",
+    "is_bundle": "Is this a bundle/gift set?",
+    "bundle_hint": "Bundles group multiple products in a special offer"
   },
   "common": {
     "loading": "Loading...",

@@ -37,7 +37,8 @@
     "new_badge": "NUEVO",
     "offer_badge": "OFERTA",
     "sold_out_badge": "AGOTADO",
-    "olfactory_notes": "Notas Olfativas"
+    "olfactory_notes": "Notas Olfativas",
+    "clear_notes": "Limpiar notas"
   },
   "product": {
     "brand": "Marca",
@@ -57,7 +58,9 @@
     "add_photo": "Agregar",
     "review_photo_hint": "Máx. 3 fotos · JPG, PNG, WEBP · 2MB c/u",
     "review_image_too_large": "La imagen supera 2MB",
-    "review_image_upload_error": "Error al subir la imagen"
+    "review_image_upload_error": "Error al subir la imagen",
+    "bundle_label": "Set de Regalo",
+    "bundle_includes": "Este set incluye varios productos seleccionados"
   },
   "cart": {
     "title": "Tu Carrito",
@@ -239,7 +242,9 @@
     "total_orders": "Pedidos Totales",
     "total_customers": "Clientes Totales",
     "brands": "Marcas",
-    "categories": "Categorías"
+    "categories": "Categorías",
+    "is_bundle": "¿Es un set/bundle?",
+    "bundle_hint": "Los bundles agrupan varios productos en una oferta especial"
   },
   "common": {
     "loading": "Cargando...",
