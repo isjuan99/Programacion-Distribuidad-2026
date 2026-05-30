@@ -49,7 +49,9 @@
     "reviews": "Reseñas",
     "write_review": "Escribir Reseña",
     "no_reviews": "Sin reseñas aún. ¡Sé el primero!",
-    "related_products": "También te puede interesar"
+    "related_products": "También te puede interesar",
+    "if_you_like": "Si te gusta, también prueba",
+    "fragrance_match_subtitle": "Fragancias con notas similares a {name}"
   },
   "cart": {
     "title": "Tu Carrito",

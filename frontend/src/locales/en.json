@@ -49,7 +49,9 @@
     "reviews": "Reviews",
     "write_review": "Write a Review",
     "no_reviews": "No reviews yet. Be the first!",
-    "related_products": "You may also like"
+    "related_products": "You may also like",
+    "if_you_like": "If you like this, also try",
+    "fragrance_match_subtitle": "Fragrances with similar notes to {name}"
   },
   "cart": {
     "title": "Your Cart",
