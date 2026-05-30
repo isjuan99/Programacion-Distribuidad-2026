@@ -1,0 +1,66 @@
+version: "3.9"
+
+services:
+  # ── PostgreSQL ────────────────────────────────────────────────────────────
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: aroma_db
+      POSTGRES_USER: aroma_user
+      POSTGRES_PASSWORD: aroma_secret
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aroma_user -d aroma_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── FastAPI Backend ───────────────────────────────────────────────────────
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://aroma_user:aroma_secret@db:5432/aroma_db
+      SECRET_KEY: cambiar-esto-en-produccion-usar-openssl-rand-hex-32
+      ALGORITHM: HS256
+      ACCESS_TOKEN_EXPIRE_MINUTES: 30
+      REFRESH_TOKEN_EXPIRE_DAYS: 7
+      FRONTEND_URL: http://localhost:80
+      UPLOAD_DIR: /app/uploads
+      # SMTP — Gmail configurado
+      SMTP_HOST: smtp.gmail.com
+      SMTP_PORT: 587
+      SMTP_USER: aromadistribuido@gmail.com
+      SMTP_PASSWORD: qddxwmfplqpzzohj
+      EMAILS_FROM: aromadistribuido@gmail.com
+      EMAILS_FROM_NAME: Aroma-Distribuido
+      # Google / Apple OAuth
+      GOOGLE_CLIENT_ID: "563607884052-vuqvpo7ls4fqfoaidpubik653c1p6ner.apps.googleusercontent.com"
+      APPLE_CLIENT_ID: ""
+      # Stripe — configurar para pagos reales
+      STRIPE_SECRET_KEY: sk_test_xxxxxxxxxxxxxxxxx
+      STRIPE_WEBHOOK_SECRET: whsec_xxxxxxxxxxxxxxxxx
+    volumes:
+      - uploads_data:/app/uploads
+    ports:
+      - "8000:8000"
+
+  # ── Vue 3 Frontend ────────────────────────────────────────────────────────
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  postgres_data:
+  uploads_data:
