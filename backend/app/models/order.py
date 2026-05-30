@@ -39,6 +39,9 @@ class Order(Base):
     stripe_payment_intent_id = Column(String(255), nullable=True)
     payment_method = Column(String(50), nullable=True)
     notes = Column(Text, nullable=True)
+    tracking_number = Column(String(100), nullable=True)
+    tracking_company = Column(String(100), nullable=True)
+    tracking_url = Column(String(500), nullable=True)
 
     # Shipping address (denormalized for historical accuracy)
     shipping_email = Column(String(255), nullable=False)
