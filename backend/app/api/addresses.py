@@ -25,11 +25,17 @@ async def create_address(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    if data.is_default:
+    existing_count = db.query(Address).filter(Address.user_id == current_user.id).count()
+    # Auto-default if this is the first address or caller requested it
+    if data.is_default or existing_count == 0:
         db.query(Address).filter(
             Address.user_id == current_user.id
         ).update({"is_default": False})
-    addr = Address(**data.model_dump(), user_id=current_user.id)
+        addr_data = data.model_dump()
+        addr_data["is_default"] = True
+    else:
+        addr_data = data.model_dump()
+    addr = Address(**addr_data, user_id=current_user.id)
     db.add(addr)
     db.commit()
     db.refresh(addr)
