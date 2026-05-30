@@ -24,8 +24,15 @@
         </RouterLink>
       </div>
 
-      <!-- Existing register form -->
-      <form v-else @submit.prevent="handleRegister" class="space-y-3">
+      <!-- Register form + OAuth (shown when not yet registered) -->
+      <template v-else>
+        <!-- OAuth Buttons -->
+        <div class="mb-6">
+          <OAuthButtons @error="oauthError = $event" />
+          <p v-if="oauthError" class="text-red-400 text-sm text-center mt-2">{{ oauthError }}</p>
+        </div>
+
+        <form @submit.prevent="handleRegister" class="space-y-3">
         <div class="grid grid-cols-2 gap-3">
           <div class="relative">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-aroma-muted">
@@ -153,6 +160,7 @@
           {{ loading ? $t('common.loading') : $t('auth.register_btn') }}
         </button>
       </form>
+      </template>
 
       <p class="text-center text-xs text-aroma-muted mt-6">
         {{ $t('auth.have_account') }}
@@ -167,6 +175,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useAuthStore } from '../stores/auth'
+import OAuthButtons from '../components/auth/OAuthButtons.vue'
 
 const auth = useAuthStore()
 
@@ -178,6 +187,7 @@ const showPwd = ref(false)
 const showConfirm = ref(false)
 const loading = ref(false)
 const error = ref('')
+const oauthError = ref('')
 const registered = ref(false)
 const registeredEmail = ref('')
 

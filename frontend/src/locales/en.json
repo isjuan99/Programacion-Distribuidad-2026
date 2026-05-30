@@ -144,7 +144,10 @@
     "resending": "Sending...",
     "verification_sent": "Verification email sent. Please check your inbox.",
     "check_email_title": "Check your email",
-    "check_email_message": "We've sent a verification link to {email}. Please click the link to activate your account before signing in."
+    "check_email_message": "We've sent a verification link to {email}. Please click the link to activate your account before signing in.",
+    "or_continue_with": "Or continue with",
+    "continue_google": "Continue with Google",
+    "continue_apple": "Continue with Apple"
   },
   "account": {
     "title": "My Account",

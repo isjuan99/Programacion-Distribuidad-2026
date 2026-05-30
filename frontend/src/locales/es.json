@@ -144,7 +144,10 @@
     "resending": "Enviando...",
     "verification_sent": "Correo de verificación enviado. Por favor revisa tu bandeja de entrada.",
     "check_email_title": "Revisa tu correo",
-    "check_email_message": "Hemos enviado un enlace de verificación a {email}. Haz clic en el enlace para activar tu cuenta antes de iniciar sesión."
+    "check_email_message": "Hemos enviado un enlace de verificación a {email}. Haz clic en el enlace para activar tu cuenta antes de iniciar sesión.",
+    "or_continue_with": "O continúa con",
+    "continue_google": "Continuar con Google",
+    "continue_apple": "Continuar con Apple"
   },
   "account": {
     "title": "Mi Cuenta",
