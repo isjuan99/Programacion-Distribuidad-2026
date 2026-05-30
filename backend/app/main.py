@@ -15,6 +15,7 @@ from app.api.upload import router as upload_router
 from app.api.reports import router as reports_router
 from app.api.admin import router as admin_router
 from app.api.addresses import router as addresses_router
+from app.api.returns import router as returns_router
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -57,6 +58,7 @@ app.include_router(upload_router, prefix="/api/v1")
 app.include_router(reports_router, prefix="/api/v1")
 app.include_router(admin_router, prefix="/api/v1")
 app.include_router(addresses_router, prefix="/api/v1")
+app.include_router(returns_router, prefix="/api/v1")
 
 
 @app.get("/api/v1/health")
