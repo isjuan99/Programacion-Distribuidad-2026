@@ -171,7 +171,19 @@
     "status": "Estado",
     "en_camino": "En camino",
     "entregado": "Entregado",
-    "pending": "Pendiente"
+    "pending": "Pendiente",
+    "my_addresses": "Mis Direcciones",
+    "add_address": "Agregar Dirección",
+    "no_addresses": "No tienes direcciones guardadas.",
+    "default": "Predeterminada",
+    "set_default": "Establecer como predeterminada",
+    "edit_address": "Editar Dirección",
+    "new_address": "Nueva Dirección",
+    "address_label": "Etiqueta",
+    "state": "Estado / Provincia",
+    "phone": "Teléfono",
+    "set_as_default": "Establecer como dirección predeterminada",
+    "confirm_delete_address": "¿Eliminar esta dirección?"
   },
   "admin": {
     "console": "Admin Console",

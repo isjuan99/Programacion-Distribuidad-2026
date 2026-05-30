@@ -171,7 +171,19 @@
     "status": "Status",
     "en_camino": "In Transit",
     "entregado": "Delivered",
-    "pending": "Pending"
+    "pending": "Pending",
+    "my_addresses": "My Addresses",
+    "add_address": "Add Address",
+    "no_addresses": "You have no saved addresses.",
+    "default": "Default",
+    "set_default": "Set as default",
+    "edit_address": "Edit Address",
+    "new_address": "New Address",
+    "address_label": "Label",
+    "state": "State / Province",
+    "phone": "Phone",
+    "set_as_default": "Set as default address",
+    "confirm_delete_address": "Delete this address?"
   },
   "admin": {
     "console": "Admin Console",
