@@ -203,7 +203,9 @@
     "state": "State / Province",
     "phone": "Phone",
     "set_as_default": "Set as default address",
-    "confirm_delete_address": "Delete this address?"
+    "confirm_delete_address": "Delete this address?",
+    "tracking": "Shipping Info",
+    "track_package": "Track package"
   },
   "admin": {
     "console": "Admin Console",
@@ -255,7 +257,14 @@
     "update_status": "Update status",
     "admin_notes": "Internal notes",
     "notes_placeholder": "Message for the customer (optional)...",
-    "save_status": "Save Changes"
+    "save_status": "Save Changes",
+    "export_error": "Export error",
+    "tracking_info": "Tracking Information",
+    "tracking_company": "Shipping Company",
+    "tracking_number": "Tracking Number",
+    "tracking_url": "Tracking URL",
+    "save_tracking": "Save & Notify Customer",
+    "tracking_saved": "Tracking saved and email sent to customer"
   },
   "returns": {
     "return_details": "Return Details",
@@ -294,7 +303,8 @@
     "all": "All",
     "review": "Review",
     "date": "Date",
-    "actions": "Actions"
+    "actions": "Actions",
+    "optional": "optional"
   },
   "order_success": {
     "title": "Order Confirmed!",

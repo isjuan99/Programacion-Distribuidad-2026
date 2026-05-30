@@ -102,19 +102,94 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="order in orders" :key="order.id" class="border-b border-aroma-border/50 hover:bg-aroma-surface/30">
-                    <td class="py-4 text-aroma-text">#{{ order.order_number }}</td>
-                    <td class="py-4 text-aroma-muted">{{ formatDate(order.created_at) }}</td>
-                    <td class="py-4 text-aroma-text">${{ order.total.toFixed(2) }}</td>
-                    <td class="py-4">
-                      <span :class="statusClass(order.status)">{{ statusLabel(order.status) }}</span>
-                    </td>
-                  </tr>
+                  <template v-for="order in orders" :key="order.id">
+                    <tr class="border-b border-aroma-border/50 hover:bg-aroma-surface/30" :class="{ 'border-b-0': order.tracking_number }">
+                      <td class="py-4 text-aroma-text">#{{ order.order_number }}</td>
+                      <td class="py-4 text-aroma-muted">{{ formatDate(order.created_at) }}</td>
+                      <td class="py-4 text-aroma-text">${{ order.total.toFixed(2) }}</td>
+                      <td class="py-4">
+                        <span :class="statusClass(order.status)">{{ statusLabel(order.status) }}</span>
+                      </td>
+                    </tr>
+                    <tr v-if="order.tracking_number" class="border-b border-aroma-border/50">
+                      <td colspan="4" class="pb-4 pt-0">
+                        <!-- Tracking info -->
+                        <div class="mt-2 bg-blue-900/10 border border-blue-500/20 rounded p-3">
+                          <p class="text-xs tracking-widest text-gray-400 mb-1 uppercase">{{ $t('account.tracking') }}</p>
+                          <p class="text-sm text-white">
+                            {{ order.tracking_company }} ·
+                            <span class="text-[#c9a84c]">{{ order.tracking_number }}</span>
+                          </p>
+                          <a
+                            v-if="order.tracking_url"
+                            :href="order.tracking_url"
+                            target="_blank"
+                            rel="noopener"
+                            class="inline-block mt-1 text-xs text-[#c9a84c] border border-[#c9a84c]/30 px-3 py-1 hover:bg-[#c9a84c]/10 transition-colors"
+                          >
+                            {{ $t('account.track_package') }} →
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </template>
                   <tr v-if="orders.length === 0">
                     <td colspan="4" class="py-8 text-center text-aroma-muted text-xs">Sin pedidos aún</td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+
+          <!-- Orders Tab -->
+          <div v-if="activeTab === 'orders'" class="space-y-4">
+            <h3 class="text-lg text-white font-light">{{ $t('account.orders') }}</h3>
+            <div v-if="loadingOrders" class="animate-pulse space-y-3">
+              <div v-for="i in 3" :key="i" class="h-12 bg-aroma-surface" />
+            </div>
+            <div v-else-if="orders.length === 0" class="text-center py-12 text-gray-500 text-sm">
+              Sin pedidos aún
+            </div>
+            <div v-else class="space-y-3">
+              <div
+                v-for="order in orders"
+                :key="order.id"
+                class="border border-gray-800 p-4"
+              >
+                <div class="flex items-center justify-between gap-4">
+                  <div class="min-w-0">
+                    <p class="text-sm text-gray-300">#{{ order.order_number }}</p>
+                    <p class="text-xs text-gray-500 mt-1">{{ formatDate(order.created_at) }}</p>
+                  </div>
+                  <div class="flex items-center gap-3 shrink-0">
+                    <span class="text-sm text-aroma-text">${{ order.total.toFixed(2) }}</span>
+                    <span :class="statusClass(order.status)" class="text-xs">{{ statusLabel(order.status) }}</span>
+                  </div>
+                </div>
+                <div v-if="order.tracking_number" class="mt-3 bg-blue-900/10 border border-blue-500/20 rounded p-3">
+                  <p class="text-xs tracking-widest text-gray-400 mb-1 uppercase">{{ $t('account.tracking') }}</p>
+                  <p class="text-sm text-white">
+                    {{ order.tracking_company }} ·
+                    <span class="text-[#c9a84c]">{{ order.tracking_number }}</span>
+                  </p>
+                  <a
+                    v-if="order.tracking_url"
+                    :href="order.tracking_url"
+                    target="_blank"
+                    rel="noopener"
+                    class="inline-block mt-1 text-xs text-[#c9a84c] border border-[#c9a84c]/30 px-3 py-1 hover:bg-[#c9a84c]/10 transition-colors"
+                  >
+                    {{ $t('account.track_package') }} →
+                  </a>
+                </div>
+                <button
+                  v-if="order.status === 'delivered'"
+                  @click="openReturnForm(order.id)"
+                  class="text-xs text-gray-400 border border-gray-700 px-3 py-1 hover:border-gray-500 hover:text-white transition-colors mt-2 inline-block"
+                >
+                  {{ $t('account.request_return') }}
+                </button>
+              </div>
             </div>
           </div>
 
@@ -248,6 +323,74 @@
               </div>
             </div>
           </div>
+          <!-- Returns tab -->
+          <div v-if="activeTab === 'returns'" class="space-y-4">
+            <h3 class="text-lg text-white font-light">{{ $t('account.my_returns') }}</h3>
+
+            <div v-if="returns.length === 0" class="text-center py-12 text-gray-500 text-sm">
+              {{ $t('account.no_returns') }}
+            </div>
+            <div v-else class="space-y-3">
+              <div
+                v-for="ret in returns"
+                :key="ret.id"
+                class="border border-gray-800 p-4 flex items-center justify-between gap-4"
+              >
+                <div class="min-w-0">
+                  <p class="text-sm text-gray-300">Pedido #{{ ret.order_id }} · {{ ret.reason }}</p>
+                  <p class="text-xs text-gray-500 mt-1">{{ formatDate(ret.created_at) }}</p>
+                </div>
+                <span
+                  class="text-xs px-2 py-1 shrink-0 rounded-sm"
+                  :class="{
+                    'bg-yellow-500/20 text-yellow-400': ret.status === 'pending',
+                    'bg-green-500/20 text-green-400': ret.status === 'approved' || ret.status === 'refunded',
+                    'bg-red-500/20 text-red-400': ret.status === 'rejected',
+                    'bg-blue-500/20 text-blue-400': ret.status === 'shipped',
+                  }"
+                >
+                  {{ returnStatusLabel(ret.status) }}
+                </span>
+              </div>
+            </div>
+
+            <!-- Return request modal -->
+            <div
+              v-if="showReturnForm"
+              class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4"
+              @click.self="showReturnForm = false"
+            >
+              <div class="bg-[#111] border border-gray-800 p-6 w-full max-w-md">
+                <h3 class="text-white font-light mb-6">{{ $t('account.request_return') }}</h3>
+                <form @submit.prevent="submitReturn" class="space-y-4">
+                  <div>
+                    <label class="block text-xs text-gray-400 mb-1 uppercase tracking-widest">{{ $t('returns.reason') }}</label>
+                    <select v-model="returnForm.reason" required
+                      class="w-full bg-[#0a0a0a] border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none">
+                      <option value="" disabled>{{ $t('returns.select_reason') }}</option>
+                      <option v-for="r in returnReasons" :key="r" :value="r">{{ r }}</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="block text-xs text-gray-400 mb-1 uppercase tracking-widest">{{ $t('returns.comments') }} ({{ $t('common.optional') }})</label>
+                    <textarea v-model="returnForm.comments" rows="3"
+                      class="w-full bg-[#0a0a0a] border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none resize-none"
+                    ></textarea>
+                  </div>
+                  <div class="flex gap-3">
+                    <button type="submit"
+                      class="flex-1 bg-[#c9a84c] text-black py-3 text-sm tracking-widest hover:bg-[#b8943e] transition-colors">
+                      {{ $t('account.submit_return') }}
+                    </button>
+                    <button type="button" @click="showReturnForm = false"
+                      class="px-5 border border-gray-700 text-gray-400 text-sm hover:border-gray-500 transition-colors">
+                      {{ $t('common.cancel') }}
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </main>
       </div>
     </div>
@@ -350,12 +493,67 @@ async function setDefaultAddress(id) {
   }
 }
 
+// Returns
+const returns = ref([])
+const showReturnForm = ref(false)
+const returnOrderId = ref(null)
+const returnForm = ref({ reason: '', comments: '' })
+const returnReasons = [
+  'Producto dañado',
+  'No coincide con la descripción',
+  'Cambio de opinión',
+  'Producto incorrecto recibido',
+  'Calidad insatisfactoria',
+]
+
+async function loadReturns() {
+  try {
+    const { data } = await api.get('/returns/my-returns')
+    returns.value = data
+  } catch {
+    returns.value = []
+  }
+}
+
+function openReturnForm(orderId) {
+  returnOrderId.value = orderId
+  returnForm.value = { reason: '', comments: '' }
+  showReturnForm.value = true
+}
+
+async function submitReturn() {
+  try {
+    await api.post('/returns', {
+      order_id: returnOrderId.value,
+      reason: returnForm.value.reason,
+      comments: returnForm.value.comments,
+    })
+    showReturnForm.value = false
+    await loadReturns()
+    alert(t('account.return_submitted'))
+  } catch (e) {
+    alert(e.response?.data?.detail || t('common.error'))
+  }
+}
+
+function returnStatusLabel(status) {
+  const map = {
+    pending: t('returns.status_pending'),
+    approved: t('returns.status_approved'),
+    rejected: t('returns.status_rejected'),
+    shipped: t('returns.status_shipped'),
+    refunded: t('returns.status_refunded'),
+  }
+  return map[status] || status
+}
+
 const lastOrder = computed(() => orders.value[0] || null)
 
 const menuItems = [
   { tab: 'profile', i18n: 'account.profile', icon: 'span' },
   { tab: 'orders', i18n: 'account.orders', icon: 'span' },
   { tab: 'addresses', i18n: 'account.addresses', icon: 'span' },
+  { tab: 'returns', i18n: 'account.my_returns', icon: 'span' },
   { tab: 'payment', i18n: 'account.payment', icon: 'span' },
   { tab: 'wishlist', i18n: 'account.wishlist', icon: 'span' },
 ]
@@ -391,5 +589,6 @@ onMounted(async () => {
     loadingOrders.value = false
   }
   await loadAddresses()
+  await loadReturns()
 })
 </script>
