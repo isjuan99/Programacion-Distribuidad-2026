@@ -19,6 +19,8 @@ const routes = [
   { path: '/forgot-password', name: 'ForgotPassword', component: () => import('../pages/ForgotPasswordPage.vue'), meta: { guestOnly: true } },
   { path: '/reset-password', name: 'ResetPassword', component: () => import('../pages/ForgotPasswordPage.vue') },
   { path: '/verify-email', name: 'VerifyEmail', component: () => import('../pages/VerifyEmailPage.vue') },
+  // Legacy admin login URL → redirect to unified login
+  { path: '/admin/login', redirect: '/login' },
 
   // Protected
   {
@@ -53,7 +55,6 @@ const routes = [
       { path: 'returns', name: 'AdminReturns', component: () => import('../pages/admin/AdminReturns.vue') },
     ],
   },
-  { path: '/admin/login', name: 'AdminLogin', component: () => import('../pages/admin/AdminLoginPage.vue') },
 ]
 
 const router = createRouter({
@@ -65,15 +66,15 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const auth = useAuthStore()
 
-  // Admin panel requires logging in explicitly via /admin/login
-  if (to.meta.requiresAdmin && !auth.isAdminSession) {
-    return next('/admin/login')
+  if (to.meta.requiresAdmin && !auth.isAdmin) {
+    return next({ name: 'Login', query: { redirect: to.fullPath } })
   }
   if (to.meta.requiresAuth && !auth.isAuthenticated) {
     return next({ name: 'Login', query: { redirect: to.fullPath } })
   }
+  // Already authenticated: admins go to dashboard, clients go to home
   if (to.meta.guestOnly && auth.isAuthenticated) {
-    return next('/')
+    return next(auth.isAdmin ? '/admin/dashboard' : '/')
   }
   next()
 })

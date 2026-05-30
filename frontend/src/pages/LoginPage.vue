@@ -134,10 +134,12 @@ async function handleLogin() {
   loading.value = true
   try {
     await auth.login(form.value.email, form.value.password)
-    // Catalog login never grants admin panel access
-    auth.setAdminSession(false)
-    const redirect = route.query.redirect || '/'
-    router.push(redirect)
+    // Redirect by role: admins go to dashboard, clients go to home
+    if (auth.isAdmin) {
+      router.push('/admin/dashboard')
+    } else {
+      router.push(route.query.redirect || '/')
+    }
   } catch (e) {
     const detail = e.response?.data?.detail
     if (detail === 'EMAIL_NOT_VERIFIED') {
