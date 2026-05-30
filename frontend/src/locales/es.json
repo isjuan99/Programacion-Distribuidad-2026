@@ -36,7 +36,8 @@
     "out_of_stock": "Agotado",
     "new_badge": "NUEVO",
     "offer_badge": "OFERTA",
-    "sold_out_badge": "AGOTADO"
+    "sold_out_badge": "AGOTADO",
+    "olfactory_notes": "Notas Olfativas"
   },
   "product": {
     "brand": "Marca",

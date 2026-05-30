@@ -36,7 +36,8 @@
     "out_of_stock": "Out of Stock",
     "new_badge": "NEW",
     "offer_badge": "OFFER",
-    "sold_out_badge": "SOLD OUT"
+    "sold_out_badge": "SOLD OUT",
+    "olfactory_notes": "Olfactory Notes"
   },
   "product": {
     "brand": "Brand",

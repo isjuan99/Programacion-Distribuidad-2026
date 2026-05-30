@@ -61,6 +61,43 @@
               </button>
             </div>
           </div>
+
+          <!-- Olfactory Notes Filter -->
+          <div class="border-t border-gray-800 pt-5 mt-5">
+            <h3 class="text-xs tracking-widest text-gray-400 uppercase mb-3">{{ $t('shop.olfactory_notes') }}</h3>
+
+            <!-- Selected notes as removable tags -->
+            <div v-if="selectedNotes.length" class="flex flex-wrap gap-2 mb-3">
+              <button
+                v-for="note in selectedNotes"
+                :key="note"
+                @click="removeNote(note)"
+                class="flex items-center gap-1 bg-[#c9a84c]/20 text-[#c9a84c] text-xs px-2 py-1 border border-[#c9a84c]/30 hover:bg-[#c9a84c]/30 transition-colors"
+              >
+                <span class="capitalize">{{ note }}</span>
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Available notes checkboxes -->
+            <div class="space-y-1 max-h-48 overflow-y-auto pr-1">
+              <label
+                v-for="note in availableNotes.slice(0, 15)"
+                :key="note"
+                class="flex items-center gap-2 text-sm text-gray-400 cursor-pointer hover:text-white transition-colors py-0.5"
+              >
+                <input
+                  type="checkbox"
+                  :checked="selectedNotes.includes(note)"
+                  @change="toggleNote(note)"
+                  class="accent-[#c9a84c]"
+                />
+                <span class="capitalize">{{ note }}</span>
+              </label>
+            </div>
+          </div>
         </aside>
 
         <!-- Products area -->
@@ -131,6 +168,7 @@ import Header from '../components/layout/Header.vue'
 import Footer from '../components/layout/Footer.vue'
 import ProductCard from '../components/ui/ProductCard.vue'
 import { useProductsStore } from '../stores/products'
+import api from '../router/api'
 
 const route = useRoute()
 const store = useProductsStore()
@@ -150,6 +188,31 @@ const filters = reactive({
   page: 1,
 })
 
+const availableNotes = ref([])
+const selectedNotes = ref([])
+
+async function loadOlfactoryNotes() {
+  try {
+    const { data } = await api.get('/filters/olfactory-notes')
+    availableNotes.value = data
+  } catch { /* ignore */ }
+}
+
+function toggleNote(note) {
+  const idx = selectedNotes.value.indexOf(note)
+  if (idx >= 0) {
+    selectedNotes.value.splice(idx, 1)
+  } else {
+    selectedNotes.value.push(note)
+  }
+  load()
+}
+
+function removeNote(note) {
+  selectedNotes.value = selectedNotes.value.filter(n => n !== note)
+  load()
+}
+
 async function load() {
   const params = {
     page: filters.page,
@@ -161,6 +224,7 @@ async function load() {
   if (filters.maxPrice < 500) params.max_price = filters.maxPrice
   if (filters.sizes.length > 0) params.size_ml = filters.sizes[0]
   if (route.query.q) params.search = route.query.q
+  if (selectedNotes.value.length) params.top_notes = selectedNotes.value.join(',')
   await store.fetchProducts(params)
 }
 
@@ -178,6 +242,7 @@ watch(() => route.query.q, () => load())
 
 onMounted(async () => {
   await store.fetchCategories()
+  await loadOlfactoryNotes()
   await load()
 })
 </script>
