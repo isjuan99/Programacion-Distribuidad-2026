@@ -121,7 +121,7 @@
     "register_subtitle": "Register to enjoy exclusive offers and track your orders.",
     "forgot_title": "Reset Password",
     "reset_title": "Create New Password",
-    "email": "your@email.com",
+    "email": "your{'@'}email.com",
     "password": "Password",
     "confirm_password": "Confirm Password",
     "first_name": "First Name",

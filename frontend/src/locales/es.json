@@ -121,7 +121,7 @@
     "register_subtitle": "Regístrate para disfrutar de ofertas exclusivas y seguir tus pedidos.",
     "forgot_title": "Restablecer Contraseña",
     "reset_title": "Crear Nueva Contraseña",
-    "email": "tu@email.com",
+    "email": "tu{'@'}email.com",
     "password": "Contraseña",
     "confirm_password": "Confirmar Contraseña",
     "first_name": "Nombre",
