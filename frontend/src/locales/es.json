@@ -205,7 +205,12 @@
     "set_as_default": "Establecer como dirección predeterminada",
     "confirm_delete_address": "¿Eliminar esta dirección?",
     "tracking": "Información de Envío",
-    "track_package": "Rastrear paquete"
+    "track_package": "Rastrear paquete",
+    "my_returns": "Mis Devoluciones",
+    "no_returns": "No tienes solicitudes de devolución",
+    "request_return": "Solicitar Devolución",
+    "return_submitted": "Tu solicitud ha sido enviada",
+    "submit_return": "Enviar Solicitud"
   },
   "admin": {
     "console": "Admin Console",

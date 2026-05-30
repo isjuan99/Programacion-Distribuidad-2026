@@ -205,7 +205,12 @@
     "set_as_default": "Set as default address",
     "confirm_delete_address": "Delete this address?",
     "tracking": "Shipping Info",
-    "track_package": "Track package"
+    "track_package": "Track package",
+    "my_returns": "My Returns",
+    "no_returns": "No return requests",
+    "request_return": "Request Return",
+    "return_submitted": "Your request has been submitted",
+    "submit_return": "Submit Request"
   },
   "admin": {
     "console": "Admin Console",
