@@ -252,6 +252,10 @@
     "inactive": "Inactive",
     "draft": "Draft"
   },
+  "search": {
+    "view_all_results": "View all results for \"{q}\"",
+    "no_suggestions": "No results for \"{q}\""
+  },
   "footer": {
     "tagline": "Curators of fine fragrances. Elevating the everyday through the profound power of scent, designed for the modern connoisseur.",
     "information": "Information",

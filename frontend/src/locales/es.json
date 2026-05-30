@@ -254,6 +254,10 @@
     "inactive": "Inactivo",
     "draft": "Borrador"
   },
+  "search": {
+    "view_all_results": "Ver todos los resultados para \"{q}\"",
+    "no_suggestions": "Sin resultados para \"{q}\""
+  },
   "footer": {
     "tagline": "Curadores de fragancias finas. Elevando el arte del aroma a través de colecciones exclusivas y artesanía de herencia.",
     "information": "Información",
