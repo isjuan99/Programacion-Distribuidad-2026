@@ -42,6 +42,15 @@
           </div>
           <h1 class="font-display text-5xl text-aroma-text mb-2">{{ product.name }}</h1>
 
+          <!-- Bundle badge -->
+          <div v-if="product?.is_bundle" class="border border-[#c9a84c]/30 bg-[#c9a84c]/5 p-4 my-4">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xs bg-[#c9a84c] text-black px-2 py-0.5 tracking-widest font-bold uppercase">GIFT SET</span>
+              <span class="text-sm text-[#c9a84c]">{{ $t('product.bundle_label') }}</span>
+            </div>
+            <p class="text-sm text-gray-400">{{ $t('product.bundle_includes') }}</p>
+          </div>
+
           <!-- Rating -->
           <div v-if="product.review_count > 0" class="flex items-center gap-2 mb-6">
             <div class="flex gap-0.5">
