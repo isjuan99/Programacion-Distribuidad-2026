@@ -245,11 +245,33 @@
     "brands": "Brands",
     "categories": "Categories",
     "is_bundle": "Is this a bundle/gift set?",
-    "bundle_hint": "Bundles group multiple products in a special offer"
+    "bundle_hint": "Bundles group multiple products in a special offer",
+    "returns": "Returns",
+    "returns_subtitle": "Manage customer return requests",
+    "no_returns": "No return requests",
+    "order": "Order",
+    "reason": "Reason",
+    "status": "Status",
+    "update_status": "Update status",
+    "admin_notes": "Internal notes",
+    "notes_placeholder": "Message for the customer (optional)...",
+    "save_status": "Save Changes"
+  },
+  "returns": {
+    "return_details": "Return Details",
+    "reason": "Reason",
+    "comments": "Additional comments",
+    "select_reason": "Select a reason",
+    "refund_amount": "Refund amount",
+    "status_pending": "Pending",
+    "status_approved": "Approved",
+    "status_rejected": "Rejected",
+    "status_shipped": "Shipped",
+    "status_refunded": "Refunded"
   },
   "common": {
     "loading": "Loading...",
-    "error": "An error occurred",
+    "error": "An unexpected error occurred",
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
@@ -268,7 +290,11 @@
     "go_home": "Go to home",
     "active": "Active",
     "inactive": "Inactive",
-    "draft": "Draft"
+    "draft": "Draft",
+    "all": "All",
+    "review": "Review",
+    "date": "Date",
+    "actions": "Actions"
   },
   "order_success": {
     "title": "Order Confirmed!",

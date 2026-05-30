@@ -245,11 +245,33 @@
     "brands": "Marcas",
     "categories": "Categorías",
     "is_bundle": "¿Es un set/bundle?",
-    "bundle_hint": "Los bundles agrupan varios productos en una oferta especial"
+    "bundle_hint": "Los bundles agrupan varios productos en una oferta especial",
+    "returns": "Devoluciones",
+    "returns_subtitle": "Gestiona las solicitudes de devolución de los clientes",
+    "no_returns": "No hay solicitudes de devolución",
+    "order": "Pedido",
+    "reason": "Motivo",
+    "status": "Estado",
+    "update_status": "Actualizar estado",
+    "admin_notes": "Notas internas",
+    "notes_placeholder": "Mensaje para el cliente (opcional)...",
+    "save_status": "Guardar Cambios"
+  },
+  "returns": {
+    "return_details": "Detalle de Devolución",
+    "reason": "Motivo",
+    "comments": "Comentarios adicionales",
+    "select_reason": "Selecciona un motivo",
+    "refund_amount": "Monto de reembolso",
+    "status_pending": "Pendiente",
+    "status_approved": "Aprobada",
+    "status_rejected": "Rechazada",
+    "status_shipped": "Enviada",
+    "status_refunded": "Reembolsada"
   },
   "common": {
     "loading": "Cargando...",
-    "error": "Ha ocurrido un error",
+    "error": "Ocurrió un error inesperado",
     "save": "Guardar",
     "cancel": "Cancelar",
     "delete": "Eliminar",
@@ -268,7 +290,11 @@
     "go_home": "Ir al inicio",
     "active": "Activo",
     "inactive": "Inactivo",
-    "draft": "Borrador"
+    "draft": "Borrador",
+    "all": "Todos",
+    "review": "Revisar",
+    "date": "Fecha",
+    "actions": "Acciones"
   },
   "order_success": {
     "title": "¡Pedido Confirmado!",
