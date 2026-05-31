@@ -46,30 +46,30 @@
                 <p class="text-sm text-white truncate">{{ item.product_name }}</p>
                 <p class="text-xs text-gray-500">{{ item.size_ml }}ml · {{ $t('common.qty') }}: {{ item.quantity }}</p>
               </div>
-              <p class="text-sm text-[#c9a84c] shrink-0">${{ item.total_price.toFixed(2) }}</p>
+              <p class="text-sm text-[#c9a84c] shrink-0">{{ formatCOP(item.total_price) }}</p>
             </div>
           </div>
           <!-- Totals -->
           <div class="border-t border-gray-800 px-6 py-4 space-y-2">
             <div class="flex justify-between text-sm text-gray-400">
               <span>{{ $t('cart.subtotal') }}</span>
-              <span>${{ order.subtotal.toFixed(2) }}</span>
+              <span>{{ formatCOP(order.subtotal) }}</span>
             </div>
             <div class="flex justify-between text-sm text-gray-400">
               <span>{{ $t('cart.shipping') }}</span>
-              <span>{{ order.shipping_cost === 0 ? $t('common.free') : `$${order.shipping_cost.toFixed(2)}` }}</span>
+              <span>{{ order.shipping_cost === 0 ? $t('common.free') : formatCOP(order.shipping_cost) }}</span>
             </div>
             <div class="flex justify-between text-sm text-gray-400">
               <span>{{ $t('cart.tax') }}</span>
-              <span>${{ order.tax.toFixed(2) }}</span>
+              <span>{{ formatCOP(order.tax) }}</span>
             </div>
             <div v-if="order.discount > 0" class="flex justify-between text-sm text-green-400">
               <span>{{ $t('cart.discount') }}</span>
-              <span>-${{ order.discount.toFixed(2) }}</span>
+              <span>-{{ formatCOP(order.discount) }}</span>
             </div>
             <div class="flex justify-between text-base text-white border-t border-gray-800 pt-3">
               <span class="tracking-widest">{{ $t('cart.total') }}</span>
-              <span class="text-[#c9a84c]">${{ order.total.toFixed(2) }}</span>
+              <span class="text-[#c9a84c]">{{ formatCOP(order.total) }}</span>
             </div>
           </div>
         </div>
@@ -115,6 +115,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { useCartStore } from '../stores/cart'
+import { formatCOP } from '../utils/currency'
 import api from '../router/api'
 
 const route = useRoute()

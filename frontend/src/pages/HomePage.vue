@@ -37,7 +37,7 @@
 
       <!-- Content -->
       <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pb-12">
-        <p class="text-[10px] tracking-widest uppercase text-gold mb-4">Collection 2024</p>
+        <p class="text-[10px] tracking-widest uppercase text-gold mb-4">Collection 2026</p>
         <h1 class="font-display text-6xl md:text-8xl text-aroma-text max-w-3xl leading-tight mb-6">
           {{ $t('home.hero_title') }}
         </h1>
@@ -61,21 +61,24 @@
       </div>
     </section>
 
-    <!-- Categories strip -->
-    <section class="border-t border-b border-aroma-border py-12">
+    <!-- ── CATEGORÍAS ─────────────────────────────────────────────── -->
+    <!-- NEGRO: fluye directo del hero, misma atmósfera oscura -->
+    <section class="bg-aroma-dark border-t border-white/5 py-14">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="flex gap-8 overflow-x-auto scrollbar-hide">
+        <p class="text-[10px] tracking-widest uppercase text-gold mb-8 text-center">Explora por Categorias</p>
+        <div class="flex gap-10 overflow-x-auto scrollbar-hide justify-center">
           <router-link v-for="cat in categories" :key="cat.id"
             :to="`/shop?category=${cat.id}`"
-            class="shrink-0 text-center group">
-            <div class="w-20 h-20 bg-aroma-surface border border-aroma-border rounded-full flex items-center justify-center
-                        mb-3 mx-auto group-hover:border-gold transition-colors">
-              <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            class="shrink-0 text-center group flex flex-col items-center gap-3">
+            <div class="w-16 h-16 rounded-full border border-white/10 group-hover:border-gold/70
+                        flex items-center justify-center transition-all duration-300
+                        group-hover:bg-gold/10">
+              <svg class="w-6 h-6 text-gold/70 group-hover:text-gold transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                   d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
               </svg>
             </div>
-            <p class="text-[10px] tracking-widest uppercase text-aroma-muted group-hover:text-aroma-text transition-colors">
+            <p class="text-[9px] tracking-widest uppercase text-white/40 group-hover:text-white/80 transition-colors">
               {{ cat.name }}
             </p>
           </router-link>
@@ -83,74 +86,142 @@
       </div>
     </section>
 
-    <!-- Featured Products -->
-    <section class="py-24">
+    <!-- ── PRODUCTOS DESTACADOS ────────────────────────────────────── -->
+    <section class="bg-white py-28">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="flex items-end justify-between mb-12">
+        <div class="flex items-end justify-between mb-14">
           <div>
             <p class="text-[10px] tracking-widest uppercase text-gold mb-3">Selección Curada</p>
-            <h2 class="font-display text-5xl text-aroma-text">{{ $t('home.featured_title') }}</h2>
+            <h2 class="font-display text-5xl md:text-6xl text-[#1a1a1a] leading-none">{{ $t('home.featured_title') }}</h2>
           </div>
-          <router-link to="/shop" class="btn-ghost hidden md:block">Ver todo</router-link>
+          <router-link to="/shop"
+            class="hidden md:flex items-center gap-2 text-[10px] tracking-widest uppercase text-gray-400
+                   hover:text-gold transition-colors border-b border-transparent hover:border-gold pb-0.5">
+            Ver todo →
+          </router-link>
         </div>
 
         <div v-if="loadingFeatured" class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div v-for="i in 4" :key="i" class="bg-aroma-surface animate-pulse aspect-[3/4]" />
+          <div v-for="i in 4" :key="i" class="bg-gray-100 animate-pulse aspect-[3/4] rounded-sm" />
         </div>
-
-        <div v-else-if="featuredProducts.length === 0" class="text-center py-16 text-aroma-muted">
-          <p class="text-sm tracking-widest uppercase">Próximamente</p>
+        <div v-else-if="featuredProducts.length === 0" class="text-center py-20">
+          <p class="text-[10px] tracking-widest uppercase text-gray-400">Próximamente</p>
         </div>
-
         <div v-else class="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <ProductCard v-for="p in featuredProducts" :key="p.id" :product="p" />
+          <ProductCard v-for="p in featuredProducts" :key="p.id" :product="p" :light="true" />
         </div>
       </div>
     </section>
 
-    <!-- Marquee band -->
+    <!-- ── BANDA MARQUEE ───────────────────────────────────────────── -->
+    <!-- DORADO: separador visual que rompe el negro y marca el cambio -->
     <div class="bg-gold py-4 overflow-hidden">
-      <div class="flex gap-12 animate-marquee whitespace-nowrap">
-        <span v-for="i in 6" :key="i" class="text-[10px] tracking-widest uppercase text-aroma-dark flex gap-12">
-          <span>Envío Premium</span>
-          <span>·</span>
-          <span>Embalaje de Lujo</span>
-          <span>·</span>
-          <span>Autenticidad Garantizada</span>
-          <span>·</span>
-          <span>Devolución Fácil</span>
-          <span>·</span>
+      <div class="flex gap-16 animate-marquee whitespace-nowrap">
+        <span v-for="i in 8" :key="i" class="text-[9px] tracking-[3px] uppercase text-aroma-dark font-semibold flex gap-16">
+          <span>Envío Premium</span><span>·</span>
+          <span>Embalaje de Lujo</span><span>·</span>
+          <span>Autenticidad Garantizada</span><span>·</span>
+          <span>Devolución Fácil</span><span>·</span>
         </span>
       </div>
     </div>
 
-    <!-- New Arrivals -->
-    <section class="py-24 bg-aroma-surface">
+    <!-- ── NUEVAS LLEGADAS ─────────────────────────────────────────── -->
+    <section class="bg-white py-28">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="text-center mb-12">
+        <div class="text-center mb-14">
           <p class="text-[10px] tracking-widest uppercase text-gold mb-3">Recién Llegado</p>
-          <h2 class="font-display text-5xl text-aroma-text">{{ $t('home.new_arrivals') }}</h2>
+          <h2 class="font-display text-5xl md:text-6xl text-[#1a1a1a] leading-none">{{ $t('home.new_arrivals') }}</h2>
+          <p class="text-gray-500 text-sm mt-4">Las últimas incorporaciones a nuestra colección exclusiva</p>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-          <ProductCard v-for="p in newProducts" :key="p.id" :product="p" />
+          <ProductCard v-for="p in newProducts" :key="p.id" :product="p" :light="true" />
+        </div>
+        <div class="text-center mt-12">
+          <router-link to="/shop" class="btn-outline-gold">Explorar catálogo completo</router-link>
         </div>
       </div>
     </section>
 
-    <!-- Value props -->
-    <section class="py-20 border-t border-aroma-border">
+    <!-- ── PROPUESTA DE VALOR ──────────────────────────────────────── -->
+    <!-- NEGRO: íconos dorados sobre negro = máximo contraste y elegancia -->
+    <section class="bg-aroma-dark border-t border-white/5 py-20">
       <div class="max-w-7xl mx-auto px-6">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div v-for="prop in valueProps" :key="prop.title" class="text-center">
-            <div class="w-12 h-12 border border-gold/30 flex items-center justify-center mx-auto mb-4">
-              <svg class="w-5 h-5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+          <div v-for="prop in valueProps" :key="prop.title" class="text-center group">
+            <div class="w-14 h-14 border border-gold/20 group-hover:border-gold/60 flex items-center justify-center mx-auto mb-5
+                        transition-all duration-300 group-hover:bg-gold/5">
+              <svg class="w-6 h-6 text-gold/60 group-hover:text-gold transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" :d="prop.icon"/>
               </svg>
             </div>
-            <h3 class="text-xs tracking-widest uppercase text-aroma-text mb-2">{{ prop.title }}</h3>
-            <p class="text-aroma-muted text-xs leading-relaxed">{{ prop.desc }}</p>
+            <h3 class="text-[10px] tracking-widest uppercase text-white mb-2">{{ prop.title }}</h3>
+            <p class="text-white/35 text-xs leading-relaxed">{{ prop.desc }}</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ── FAQ ────────────────────────────────────────────────────── -->
+    <!-- CREMA/BLANCO: el único bloque claro — hace que la página respire
+         y el texto informativo se lea perfectamente -->
+    <section class="bg-[#f5f0e8] py-28">
+      <div class="max-w-3xl mx-auto px-6">
+
+        <!-- Título -->
+        <div class="text-center mb-16">
+          <p class="text-[10px] tracking-widest uppercase text-[#c9a84c] mb-3">Soporte</p>
+          <h2 class="font-display text-5xl md:text-6xl text-[#1a1a1a] leading-none">Preguntas Frecuentes</h2>
+          <p class="text-[#6b6560] text-sm mt-5 leading-relaxed">
+            Todo lo que necesitas saber sobre nuestros productos y servicios.
+          </p>
+        </div>
+
+        <!-- Acordeón -->
+        <div class="divide-y divide-[#1a1a1a]/10">
+          <div v-for="(item, i) in faqItems" :key="i">
+            <button
+              @click="openFaq === i ? openFaq = null : openFaq = i"
+              class="w-full flex items-center justify-between py-6 text-left group"
+            >
+              <span class="text-sm md:text-base tracking-wide pr-8 transition-colors duration-200"
+                :class="openFaq === i ? 'text-[#c9a84c]' : 'text-[#1a1a1a] group-hover:text-[#c9a84c]'">
+                {{ item.q }}
+              </span>
+              <span class="shrink-0 w-7 h-7 flex items-center justify-center border transition-all duration-200"
+                :class="openFaq === i
+                  ? 'border-[#c9a84c] bg-[#c9a84c]/10'
+                  : 'border-[#1a1a1a]/20 group-hover:border-[#c9a84c]'">
+                <svg class="w-3 h-3 text-[#c9a84c] transition-transform duration-300"
+                  :class="openFaq === i ? 'rotate-45' : ''"
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                </svg>
+              </span>
+            </button>
+
+            <div class="overflow-hidden transition-all duration-500"
+              :style="openFaq === i ? 'max-height:600px;opacity:1' : 'max-height:0;opacity:0'">
+              <p class="text-[#6b6560] text-sm leading-relaxed pb-7 pr-12">
+                {{ item.a }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA de contacto -->
+        <div class="mt-16 text-center bg-[#1a1a1a] p-10">
+          <p class="text-[10px] tracking-widest uppercase text-[#c9a84c] mb-3">¿Más dudas?</p>
+          <p class="text-white/70 text-sm mb-6 leading-relaxed">
+            Nuestro equipo está disponible para ayudarte con cualquier consulta.
+          </p>
+          <a href="mailto:aromadistribuido@gmail.com"
+            class="inline-block bg-[#c9a84c] text-[#0a0a0a] px-10 py-3 text-[10px] tracking-widest uppercase
+                   font-semibold hover:bg-[#b8943e] transition-colors">
+            Contáctanos
+          </a>
+        </div>
+
       </div>
     </section>
 
@@ -164,6 +235,28 @@ import Header from '../components/layout/Header.vue'
 import Footer from '../components/layout/Footer.vue'
 import ProductCard from '../components/ui/ProductCard.vue'
 import api from '../router/api'
+
+// FAQ accordion state
+const openFaq = ref(null)
+
+const faqItems = [
+  {
+    q: 'Devoluciones y reembolsos',
+    a: 'La satisfacción de nuestros clientes es nuestra prioridad número uno. Si hay algún problema con tu pedido, comunícate con nosotros por correo electrónico a aromadistribuido@gmail.com y lo resolveremos a la brevedad posible.',
+  },
+  {
+    q: 'Seguridad de pago',
+    a: 'Todas las pasarelas de pago directo cumplen con los estándares establecidos por PCI-DSS, administrados por el PCI Security Standards Council. Este es un esfuerzo conjunto de marcas líderes como Visa, MasterCard, American Express y Discover, garantizando que tu información financiera esté siempre protegida.',
+  },
+  {
+    q: 'Tiempos de entrega',
+    a: 'La entrega estándar suele tardar entre 7 y 10 días laborables. No ofrecemos garantías sobre tiempos de envío superiores al promedio y no aceptaremos reclamos por demoras fuera de nuestro control. El tiempo de envío se refiere al período comprendido entre la realización del pedido y la entrega al transportista. Si tu pedido no ha llegado después de dos semanas, contáctanos a aromadistribuido@gmail.com y analizaremos los detalles de tu caso.',
+  },
+  {
+    q: 'Notificaciones de nuevo en stock',
+    a: 'Los productos se reabastecen periódicamente según la disponibilidad de nuestros proveedores. Si un producto que deseas está agotado, te recomendamos agregarlo a tu lista de deseos o contactarnos a aromadistribuido@gmail.com para recibir una notificación personalizada cuando vuelva a estar disponible.',
+  },
+]
 
 const heroImages = [
   // Perfume en pedestal con columnas clásicas — elegante arquitectónico

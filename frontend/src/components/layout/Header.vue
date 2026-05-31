@@ -5,7 +5,7 @@
   >
     <div class="max-w-7xl mx-auto px-8 h-18 flex items-center gap-10" style="height:68px;">
 
-      <!-- Logo — izquierda -->
+      <!-- Logo -->
       <router-link
         to="/"
         class="font-display text-xl tracking-widest text-aroma-text hover:text-gold transition-colors shrink-0"
@@ -20,18 +20,94 @@
         </div>
       </div>
 
-      <!-- Nav links + iconos — derecha -->
+      <!-- Nav + iconos — derecha -->
       <div class="flex items-center gap-8 shrink-0 ml-auto">
         <nav class="hidden md:flex items-center gap-7">
+
+          <!-- Inicio -->
           <router-link
-            v-for="link in navLinks"
-            :key="link.to"
-            :to="link.to"
+            to="/"
+            class="text-xs tracking-widest uppercase text-aroma-muted hover:text-aroma-text transition-colors"
+            active-class="text-gold border-b border-gold pb-0.5"
+            :exact="true"
+          >
+            Inicio
+          </router-link>
+
+          <!-- Catálogo -->
+          <router-link
+            to="/shop"
             class="text-xs tracking-widest uppercase text-aroma-muted hover:text-aroma-text transition-colors"
             active-class="text-gold border-b border-gold pb-0.5"
           >
-            {{ $t(link.i18n) }}
+            Catálogo
           </router-link>
+
+          <!-- Ofertas -->
+          <router-link
+            to="/offers"
+            class="text-xs tracking-widest uppercase text-aroma-muted hover:text-aroma-text transition-colors"
+            active-class="text-gold border-b border-gold pb-0.5"
+          >
+            Ofertas
+          </router-link>
+
+          <!-- Dropdown Perfumes -->
+          <div
+            class="relative"
+            @mouseenter="perfumesOpen = true"
+            @mouseleave="perfumesOpen = false"
+          >
+            <button
+              class="flex items-center gap-1 text-xs tracking-widest uppercase transition-colors"
+              :class="perfumesOpen ? 'text-gold' : 'text-aroma-muted hover:text-aroma-text'"
+            >
+              Perfumes
+              <svg
+                class="w-3 h-3 transition-transform duration-200"
+                :class="perfumesOpen ? 'rotate-180' : ''"
+                fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+
+            <transition
+              enter-active-class="transition-all duration-200 ease-out"
+              enter-from-class="opacity-0 translate-y-1"
+              enter-to-class="opacity-100 translate-y-0"
+              leave-active-class="transition-all duration-150 ease-in"
+              leave-from-class="opacity-100 translate-y-0"
+              leave-to-class="opacity-0 translate-y-1"
+            >
+              <div v-show="perfumesOpen" class="absolute top-full left-1/2 -translate-x-1/2 pt-4 z-50">
+                <div class="bg-aroma-dark border border-white/10 shadow-2xl min-w-[160px] overflow-hidden">
+                  <router-link
+                    v-for="item in perfumesMenu"
+                    :key="item.label"
+                    :to="item.to"
+                    @click="perfumesOpen = false"
+                    class="flex items-center gap-3 px-5 py-3.5 text-xs tracking-widest uppercase
+                           text-aroma-muted hover:text-gold hover:bg-white/5 transition-colors
+                           border-b border-white/5 last:border-0 group"
+                  >
+                    <span class="w-1.5 h-1.5 rounded-full bg-gold/40 group-hover:bg-gold transition-colors shrink-0"></span>
+                    {{ item.label }}
+                  </router-link>
+                </div>
+              </div>
+            </transition>
+          </div>
+
+          <!-- Contacto -->
+          <router-link
+            to="/contact"
+            class="text-xs tracking-widest uppercase text-aroma-muted hover:text-aroma-text transition-colors"
+            active-class="text-gold border-b border-gold pb-0.5"
+          >
+            Contacto
+          </router-link>
+
         </nav>
 
         <!-- Separador -->
@@ -78,11 +154,13 @@ const auth = useAuthStore()
 const cart = useCartStore()
 
 const scrolled = ref(false)
+const perfumesOpen = ref(false)
 
-const navLinks = [
-  { to: '/shop', i18n: 'nav.catalog' },
-  { to: '/shop', i18n: 'nav.collections' },
-  { to: '/contact', i18n: 'nav.contact' },
+// El dropdown usa el campo gender del producto (no categoría)
+const perfumesMenu = [
+  { label: 'Hombre', to: '/shop?gender=hombre' },
+  { label: 'Mujer',  to: '/shop?gender=mujer'  },
+  { label: 'Unisex', to: '/shop?gender=unisex' },
 ]
 
 function onScroll() {
@@ -90,6 +168,6 @@ function onScroll() {
 }
 
 onMounted(() => window.addEventListener('scroll', onScroll))
+
 onUnmounted(() => window.removeEventListener('scroll', onScroll))
 </script>
-

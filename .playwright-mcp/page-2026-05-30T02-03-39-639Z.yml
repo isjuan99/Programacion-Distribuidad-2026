@@ -1,0 +1,32 @@
+- generic [ref=e6]:
+  - heading "AROMA" [level=1] [ref=e8]
+  - heading "Bienvenido de nuevo" [level=2] [ref=e9]
+  - paragraph [ref=e10]: Accede a tu cuenta para ver tus pedidos y guardar tus fragancias favoritas.
+  - generic [ref=e11]:
+    - generic [ref=e12]:
+      - img [ref=e14]
+      - textbox "tu@email.com" [ref=e16]
+    - generic [ref=e17]:
+      - img [ref=e19]
+      - textbox "Contraseña" [ref=e21]
+      - button [ref=e22] [cursor=pointer]:
+        - img [ref=e23]
+    - generic [ref=e25]:
+      - generic [ref=e26] [cursor=pointer]:
+        - checkbox "Recordarme" [ref=e27]
+        - text: Recordarme
+      - link "¿Olvidaste tu contraseña?" [ref=e28] [cursor=pointer]:
+        - /url: /forgot-password
+    - button "Iniciar Sesión" [ref=e29] [cursor=pointer]
+  - generic [ref=e31]:
+    - generic [ref=e34]: O continúa con
+    - button "Continuar con Google" [ref=e36] [cursor=pointer]:
+      - img [ref=e37]
+      - text: Continuar con Google
+    - button "Continuar con Apple" [ref=e42] [cursor=pointer]:
+      - img [ref=e43]
+      - text: Continuar con Apple
+  - paragraph [ref=e45]:
+    - text: ¿No tienes una cuenta?
+    - link "Regístrate aquí" [ref=e46] [cursor=pointer]:
+      - /url: /register

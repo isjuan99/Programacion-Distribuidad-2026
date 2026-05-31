@@ -2,6 +2,8 @@
   "nav": {
     "catalog": "Catálogo",
     "collections": "Colecciones",
+    "offers": "Ofertas",
+    "perfumes": "Perfumes",
     "about": "Nosotros",
     "contact": "Contacto",
     "search": "Buscar",
@@ -210,7 +212,13 @@
     "no_returns": "No tienes solicitudes de devolución",
     "request_return": "Solicitar Devolución",
     "return_submitted": "Tu solicitud ha sido enviada",
-    "submit_return": "Enviar Solicitud"
+    "submit_return": "Enviar Solicitud",
+    "loyalty": "Puntos de Lealtad",
+    "loyalty_balance": "Saldo de puntos",
+    "payment_methods": "Métodos de Pago",
+    "no_payment_methods": "No tienes métodos de pago guardados.",
+    "add_payment": "Agregar método de pago",
+    "no_wishlist": "Tu lista de deseos está vacía."
   },
   "admin": {
     "console": "Admin Console",

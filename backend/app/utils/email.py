@@ -10,6 +10,9 @@ async def _send(to: str, subject: str, html: str):
     msg["From"] = f"{settings.EMAILS_FROM_NAME} <{settings.EMAILS_FROM}>"
     msg["To"] = to
     msg.attach(MIMEText(html, "html"))
+    if not settings.SMTP_PASSWORD:
+        print(f"[Email] SMTP_PASSWORD no configurado — correo a '{to}' no enviado")
+        return
     try:
         await aiosmtplib.send(
             msg,
@@ -20,8 +23,10 @@ async def _send(to: str, subject: str, html: str):
             use_tls=False,
             start_tls=True,
         )
+        print(f"[Email] Enviado a {to}: {subject}")
     except Exception as e:
-        print(f"[Email Error] {e}")
+        print(f"[Email Error] Host={settings.SMTP_HOST}:{settings.SMTP_PORT} User={settings.SMTP_USER} → {e}")
+        raise
 
 
 async def send_welcome_email(to: str, first_name: str):
@@ -160,6 +165,113 @@ async def send_tracking_email(to: str, first_name: str, order_number: str, track
     </div>
     """
     await _send(to, f"Tu pedido #{order_number} ha sido enviado — Aroma-Distribuido", html)
+
+
+async def send_contact_email(name: str, email: str, message: str):
+    """Envía el mensaje del formulario de contacto a aromadistribuido@gmail.com."""
+    from datetime import datetime
+    now = datetime.now().strftime("%d/%m/%Y %H:%M")
+    html = f"""
+    <div style="font-family:Georgia,serif;max-width:620px;margin:0 auto;background:#0a0a0a;color:#f5f0e8;padding:0;">
+
+      <!-- Header -->
+      <div style="background:#0a0a0a;border-bottom:1px solid #1a1a1a;padding:32px 40px 24px;">
+        <h1 style="font-size:24px;letter-spacing:8px;color:#c9a84c;margin:0 0 4px;">AROMA</h1>
+        <p style="font-size:10px;letter-spacing:4px;color:#555;margin:0;">DISTRIBUIDO</p>
+      </div>
+
+      <!-- Alert strip -->
+      <div style="background:#c9a84c;padding:12px 40px;">
+        <p style="font-size:11px;letter-spacing:3px;color:#0a0a0a;font-weight:bold;margin:0;">NUEVO MENSAJE DE CONTACTO</p>
+      </div>
+
+      <!-- Body -->
+      <div style="padding:40px;">
+        <h2 style="font-size:22px;font-weight:normal;color:#fff;margin:0 0 6px;">
+          {name} te ha enviado un mensaje
+        </h2>
+        <p style="color:#666;font-size:12px;margin:0 0 32px;letter-spacing:1px;">{now}</p>
+
+        <!-- Datos del remitente -->
+        <div style="background:#111;border:1px solid #1a1a1a;padding:20px;margin-bottom:24px;">
+          <table style="width:100%;border-collapse:collapse;">
+            <tr>
+              <td style="padding:8px 0;border-bottom:1px solid #1a1a1a;width:120px;">
+                <p style="color:#555;font-size:10px;letter-spacing:3px;margin:0;">NOMBRE</p>
+              </td>
+              <td style="padding:8px 0;border-bottom:1px solid #1a1a1a;">
+                <p style="color:#f5f0e8;font-size:14px;margin:0;">{name}</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 0;">
+                <p style="color:#555;font-size:10px;letter-spacing:3px;margin:0;">CORREO</p>
+              </td>
+              <td style="padding:8px 0;">
+                <a href="mailto:{email}" style="color:#c9a84c;font-size:14px;text-decoration:none;">{email}</a>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+        <!-- Mensaje -->
+        <div style="background:#111;border:1px solid #1a1a1a;padding:24px;margin-bottom:32px;">
+          <p style="color:#555;font-size:10px;letter-spacing:3px;margin:0 0 16px;">MENSAJE</p>
+          <p style="color:#ccc;font-size:15px;line-height:1.8;margin:0;white-space:pre-wrap;">{message}</p>
+        </div>
+
+        <!-- CTA responder -->
+        <a href="mailto:{email}?subject=Re: Tu consulta en Aroma-Distribuido"
+           style="display:inline-block;background:#c9a84c;color:#0a0a0a;padding:16px 40px;
+                  text-decoration:none;letter-spacing:3px;font-size:12px;font-weight:bold;">
+          RESPONDER A {name.upper()}
+        </a>
+
+        <p style="color:#333;font-size:11px;margin-top:40px;line-height:1.8;border-top:1px solid #1a1a1a;padding-top:24px;">
+          Este correo fue generado autom&#225;ticamente desde el formulario de contacto de
+          <a href="{settings.FRONTEND_URL}" style="color:#c9a84c;text-decoration:none;">Aroma-Distribuido</a>.<br>
+          &#169; 2026 Aroma-Distribuido. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+    """
+    await _send("aromadistribuido@gmail.com", f"Nuevo mensaje de {name} — Aroma-Distribuido", html)
+
+
+async def send_contact_confirmation_email(to: str, name: str):
+    """Confirmación al cliente de que su mensaje fue recibido."""
+    html = f"""
+    <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;background:#0a0a0a;color:#f5f0e8;padding:0;">
+      <div style="padding:32px 40px 24px;">
+        <h1 style="font-size:24px;letter-spacing:8px;color:#c9a84c;margin:0 0 4px;">AROMA</h1>
+        <p style="font-size:10px;letter-spacing:4px;color:#555;margin:0;">DISTRIBUIDO</p>
+      </div>
+      <div style="padding:8px 40px 40px;">
+        <h2 style="font-size:22px;font-weight:normal;color:#fff;margin:0 0 16px;">
+          Gracias por contactarnos, {name}.
+        </h2>
+        <p style="color:#aaa;line-height:1.8;margin:0 0 24px;">
+          Hemos recibido tu mensaje y uno de nuestros asesores te responder&#225; en un plazo
+          de <strong style="color:#c9a84c;">24 a 48 horas h&#225;biles</strong>.
+        </p>
+        <div style="background:#111;border:1px solid #1a1a1a;border-left:3px solid #c9a84c;padding:16px 20px;margin-bottom:32px;">
+          <p style="color:#888;font-size:12px;margin:0;">
+            Si tu consulta es urgente, pu&#233;des escribirnos directamente a<br>
+            <a href="mailto:aromadistribuido@gmail.com" style="color:#c9a84c;">aromadistribuido@gmail.com</a>
+          </p>
+        </div>
+        <a href="{settings.FRONTEND_URL}/shop"
+           style="display:inline-block;background:#c9a84c;color:#0a0a0a;padding:14px 36px;
+                  text-decoration:none;letter-spacing:3px;font-size:12px;font-weight:bold;">
+          EXPLORAR FRAGANCIAS
+        </a>
+        <p style="color:#333;font-size:11px;margin-top:40px;border-top:1px solid #1a1a1a;padding-top:24px;">
+          &#169; 2026 Aroma-Distribuido. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+    """
+    await _send(to, "Recibimos tu mensaje — Aroma-Distribuido", html)
 
 
 async def send_return_status_email(to: str, first_name: str, order_number: str, return_status: str, admin_notes: str = None):

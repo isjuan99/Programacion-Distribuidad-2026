@@ -1,0 +1,11 @@
+- generic [ref=e4]:
+  - generic [ref=e5]:
+    - heading "Aroma-Distribuido" [level=1] [ref=e6]
+    - paragraph [ref=e7]: Admin Console
+  - generic [ref=e8]:
+    - textbox "admin@aroma.com" [ref=e9]
+    - textbox "Contraseña" [ref=e10]
+    - button "Iniciar sesión" [ref=e11] [cursor=pointer]
+  - paragraph [ref=e12]:
+    - link "← Volver a la tienda" [ref=e13] [cursor=pointer]:
+      - /url: /

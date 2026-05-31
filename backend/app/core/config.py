@@ -21,6 +21,7 @@ class Settings(BaseSettings):
 
     UPLOAD_DIR: str = "uploads"
     MAX_IMAGE_SIZE_MB: int = 5
+    ALLOWED_IMAGE_TYPES: str = "image/jpeg,image/png,image/webp"
 
     FRONTEND_URL: str = "http://localhost:5173"
     GOOGLE_CLIENT_ID: str = ""

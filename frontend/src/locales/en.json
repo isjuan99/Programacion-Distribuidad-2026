@@ -2,6 +2,8 @@
   "nav": {
     "catalog": "Catalog",
     "collections": "Collections",
+    "offers": "Offers",
+    "perfumes": "Perfumes",
     "about": "About",
     "contact": "Contact",
     "search": "Search",
@@ -210,7 +212,13 @@
     "no_returns": "No return requests",
     "request_return": "Request Return",
     "return_submitted": "Your request has been submitted",
-    "submit_return": "Submit Request"
+    "submit_return": "Submit Request",
+    "loyalty": "Loyalty Points",
+    "loyalty_balance": "Points balance",
+    "payment_methods": "Payment Methods",
+    "no_payment_methods": "You have no saved payment methods.",
+    "add_payment": "Add payment method",
+    "no_wishlist": "Your wishlist is empty."
   },
   "admin": {
     "console": "Admin Console",

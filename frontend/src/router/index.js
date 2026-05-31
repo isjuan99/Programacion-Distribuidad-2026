@@ -5,8 +5,10 @@ const routes = [
   // Public
   { path: '/', name: 'Home', component: () => import('../pages/HomePage.vue') },
   { path: '/shop', name: 'Shop', component: () => import('../pages/ShopPage.vue') },
+  { path: '/collections', name: 'Collections', component: () => import('../pages/ShopPage.vue') },
   { path: '/product/:id', name: 'Product', component: () => import('../pages/ProductPage.vue') },
   { path: '/cart', name: 'Cart', component: () => import('../pages/CartPage.vue') },
+  { path: '/offers', name: 'Offers', component: () => import('../pages/OffersPage.vue') },
   { path: '/contact', name: 'Contact', component: () => import('../pages/ContactPage.vue') },
   { path: '/terms', name: 'Terms', component: () => import('../pages/TermsPage.vue') },
   { path: '/privacy', name: 'Privacy', component: () => import('../pages/PrivacyPage.vue') },

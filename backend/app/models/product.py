@@ -29,6 +29,7 @@ class Product(Base):
     is_featured = Column(Boolean, default=False)
     is_new = Column(Boolean, default=False)
     is_bundle = Column(Boolean, default=False)
+    gender = Column(String(20), nullable=True)  # 'hombre', 'mujer', 'unisex'
     images = Column(JSON, default=list)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
@@ -48,6 +49,7 @@ class ProductVariant(Base):
     product_id = Column(Integer, ForeignKey("products.id"), nullable=False)
     size_ml = Column(Integer, nullable=False)
     price = Column(Float, nullable=False)
+    compare_at_price = Column(Float, nullable=True)
     stock = Column(Integer, default=0)
     sku = Column(String(100), unique=True, index=True)
 

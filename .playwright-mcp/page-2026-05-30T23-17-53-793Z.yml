@@ -1,0 +1,751 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e7]:
+          - generic "ENVÍO GRATIS A TODA COLOMBIA" [ref=e10]:
+            - group [ref=e11]:
+              - generic [ref=e12]: ENVÍO GRATIS A TODA COLOMBIA
+              - generic [ref=e13]: ENVÍO GRATIS A TODA COLOMBIA
+              - generic [ref=e14]: ENVÍO GRATIS A TODA COLOMBIA
+              - generic [ref=e15]: ENVÍO GRATIS A TODA COLOMBIA
+          - generic [ref=e18]:
+            - link "Enlace social Facebook" [ref=e19] [cursor=pointer]:
+              - /url: https://www.facebook.com/sharer/sharer.php?u=https://maferperfumes.com/categoria/caballero/
+              - generic [ref=e20]: 
+            - link "Enlace de la red social X" [ref=e21] [cursor=pointer]:
+              - /url: https://x.com/share?url=https://maferperfumes.com/categoria/caballero/
+              - generic [ref=e22]: 
+            - link "Enlace social Pinterest" [ref=e23] [cursor=pointer]:
+              - /url: https://pinterest.com/pin/create/button/?url=https://maferperfumes.com/categoria/caballero/&media=https://maferperfumes.com/wp-content/uploads/2024/11/img_5104.jpeg&description=Mandarin+Sky+Armaf
+              - generic [ref=e24]: 
+            - link "Enlace social Linkedin" [ref=e25] [cursor=pointer]:
+              - /url: https://www.linkedin.com/shareArticle?mini=true&url=https://maferperfumes.com/categoria/caballero/
+              - generic [ref=e26]: 
+            - link "Enlace social Telegram" [ref=e27] [cursor=pointer]:
+              - /url: https://telegram.me/share/url?url=https://maferperfumes.com/categoria/caballero/
+              - generic [ref=e28]: 
+        - generic [ref=e31]:
+          - link "Logotipo del sitio" [ref=e34] [cursor=pointer]:
+            - /url: https://maferperfumes.com/
+          - navigation "Navegacion Principal" [ref=e36]:
+            - list [ref=e37]:
+              - listitem [ref=e38]:
+                - link "Inicio" [ref=e39] [cursor=pointer]:
+                  - /url: https://maferperfumes.com
+                  - generic [ref=e40]: Inicio
+              - listitem [ref=e41]:
+                - link "Nuevos Lanzamientos" [ref=e42] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/catalogo/?orderby=date
+                  - generic [ref=e43]: Nuevos Lanzamientos
+              - listitem [ref=e44]:
+                - link "Familias Olfativas " [ref=e45] [cursor=pointer]:
+                  - /url: "#"
+                  - generic [ref=e46]: Familias Olfativas
+                  - text: 
+              - listitem [ref=e47]:
+                - link "Perfumes " [ref=e48] [cursor=pointer]:
+                  - /url: "#"
+                  - generic [ref=e49]: Perfumes
+                  - text: 
+              - listitem [ref=e50]:
+                - link "CATALOGO" [ref=e51] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/catalogo
+                  - generic [ref=e52]: CATALOGO
+              - listitem [ref=e53]:
+                - link "OFERTAS" [ref=e54] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/nuevas-ofertas
+                  - generic [ref=e55]: OFERTAS
+          - generic [ref=e56]:
+            - generic [ref=e57]:
+              - link "" [ref=e58] [cursor=pointer]:
+                - /url: https://maferperfumes.com/mi-cuenta/
+                - generic [ref=e59]: 
+              - text: "* *"
+            - generic "Buscar" [ref=e60]:
+              - link "Buscar" [ref=e61] [cursor=pointer]:
+                - /url: "#"
+                - generic [ref=e62]: 
+            - link "0 $ 0" [ref=e64] [cursor=pointer]:
+              - /url: https://maferperfumes.com/carrito/
+              - generic [ref=e66]: "0"
+              - generic [ref=e70]: $ 0
+          - text: 
+    - generic [ref=e71]:
+      - generic [ref=e74]:
+        - link "Regresa" [ref=e76] [cursor=pointer]:
+          - /url: "#"
+          - text: 
+        - heading "Caballero" [level=1] [ref=e77]
+      - main [ref=e78]:
+        - complementary [ref=e79]:
+          - text: 
+          - generic [ref=e80]:
+            - generic [ref=e81]:
+              - heading "Filtrar por precio" [level=5] [ref=e82]
+              - generic [ref=e85]:
+                - generic: Precio mínimo
+                - generic: Precio máximo
+                - button "Filtrar" [ref=e86] [cursor=pointer]
+            - generic [ref=e87]:
+              - heading "Filtrar por tamaño" [level=5] [ref=e88]
+              - list [ref=e89]:
+                - listitem [ref=e90]:
+                  - link " 100ml" [ref=e91] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/?filter_tamano=100ml
+                  - generic [ref=e92]: (4)
+                - listitem [ref=e93]:
+                  - link " 200ml" [ref=e94] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/?filter_tamano=200ml
+                  - generic [ref=e95]: (4)
+                - listitem [ref=e96]:
+                  - link " 75ml" [ref=e97] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/?filter_tamano=75ml
+                  - generic [ref=e98]: (3)
+                - listitem [ref=e99]:
+                  - link " 125ml" [ref=e100] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/?filter_tamano=125ml
+                  - generic [ref=e101]: (3)
+            - generic [ref=e102]:
+              - heading "Categorías del producto" [level=5] [ref=e103]
+              - list [ref=e104]:
+                - listitem [ref=e105]:
+                  - link "ACCESORIOS DE LUJO" [ref=e106] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/accesorios-de-lujo/
+                  - generic [ref=e107]: "3"
+                - listitem [ref=e108]:
+                  - link "Almendrado" [ref=e109] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/almendrado/
+                  - generic [ref=e110]: "5"
+                - listitem [ref=e111]:
+                  - link "Almizclado" [ref=e112] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/almizclado/
+                  - generic [ref=e113]: "21"
+                - listitem [ref=e114]:
+                  - link "Amaderado" [ref=e115] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/amaderado/
+                  - generic [ref=e116]: "307"
+                - listitem [ref=e117]:
+                  - link "Ámbar" [ref=e118] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/ambar/
+                  - generic [ref=e119]: "45"
+                - listitem [ref=e120]:
+                  - link "Aromático" [ref=e121] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/aromatico/
+                  - generic [ref=e122]: "23"
+                - listitem [ref=e123]:
+                  - link "Atalcado" [ref=e124] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/atalcado/
+                  - generic [ref=e125]: "61"
+                - listitem [ref=e126]:
+                  - link "Avainillado" [ref=e127] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/avainillado/
+                  - generic [ref=e128]: "101"
+                - listitem [ref=e129]:
+                  - link "Caballero" [ref=e130] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/
+                  - generic [ref=e131]: "517"
+                - listitem [ref=e132]:
+                  - link "Cacao" [ref=e133] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/cacao/
+                  - generic [ref=e134]: "4"
+                - listitem [ref=e135]:
+                  - link "Café" [ref=e136] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/cafe/
+                  - generic [ref=e137]: "2"
+                - listitem [ref=e138]:
+                  - link "Cálido Especiado" [ref=e139] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/calido-especiado/
+                  - generic [ref=e140]: "72"
+                - listitem [ref=e141]:
+                  - link "Caramelo" [ref=e142] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caramelo/
+                  - generic [ref=e143]: "6"
+                - listitem [ref=e144]:
+                  - link "Cereza" [ref=e145] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/cereza/
+                  - generic [ref=e146]: "7"
+                - listitem [ref=e147]:
+                  - link "Cítricos" [ref=e148] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/citricos/
+                  - generic [ref=e149]: "236"
+                - listitem [ref=e150]:
+                  - link "Coco" [ref=e151] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/coco/
+                  - generic [ref=e152]: "9"
+                - listitem [ref=e153]:
+                  - link "Cuero" [ref=e154] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/cuero/
+                  - generic [ref=e155]: "25"
+                - listitem [ref=e156]:
+                  - link "Dama" [ref=e157] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/dama/
+                  - generic [ref=e158]: "404"
+                - listitem [ref=e159]:
+                  - link "Decants" [ref=e160] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/decants/
+                  - generic [ref=e161]: "165"
+                - listitem [ref=e162]:
+                  - link "Destacados" [ref=e163] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/destacados/
+                  - generic [ref=e164]: "22"
+                - listitem [ref=e165]:
+                  - link "Dulces" [ref=e166] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/dulces/
+                  - generic [ref=e167]: "304"
+                - listitem [ref=e168]:
+                  - link "Estuches" [ref=e169] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/estuches-regalo/
+                  - generic [ref=e170]: "74"
+                - listitem [ref=e171]:
+                  - link "Florales" [ref=e172] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/florales/
+                  - generic [ref=e173]: "168"
+                - listitem [ref=e174]:
+                  - link "Fresco Especiado" [ref=e175] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/fresco-especiado/
+                  - generic [ref=e176]: "27"
+                - listitem [ref=e177]:
+                  - link "Frutales" [ref=e178] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/frutales/
+                  - generic [ref=e179]: "282"
+                - listitem [ref=e180]:
+                  - link "General" [ref=e181] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/sin-categorizar/
+                  - generic [ref=e182]: "45"
+                - listitem [ref=e183]:
+                  - link "General" [ref=e184] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/general/
+                  - generic [ref=e185]: "788"
+                - listitem [ref=e186]:
+                  - link "Incienso" [ref=e187] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/incienso/
+                  - generic [ref=e188]: "1"
+                - listitem [ref=e189]:
+                  - link "Iris" [ref=e190] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/iris/
+                  - generic [ref=e191]: "7"
+                - listitem [ref=e192]:
+                  - link "Lactónico" [ref=e193] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/lactonico/
+                  - generic [ref=e194]: "3"
+                - listitem [ref=e195]:
+                  - link "Lavanda" [ref=e196] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/lavanda/
+                  - generic [ref=e197]: "7"
+                - listitem [ref=e198]:
+                  - link "Marino" [ref=e199] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/marino/
+                  - generic [ref=e200]: "19"
+                - listitem [ref=e201]:
+                  - link "Nicho" [ref=e202] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/nicho/
+                  - generic [ref=e203]: "206"
+                - listitem [ref=e204]:
+                  - link "Ozónico" [ref=e205] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/ozonico/
+                  - generic [ref=e206]: "4"
+                - listitem [ref=e207]:
+                  - link "Rosas" [ref=e208] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/rosas/
+                  - generic [ref=e209]: "25"
+                - listitem [ref=e210]:
+                  - link "Tabaco" [ref=e211] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/tabaco/
+                  - generic [ref=e212]: "7"
+                - listitem [ref=e213]:
+                  - link "Terroso" [ref=e214] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/terroso/
+                  - generic [ref=e215]: "1"
+                - listitem [ref=e216]:
+                  - link "Testers Disponibles" [ref=e217] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/testers-disponibles/
+                  - generic [ref=e218]: "1"
+                - listitem [ref=e219]:
+                  - link "Tropical" [ref=e220] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/tropical/
+                  - generic [ref=e221]: "16"
+                - listitem [ref=e222]:
+                  - link "Unisex" [ref=e223] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/unisex/
+                  - generic [ref=e224]: "12"
+                - listitem [ref=e225]:
+                  - link "Verde" [ref=e226] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/verde/
+                  - generic [ref=e227]: "11"
+        - generic [ref=e228]:
+          - generic [ref=e230]:
+            - text: 
+            - generic [ref=e231]:
+              - generic [ref=e232]: "Mostrar :"
+              - link "30" [ref=e233] [cursor=pointer]:
+                - /url: https://maferperfumes.com/categoria/caballero/?per_page=30
+              - generic [ref=e234]: /
+              - link "60" [ref=e235] [cursor=pointer]:
+                - /url: https://maferperfumes.com/categoria/caballero/?per_page=60
+              - generic [ref=e236]: /
+              - link "90" [ref=e237] [cursor=pointer]:
+                - /url: https://maferperfumes.com/categoria/caballero/?per_page=90
+              - generic [ref=e238]: /
+              - link "120" [ref=e239] [cursor=pointer]:
+                - /url: https://maferperfumes.com/categoria/caballero/?per_page=120
+              - generic [ref=e240]: /
+              - link "150" [ref=e241] [cursor=pointer]:
+                - /url: https://maferperfumes.com/categoria/caballero/?per_page=150
+              - text: /
+            - combobox "Pedido de la tienda" [ref=e243] [cursor=pointer]:
+              - option "Ordenar por los últimos"
+              - 'option "Ordenar por precio: bajo a alto"'
+              - 'option "Ordenar por precio: alto a bajo"'
+              - option "Ordenar por popularidad" [selected]
+          - generic [ref=e244]:
+            - generic [ref=e245]:
+              - generic [ref=e247]:
+                - link "Mandarin Sky Armaf" [ref=e249] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/odyssey-mandarin-sky-armaf/
+                - heading "Mandarin Sky Armaf" [level=3] [ref=e250]:
+                  - link "Mandarin Sky Armaf" [ref=e251] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/odyssey-mandarin-sky-armaf/
+                - generic [ref=e252]:
+                  - generic [ref=e254]: $ 270.000
+                  - text: "-"
+                  - generic [ref=e256]: $ 350.000
+                  - generic: "Rango de precios: desde $ 270.000 hasta $ 350.000"
+                - generic [ref=e257]: 2 Opciones disponibles
+              - generic [ref=e260]:
+                - link "Club de Nuit Intense Men 105 ML" [ref=e262] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/club-de-nuit-intense-men-105ml/
+                - heading "Club de Nuit Intense Men 105 ML" [level=3] [ref=e263]:
+                  - link "Club de Nuit Intense Men 105 ML" [ref=e264] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/club-de-nuit-intense-men-105ml/
+                - generic [ref=e267]: $ 260.000
+                - generic [ref=e268]: 1 Opción disponible
+              - generic [ref=e271]:
+                - link "Art Of Universe Lattafa 100 ML" [ref=e273] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/art-of-universe-lattafa/
+                  - generic:
+                    - img
+                - heading "Art Of Universe Lattafa 100 ML" [level=3] [ref=e274]:
+                  - link "Art Of Universe Lattafa 100 ML" [ref=e275] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/art-of-universe-lattafa/
+                - generic [ref=e278]: $ 320.000
+                - generic [ref=e279]: 1 Opción disponible
+              - generic [ref=e282]:
+                - link "Nitro Red Dumont Paris 100 ML" [ref=e284] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/nitro-red-dumont-paris/
+                  - generic [ref=e286]: "-16%"
+                - heading "Nitro Red Dumont Paris 100 ML" [level=3] [ref=e287]:
+                  - link "Nitro Red Dumont Paris 100 ML" [ref=e288] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/nitro-red-dumont-paris/
+                - generic [ref=e289]:
+                  - deletion [ref=e290]:
+                    - generic [ref=e292]: $ 270.000
+                  - generic: "El precio original era: $ 270.000."
+                  - insertion [ref=e293]:
+                    - generic [ref=e295]: $ 226.000
+                  - generic: "El precio actual es: $ 226.000."
+                - generic [ref=e296]: 1 Opción disponible
+              - generic [ref=e299]:
+                - link "Le Beau Le Parfum Jean Paul Gaultier" [ref=e301] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/le-beau-le-parfum-jean-paul-gaultier-125-ml/
+                  - generic:
+                    - img
+                - generic [ref=e302]:
+                  - generic [ref=e304] [cursor=pointer]: 75ml
+                  - generic [ref=e306] [cursor=pointer]: 125ml
+                - heading "Le Beau Le Parfum Jean Paul Gaultier" [level=3] [ref=e307]:
+                  - link "Le Beau Le Parfum Jean Paul Gaultier" [ref=e308] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/le-beau-le-parfum-jean-paul-gaultier-125-ml/
+                - generic [ref=e309]:
+                  - generic [ref=e311]: $ 430.000
+                  - text: "-"
+                  - generic [ref=e313]: $ 590.000
+                  - generic: "Rango de precios: desde $ 430.000 hasta $ 590.000"
+                - generic [ref=e314]: 2 Opciones disponibles
+              - generic [ref=e317]:
+                - link "Rasasi Hawas Fire 100 ML" [ref=e319] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/hawas-fire/
+                  - generic:
+                    - img
+                - heading "Rasasi Hawas Fire 100 ML" [level=3] [ref=e320]:
+                  - link "Rasasi Hawas Fire 100 ML" [ref=e321] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/hawas-fire/
+                - generic [ref=e324]: $ 340.000
+                - generic [ref=e325]: 1 Opción disponible
+              - generic [ref=e328]:
+                - link "Khamrah Lattafa 100 ML" [ref=e330] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/khamrah-lattafa/
+                - heading "Khamrah Lattafa 100 ML" [level=3] [ref=e331]:
+                  - link "Khamrah Lattafa 100 ML" [ref=e332] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/khamrah-lattafa/
+                - generic [ref=e335]: $ 250.000
+                - generic [ref=e336]: 1 Opción disponible
+              - generic [ref=e339]:
+                - link "Nautica Voyage" [ref=e341] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/nautica-voyage/
+                - heading "Nautica Voyage" [level=3] [ref=e342]:
+                  - link "Nautica Voyage" [ref=e343] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/nautica-voyage/
+                - generic [ref=e346]: $ 150.000
+                - generic [ref=e347]: 1 Opción disponible
+              - generic [ref=e350]:
+                - link "Afnan 9PM 100 ML" [ref=e352] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/afnan-9pm/
+                - heading "Afnan 9PM 100 ML" [level=3] [ref=e353]:
+                  - link "Afnan 9PM 100 ML" [ref=e354] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/afnan-9pm/
+                - generic [ref=e357]: $ 250.000
+                - generic [ref=e358]: 1 Opción disponible
+              - generic [ref=e361]:
+                - link "Odyssey Mandarin Sky Elixir Armaf 100 ML" [ref=e363] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/odyssey-mandarin-sky-elixir-100ml/
+                  - generic:
+                    - img
+                - heading "Odyssey Mandarin Sky Elixir Armaf 100 ML" [level=3] [ref=e364]:
+                  - link "Odyssey Mandarin Sky Elixir Armaf 100 ML" [ref=e365] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/odyssey-mandarin-sky-elixir-100ml/
+                - generic [ref=e368]: $ 300.000
+                - generic [ref=e369]: 1 Opción disponible
+              - generic [ref=e372]:
+                - link "Lattafa Amethyst 100 ML" [ref=e374] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/lattafa-amethyst/
+                - heading "Lattafa Amethyst 100 ML" [level=3] [ref=e375]:
+                  - link "Lattafa Amethyst 100 ML" [ref=e376] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/lattafa-amethyst/
+                - generic [ref=e379]: $ 220.000
+                - generic [ref=e380]: 1 Opción disponible
+              - generic [ref=e383]:
+                - link "Valentino Uomo Born In Roma Intense EDP 100 ML" [ref=e385] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/valentino-uomo-born-in-roma-intense-edp/
+                  - generic:
+                    - img
+                - heading "Valentino Uomo Born In Roma Intense EDP 100 ML" [level=3] [ref=e386]:
+                  - link "Valentino Uomo Born In Roma Intense EDP 100 ML" [ref=e387] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/valentino-uomo-born-in-roma-intense-edp/
+                - generic [ref=e390]: $ 720.000
+                - generic [ref=e391]: 1 Opción disponible
+              - generic [ref=e394]:
+                - link "Rasasi Hawas Tropical 100 ML" [ref=e396] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/rasasi-hawas-tropical/
+                  - generic:
+                    - img
+                - heading "Rasasi Hawas Tropical 100 ML" [level=3] [ref=e397]:
+                  - link "Rasasi Hawas Tropical 100 ML" [ref=e398] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/rasasi-hawas-tropical/
+                - generic [ref=e401]: $ 320.000
+                - generic [ref=e402]: 1 Opción disponible
+              - generic [ref=e405]:
+                - link "Bharara King" [ref=e407] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/bharara-king/
+                - heading "Bharara King" [level=3] [ref=e408]:
+                  - link "Bharara King" [ref=e409] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/bharara-king/
+                - generic [ref=e410]:
+                  - generic [ref=e412]: $ 350.000
+                  - text: "-"
+                  - generic [ref=e414]: $ 480.000
+                  - generic: "Rango de precios: desde $ 350.000 hasta $ 480.000"
+                - generic [ref=e415]: 2 Opciones disponibles
+              - generic [ref=e418]:
+                - link "Lattafa Asad Bourbon 100 ML" [ref=e420] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/lattafa-asad-bourbon/
+                - heading "Lattafa Asad Bourbon 100 ML" [level=3] [ref=e421]:
+                  - link "Lattafa Asad Bourbon 100 ML" [ref=e422] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/lattafa-asad-bourbon/
+                - generic [ref=e425]: $ 260.000
+                - generic [ref=e426]: 1 Opción disponible
+              - generic [ref=e429]:
+                - link "Hawas Ice Rasasi 100 ML" [ref=e431] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/hawas-ice-rasasi/
+                  - generic [ref=e433]: "-14%"
+                - heading "Hawas Ice Rasasi 100 ML" [level=3] [ref=e434]:
+                  - link "Hawas Ice Rasasi 100 ML" [ref=e435] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/hawas-ice-rasasi/
+                - generic [ref=e436]:
+                  - deletion [ref=e437]:
+                    - generic [ref=e439]: $ 320.000
+                  - generic: "El precio original era: $ 320.000."
+                  - insertion [ref=e440]:
+                    - generic [ref=e442]: $ 274.000
+                  - generic: "El precio actual es: $ 274.000."
+                - generic [ref=e443]: 1 Opción disponible
+              - generic [ref=e446]:
+                - link "Nitro Red Intensely Dumont Paris 100 ML EXT" [ref=e448] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/nitro-red-intensely-dumont-paris-extrait-de-parfum/
+                - heading "Nitro Red Intensely Dumont Paris 100 ML EXT" [level=3] [ref=e449]:
+                  - link "Nitro Red Intensely Dumont Paris 100 ML EXT" [ref=e450] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/nitro-red-intensely-dumont-paris-extrait-de-parfum/
+                - generic [ref=e453]: $ 320.000
+                - generic [ref=e454]: 1 Opción disponible
+              - generic [ref=e457]:
+                - link "Versace Eros Energy EDP 100 ML" [ref=e459] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/versace-eros-energy/
+                - heading "Versace Eros Energy EDP 100 ML" [level=3] [ref=e460]:
+                  - link "Versace Eros Energy EDP 100 ML" [ref=e461] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/versace-eros-energy/
+                - generic [ref=e464]: $ 400.000
+                - generic [ref=e465]: 1 Opción disponible
+              - generic [ref=e468]:
+                - link "Khamrah Qahwa 100 ML" [ref=e470] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/khamrah-qahwa/
+                  - generic [ref=e472]: "-19%"
+                - heading "Khamrah Qahwa 100 ML" [level=3] [ref=e473]:
+                  - link "Khamrah Qahwa 100 ML" [ref=e474] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/khamrah-qahwa/
+                - generic [ref=e475]:
+                  - deletion [ref=e476]:
+                    - generic [ref=e478]: $ 270.000
+                  - generic: "El precio original era: $ 270.000."
+                  - insertion [ref=e479]:
+                    - generic [ref=e481]: $ 219.000
+                  - generic: "El precio actual es: $ 219.000."
+                - generic [ref=e482]: 1 Opción disponible
+              - generic [ref=e485]:
+                - link "Liquid Brun French Avenue 100 ML" [ref=e487] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/liquid-brun-french-avenue/
+                  - generic [ref=e489]: "-18%"
+                - heading "Liquid Brun French Avenue 100 ML" [level=3] [ref=e490]:
+                  - link "Liquid Brun French Avenue 100 ML" [ref=e491] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/liquid-brun-french-avenue/
+                - generic [ref=e492]:
+                  - deletion [ref=e493]:
+                    - generic [ref=e495]: $ 300.000
+                  - generic: "El precio original era: $ 300.000."
+                  - insertion [ref=e496]:
+                    - generic [ref=e498]: $ 246.000
+                  - generic: "El precio actual es: $ 246.000."
+                - generic [ref=e499]: 1 Opción disponible
+              - generic [ref=e502]:
+                - link "Azzaro The Most Wanted EDP Intense 100 ML" [ref=e504] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/azzaro-the-most-wanted-edp-intense-100-ml/
+                - heading "Azzaro The Most Wanted EDP Intense 100 ML" [level=3] [ref=e505]:
+                  - link "Azzaro The Most Wanted EDP Intense 100 ML" [ref=e506] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/azzaro-the-most-wanted-edp-intense-100-ml/
+                - generic [ref=e509]: $ 520.000
+                - generic [ref=e510]: 1 Opción disponible
+              - generic [ref=e513]:
+                - link "Lattafa Oud For Glory" [ref=e515] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/lattafa-oud-for-glory/
+                - heading "Lattafa Oud For Glory" [level=3] [ref=e516]:
+                  - link "Lattafa Oud For Glory" [ref=e517] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/lattafa-oud-for-glory/
+                - generic [ref=e520]: $ 220.000
+                - generic [ref=e521]: 1 Opción disponible
+              - generic [ref=e524]:
+                - link "Al Haramain Amber Oud Gold Edition" [ref=e526] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/al-haramain-amber-oud-gold-edition/
+                - heading "Al Haramain Amber Oud Gold Edition" [level=3] [ref=e527]:
+                  - link "Al Haramain Amber Oud Gold Edition" [ref=e528] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/al-haramain-amber-oud-gold-edition/
+                - generic [ref=e529]:
+                  - generic [ref=e531]: $ 290.000
+                  - text: "-"
+                  - generic [ref=e533]: $ 490.000
+                  - generic: "Rango de precios: desde $ 290.000 hasta $ 490.000"
+                - generic [ref=e534]: 3 Opciones disponibles
+              - generic [ref=e537]:
+                - link "Club De Nuit Urban Elixir 105 ML" [ref=e539] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/club-de-nuit-urban-elixir/
+                - heading "Club De Nuit Urban Elixir 105 ML" [level=3] [ref=e540]:
+                  - link "Club De Nuit Urban Elixir 105 ML" [ref=e541] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/club-de-nuit-urban-elixir/
+                - generic [ref=e544]: $ 290.000
+                - generic [ref=e545]: 1 Opción disponible
+              - generic [ref=e548]:
+                - link "9PM Rebel Afnan 100 ML" [ref=e550] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/9pm-rebel-afnan/
+                - heading "9PM Rebel Afnan 100 ML" [level=3] [ref=e551]:
+                  - link "9PM Rebel Afnan 100 ML" [ref=e552] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/9pm-rebel-afnan/
+                - generic [ref=e555]: $ 290.000
+                - generic [ref=e556]: 1 Opción disponible
+              - generic [ref=e559]:
+                - link "Versace Eros EDP" [ref=e561] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/versace-eros-eau-de-parfum/
+                - generic [ref=e562]:
+                  - generic [ref=e564] [cursor=pointer]: 100ml
+                  - generic [ref=e566] [cursor=pointer]: 200ml
+                - heading "Versace Eros EDP" [level=3] [ref=e567]:
+                  - link "Versace Eros EDP" [ref=e568] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/versace-eros-eau-de-parfum/
+                - generic [ref=e569]:
+                  - generic [ref=e571]: $ 390.000
+                  - text: "-"
+                  - generic [ref=e573]: $ 520.000
+                  - generic: "Rango de precios: desde $ 390.000 hasta $ 520.000"
+                - generic [ref=e574]: 2 Opciones disponibles
+              - generic [ref=e577]:
+                - link "Lattafa Asad 100 ML" [ref=e579] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/lattafa-asad-clon-sauvage-elixir/
+                - heading "Lattafa Asad 100 ML" [level=3] [ref=e580]:
+                  - link "Lattafa Asad 100 ML" [ref=e581] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/lattafa-asad-clon-sauvage-elixir/
+                - generic [ref=e584]: $ 240.000
+                - generic [ref=e585]: 1 Opción disponible
+              - generic [ref=e588]:
+                - link "Vulcan Feu French Avenue 100 ML" [ref=e590] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/vulcan-feu-french-avenue-100-ml/
+                  - generic:
+                    - img
+                  - generic [ref=e592]: "-19%"
+                - heading "Vulcan Feu French Avenue 100 ML" [level=3] [ref=e593]:
+                  - link "Vulcan Feu French Avenue 100 ML" [ref=e594] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/vulcan-feu-french-avenue-100-ml/
+                - generic [ref=e595]:
+                  - deletion [ref=e596]:
+                    - generic [ref=e598]: $ 320.000
+                  - generic: "El precio original era: $ 320.000."
+                  - insertion [ref=e599]:
+                    - generic [ref=e601]: $ 259.000
+                  - generic: "El precio actual es: $ 259.000."
+                - generic [ref=e602]: 1 Opción disponible
+              - generic [ref=e605]:
+                - link "Club De Nuit Precieux l Armaf EXT" [ref=e607] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/club-de-nuit-precieux-l/
+                - heading "Club De Nuit Precieux l Armaf EXT" [level=3] [ref=e608]:
+                  - link "Club De Nuit Precieux l Armaf EXT" [ref=e609] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/club-de-nuit-precieux-l/
+                - generic [ref=e612]: $ 350.000
+                - generic [ref=e613]: 1 Opción disponible
+              - generic [ref=e616]:
+                - link "Fakhar Black Lattafa" [ref=e618] [cursor=pointer]:
+                  - /url: https://maferperfumes.com/producto/fakhar-black/
+                  - generic [ref=e620]: "-18%"
+                - heading "Fakhar Black Lattafa" [level=3] [ref=e621]:
+                  - link "Fakhar Black Lattafa" [ref=e622] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/fakhar-black/
+                - generic [ref=e623]:
+                  - deletion [ref=e624]:
+                    - generic [ref=e626]: $ 250.000
+                  - generic: "El precio original era: $ 250.000."
+                  - insertion [ref=e627]:
+                    - generic [ref=e629]: $ 206.000
+                  - generic: "El precio actual es: $ 206.000."
+                - generic [ref=e630]: 1 Opción disponible
+            - navigation "Paginación de producto" [ref=e633]:
+              - list [ref=e634]:
+                - listitem [ref=e635]:
+                  - generic "Página 1" [ref=e636]: "1"
+                - listitem [ref=e637]:
+                  - link "Página 2" [ref=e638] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/page/2/
+                    - text: "2"
+                - listitem [ref=e639]:
+                  - link "Página 3" [ref=e640] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/page/3/
+                    - text: "3"
+                - listitem [ref=e641]:
+                  - link "Página 4" [ref=e642] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/page/4/
+                    - text: "4"
+                - listitem [ref=e643]:
+                  - generic [ref=e644]: …
+                - listitem [ref=e645]:
+                  - link "Página 16" [ref=e646] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/page/16/
+                    - text: "16"
+                - listitem [ref=e647]:
+                  - link "Página 17" [ref=e648] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/page/17/
+                    - text: "17"
+                - listitem [ref=e649]:
+                  - link "Página 18" [ref=e650] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/page/18/
+                    - text: "18"
+                - listitem [ref=e651]:
+                  - link " →" [ref=e652] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/categoria/caballero/page/2/
+    - contentinfo:
+      - complementary [ref=e654]:
+        - generic [ref=e657]:
+          - img "Mafer Perfumes" [ref=e658]
+          - paragraph [ref=e659]:
+            - text: Ofrecemos una exclusiva selección de aromas para cualquier evento, desde perfumes frescos para el día a día hasta elegantes perfumes para ocasiones especiales.
+            - text: Encuentra el perfume ideal que resalte tu personalidad y deja una impresión inolvidable.
+        - generic [ref=e661]:
+          - heading "Enlaces Rápidos" [level=5] [ref=e662]
+          - list [ref=e664]:
+            - listitem [ref=e665]:
+              - link "Términos y condiciones" [ref=e666] [cursor=pointer]:
+                - /url: https://maferperfumes.com/terminos-y-condiciones/
+            - listitem [ref=e667]:
+              - link "Politica de privacidad" [ref=e668] [cursor=pointer]:
+                - /url: https://maferperfumes.com/politica-de-privacidad/
+            - listitem [ref=e669]:
+              - link "Medios de pago" [ref=e670] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e673]:
+          - heading "Contácto Digital" [level=3] [ref=e674]
+          - list [ref=e675]:
+            - listitem [ref=e676]:
+              - generic [ref=e677]: 
+              - link "+57 (304) 444 1454" [ref=e678] [cursor=pointer]:
+                - /url: https://wa.me/573044441454
+            - listitem [ref=e679]:
+              - generic [ref=e680]: 
+              - link "@maferperfumes" [ref=e681] [cursor=pointer]:
+                - /url: https://instagram.com/maferperfumes
+            - listitem [ref=e682]:
+              - generic [ref=e683]: 
+              - generic [ref=e684]:
+                - strong [ref=e685]: "Domingo - Domingo:"
+                - text: 9:00 am a 8:00 pm
+            - listitem [ref=e686]:
+              - generic [ref=e687]: 
+              - link "sac@maferperfumes.co" [ref=e688] [cursor=pointer]:
+                - /url: mailto:sac@maferperfumes.co
+        - generic [ref=e691]:
+          - heading "VÍSITANOS EN NUESTRO PUNTO FISICO" [level=3] [ref=e692]
+          - list [ref=e693]:
+            - listitem [ref=e694]:
+              - generic [ref=e695]: 
+              - generic [ref=e696]:
+                - strong [ref=e697]: "Domingo - Domingo:"
+                - text: 10:00 am a 8:00 pm
+            - listitem [ref=e698]:
+              - generic [ref=e699]: 
+              - link "Cúcuta, CC Jardín Plaza Local 96" [ref=e700] [cursor=pointer]:
+                - /url: https://maps.app.goo.gl/3zZAPNyzFUsB42reA?g_st=ipc
+                - strong [ref=e701]: Cúcuta, CC Jardín Plaza Local 96
+      - generic [ref=e703]:
+        - generic [ref=e704]:
+          - text: MaferPerfumes © 2025. Todos los derechos reservados. Creado por
+          - link "GEMETECH IT SERVICES" [ref=e705] [cursor=pointer]:
+            - /url: https://gemetechitservices.com
+        - img "payments" [ref=e707]
+  - link "Botón de desplazamiento a la parte superior":
+    - /url: "#"
+    - text: 
+  - generic [ref=e708]:
+    - link " Cerrar" [ref=e711] [cursor=pointer]:
+      - /url: "#"
+    - list [ref=e712]:
+      - listitem [ref=e713]:
+        - link "Inicio" [ref=e714] [cursor=pointer]:
+          - /url: https://maferperfumes.com
+          - generic [ref=e715]: Inicio
+      - listitem [ref=e716]:
+        - link "Nuevos Lanzamientos" [ref=e717] [cursor=pointer]:
+          - /url: https://maferperfumes.com/catalogo/?orderby=date
+          - generic [ref=e718]: Nuevos Lanzamientos
+      - listitem [ref=e719]:
+        - link "Familias Olfativas" [ref=e720] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e721]: Familias Olfativas
+      - listitem [ref=e722]:
+        - link "Perfumes" [ref=e723] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e724]: Perfumes
+      - listitem [ref=e725]:
+        - link "CATALOGO" [ref=e726] [cursor=pointer]:
+          - /url: https://maferperfumes.com/catalogo
+          - generic [ref=e727]: CATALOGO
+      - listitem [ref=e728]:
+        - link "OFERTAS" [ref=e729] [cursor=pointer]:
+          - /url: https://maferperfumes.com/nuevas-ofertas
+          - generic [ref=e730]: OFERTAS
+  - generic [ref=e732]:
+    - generic [ref=e733]: Carrito
+    - link " Cerrar" [ref=e735] [cursor=pointer]:
+      - /url: "#"
+  - text:   

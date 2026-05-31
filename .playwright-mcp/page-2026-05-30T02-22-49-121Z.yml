@@ -1,0 +1,63 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - generic [ref=e5]:
+      - paragraph [ref=e6]: Admin Console
+      - paragraph [ref=e7]: Aroma-Distribuido HQ
+    - navigation [ref=e8]:
+      - link "Dashboard" [ref=e9] [cursor=pointer]:
+        - /url: /admin/dashboard
+        - img [ref=e10]
+        - text: Dashboard
+      - link "Productos" [ref=e12] [cursor=pointer]:
+        - /url: /admin/products
+        - img [ref=e13]
+        - text: Productos
+      - link "Marcas" [ref=e15] [cursor=pointer]:
+        - /url: /admin/brands
+        - img [ref=e16]
+        - text: Marcas
+      - link "Categorías" [ref=e18] [cursor=pointer]:
+        - /url: /admin/categories
+        - img [ref=e19]
+        - text: Categorías
+      - link "Pedidos" [ref=e21] [cursor=pointer]:
+        - /url: /admin/orders
+        - img [ref=e22]
+        - text: Pedidos
+      - link "Clientes" [ref=e24] [cursor=pointer]:
+        - /url: /admin/customers
+        - img [ref=e25]
+        - text: Clientes
+      - link "Inventario" [ref=e27] [cursor=pointer]:
+        - /url: /admin/inventory
+        - img [ref=e28]
+        - text: Inventario
+      - link "Analíticas" [ref=e30] [cursor=pointer]:
+        - /url: /admin/reports
+        - img [ref=e31]
+        - text: Analíticas
+    - generic [ref=e33]:
+      - link "Configuración" [ref=e34] [cursor=pointer]:
+        - /url: /admin/settings
+        - img [ref=e35]
+        - text: Configuración
+      - button "Cerrar Sesión" [ref=e37] [cursor=pointer]:
+        - img [ref=e38]
+        - text: Cerrar Sesión
+  - generic [ref=e41]:
+    - generic [ref=e42]:
+      - heading "Dashboard" [level=1] [ref=e43]
+      - paragraph [ref=e44]: Vista general del negocio
+    - generic [ref=e50]:
+      - generic [ref=e51]:
+        - heading "Pedidos Recientes" [level=3] [ref=e52]
+        - link "Ver todos →" [ref=e53] [cursor=pointer]:
+          - /url: /admin/orders
+      - table [ref=e54]:
+        - rowgroup [ref=e55]:
+          - row "Order ID Cliente Total Estado" [ref=e56]:
+            - columnheader "Order ID" [ref=e57]
+            - columnheader "Cliente" [ref=e58]
+            - columnheader "Total" [ref=e59]
+            - columnheader "Estado" [ref=e60]
+        - rowgroup

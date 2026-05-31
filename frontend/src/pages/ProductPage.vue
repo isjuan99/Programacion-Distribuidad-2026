@@ -65,7 +65,7 @@
 
           <!-- Price -->
           <p class="font-display text-4xl text-aroma-text mb-8">
-            ${{ selectedVariant?.price?.toFixed(2) || '—' }}
+            {{ selectedVariant?.price != null ? formatCOP(selectedVariant.price) : '—' }}
           </p>
 
           <!-- Olfactory notes -->
@@ -271,7 +271,7 @@
               </div>
               <p class="text-xs text-gray-500 mb-1">{{ p.brand_name }}</p>
               <p class="text-sm text-white group-hover:text-[#c9a84c] transition-colors">{{ p.name }}</p>
-              <p v-if="p.variants && p.variants[0]" class="text-[#c9a84c] text-sm mt-1">${{ p.variants[0].price }}</p>
+              <p v-if="p.variants && p.variants[0]" class="text-[#c9a84c] text-sm mt-1">{{ formatCOP(p.variants[0].price) }}</p>
             </RouterLink>
           </div>
         </div>
@@ -302,7 +302,7 @@
               </div>
               <p class="text-xs text-gray-500 mb-1">{{ p.brand }}</p>
               <p class="text-sm text-white group-hover:text-[#c9a84c] transition-colors">{{ p.name }}</p>
-              <p v-if="p.price" class="text-[#c9a84c] text-sm mt-1">${{ p.price }}</p>
+              <p v-if="p.price" class="text-[#c9a84c] text-sm mt-1">{{ formatCOP(p.price) }}</p>
               <p v-if="p.common_notes?.length" class="text-xs text-gray-600 mt-1 capitalize">
                 {{ p.common_notes.slice(0, 2).join(' · ') }}
               </p>
@@ -344,6 +344,7 @@ import { useI18n } from 'vue-i18n'
 import Header from '../components/layout/Header.vue'
 import Footer from '../components/layout/Footer.vue'
 import { useCartStore } from '../stores/cart'
+import { formatCOP } from '../utils/currency'
 import api from '../router/api'
 
 const route = useRoute()

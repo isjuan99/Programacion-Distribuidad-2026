@@ -1,0 +1,943 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e7]:
+          - text:     
+          - generic "ENVÍO GRATIS A TODA COLOMBIA" [ref=e10]:
+            - group [ref=e11]:
+              - generic [ref=e12]: ENVÍO GRATIS A TODA COLOMBIA
+              - generic [ref=e13]: ENVÍO GRATIS A TODA COLOMBIA
+              - generic [ref=e14]: ENVÍO GRATIS A TODA COLOMBIA
+              - generic [ref=e15]: ENVÍO GRATIS A TODA COLOMBIA
+        - generic [ref=e18]:
+          - text:    
+          - generic [ref=e19]:
+            - link "Abrir menú móvil" [ref=e21] [cursor=pointer]:
+              - /url: "#"
+            - link "Buscar" [ref=e24] [cursor=pointer]:
+              - /url: "#"
+              - generic [ref=e25]: 
+          - link "Logotipo del sitio" [ref=e28] [cursor=pointer]:
+            - /url: https://maferperfumes.com/
+          - generic [ref=e29]:
+            - link "offer" [ref=e31] [cursor=pointer]:
+              - /url: https://maferperfumes.com/black-days
+              - img "offer" [ref=e33]
+            - link "0" [ref=e35] [cursor=pointer]:
+              - /url: https://maferperfumes.com/carrito/
+              - generic [ref=e37]: "0"
+    - generic [ref=e38]:
+      - generic [ref=e40]:
+        - heading "Ofertas" [level=1] [ref=e41]
+        - navigation [ref=e42]:
+          - link "Inicio" [ref=e43] [cursor=pointer]:
+            - /url: https://maferperfumes.com/
+          - generic [ref=e44]: /
+          - text: Ofertas
+      - main [ref=e45]:
+        - article [ref=e47]:
+          - generic [ref=e53]:
+            - generic [ref=e55]:
+              - generic [ref=e56]:
+                - generic [ref=e57]: "Mostrar :"
+                - link "30" [ref=e58] [cursor=pointer]:
+                  - /url: "?per_page=30&shortcode=1"
+                - generic [ref=e59]: /
+                - link "60" [ref=e60] [cursor=pointer]:
+                  - /url: "?per_page=60&shortcode=1"
+                - generic [ref=e61]: /
+                - link "90" [ref=e62] [cursor=pointer]:
+                  - /url: "?per_page=90&shortcode=1"
+                - generic [ref=e63]: /
+                - link "120" [ref=e64] [cursor=pointer]:
+                  - /url: "?per_page=120&shortcode=1"
+                - generic [ref=e65]: /
+                - link "150" [ref=e66] [cursor=pointer]:
+                  - /url: "?per_page=150&shortcode=1"
+                - text: /
+              - combobox "Pedido de la tienda" [ref=e68] [cursor=pointer]:
+                - option "Ordenar por los últimos"
+                - 'option "Ordenar por precio: bajo a alto"'
+                - 'option "Ordenar por precio: alto a bajo"'
+                - option "Ordenar por popularidad" [selected]
+            - generic [ref=e69]:
+              - generic [ref=e71]:
+                - generic [ref=e72]:
+                  - link "Nitro Red Dumont Paris 100 ML" [ref=e73] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/nitro-red-dumont-paris/
+                    - generic [ref=e75]: "-16%"
+                  - generic [ref=e77]:
+                    - 'button "Añadir al carrito: “Nitro Red Dumont Paris 100 ML”" [ref=e79] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e81] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/nitro-red-dumont-paris/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Nitro Red Dumont Paris 100 ML" [level=3] [ref=e82]:
+                  - link "Nitro Red Dumont Paris 100 ML" [ref=e83] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/nitro-red-dumont-paris/
+                - generic [ref=e84]:
+                  - deletion [ref=e85]:
+                    - generic [ref=e87]: $ 270.000
+                  - generic: "El precio original era: $ 270.000."
+                  - insertion [ref=e88]:
+                    - generic [ref=e90]: $ 226.000
+                  - generic: "El precio actual es: $ 226.000."
+                - generic [ref=e91]: 1 Opción disponible
+              - generic [ref=e94]:
+                - generic [ref=e95]:
+                  - link "Hawas Ice Rasasi 100 ML" [ref=e96] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/hawas-ice-rasasi/
+                    - generic [ref=e98]: "-14%"
+                  - generic [ref=e100]:
+                    - 'button "Añadir al carrito: “Hawas Ice Rasasi 100 ML”" [ref=e102] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e104] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/hawas-ice-rasasi/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Hawas Ice Rasasi 100 ML" [level=3] [ref=e105]:
+                  - link "Hawas Ice Rasasi 100 ML" [ref=e106] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/hawas-ice-rasasi/
+                - generic [ref=e107]:
+                  - deletion [ref=e108]:
+                    - generic [ref=e110]: $ 320.000
+                  - generic: "El precio original era: $ 320.000."
+                  - insertion [ref=e111]:
+                    - generic [ref=e113]: $ 274.000
+                  - generic: "El precio actual es: $ 274.000."
+                - generic [ref=e114]: 1 Opción disponible
+              - generic [ref=e117]:
+                - generic [ref=e118]:
+                  - link "Khamrah Qahwa 100 ML" [ref=e119] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/khamrah-qahwa/
+                    - generic [ref=e121]: "-19%"
+                  - generic [ref=e123]:
+                    - 'button "Añadir al carrito: “Khamrah Qahwa 100 ML”" [ref=e125] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e127] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/khamrah-qahwa/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Khamrah Qahwa 100 ML" [level=3] [ref=e128]:
+                  - link "Khamrah Qahwa 100 ML" [ref=e129] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/khamrah-qahwa/
+                - generic [ref=e130]:
+                  - deletion [ref=e131]:
+                    - generic [ref=e133]: $ 270.000
+                  - generic: "El precio original era: $ 270.000."
+                  - insertion [ref=e134]:
+                    - generic [ref=e136]: $ 219.000
+                  - generic: "El precio actual es: $ 219.000."
+                - generic [ref=e137]: 1 Opción disponible
+              - generic [ref=e140]:
+                - generic [ref=e141]:
+                  - link "Liquid Brun French Avenue 100 ML" [ref=e142] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/liquid-brun-french-avenue/
+                    - generic [ref=e144]: "-18%"
+                  - generic [ref=e146]:
+                    - 'button "Añadir al carrito: “Liquid Brun French Avenue 100 ML”" [ref=e148] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e150] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/liquid-brun-french-avenue/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Liquid Brun French Avenue 100 ML" [level=3] [ref=e151]:
+                  - link "Liquid Brun French Avenue 100 ML" [ref=e152] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/liquid-brun-french-avenue/
+                - generic [ref=e153]:
+                  - deletion [ref=e154]:
+                    - generic [ref=e156]: $ 300.000
+                  - generic: "El precio original era: $ 300.000."
+                  - insertion [ref=e157]:
+                    - generic [ref=e159]: $ 246.000
+                  - generic: "El precio actual es: $ 246.000."
+                - generic [ref=e160]: 1 Opción disponible
+              - generic [ref=e163]:
+                - generic [ref=e164]:
+                  - link "Moschino Toy 2 Pearl 100 ML" [ref=e165] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/moschino-toy-2-pearl/
+                    - generic [ref=e167]: "-23%"
+                  - generic [ref=e169]:
+                    - 'button "Añadir al carrito: “Moschino Toy 2 Pearl 100 ML”" [ref=e171] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e173] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/moschino-toy-2-pearl/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Moschino Toy 2 Pearl 100 ML" [level=3] [ref=e174]:
+                  - link "Moschino Toy 2 Pearl 100 ML" [ref=e175] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/moschino-toy-2-pearl/
+                - generic [ref=e176]:
+                  - deletion [ref=e177]:
+                    - generic [ref=e179]: $ 360.000
+                  - generic: "El precio original era: $ 360.000."
+                  - insertion [ref=e180]:
+                    - generic [ref=e182]: $ 279.000
+                  - generic: "El precio actual es: $ 279.000."
+                - generic [ref=e183]: 1 Opción disponible
+              - generic [ref=e186]:
+                - generic [ref=e187]:
+                  - link "Vulcan Feu French Avenue 100 ML" [ref=e188] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/vulcan-feu-french-avenue-100-ml/
+                    - generic:
+                      - img
+                    - generic [ref=e190]: "-19%"
+                  - generic [ref=e192]:
+                    - 'button "Añadir al carrito: “Vulcan Feu French Avenue 100 ML”" [ref=e194] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e196] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/vulcan-feu-french-avenue-100-ml/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Vulcan Feu French Avenue 100 ML" [level=3] [ref=e197]:
+                  - link "Vulcan Feu French Avenue 100 ML" [ref=e198] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/vulcan-feu-french-avenue-100-ml/
+                - generic [ref=e199]:
+                  - deletion [ref=e200]:
+                    - generic [ref=e202]: $ 320.000
+                  - generic: "El precio original era: $ 320.000."
+                  - insertion [ref=e203]:
+                    - generic [ref=e205]: $ 259.000
+                  - generic: "El precio actual es: $ 259.000."
+                - generic [ref=e206]: 1 Opción disponible
+              - generic [ref=e209]:
+                - generic [ref=e210]:
+                  - link "Fakhar Black Lattafa" [ref=e211] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/fakhar-black/
+                    - generic [ref=e213]: "-18%"
+                  - generic [ref=e215]:
+                    - 'button "Añadir al carrito: “Fakhar Black Lattafa”" [ref=e217] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e219] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/fakhar-black/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Fakhar Black Lattafa" [level=3] [ref=e220]:
+                  - link "Fakhar Black Lattafa" [ref=e221] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/fakhar-black/
+                - generic [ref=e222]:
+                  - deletion [ref=e223]:
+                    - generic [ref=e225]: $ 250.000
+                  - generic: "El precio original era: $ 250.000."
+                  - insertion [ref=e226]:
+                    - generic [ref=e228]: $ 206.000
+                  - generic: "El precio actual es: $ 206.000."
+                - generic [ref=e229]: 1 Opción disponible
+              - generic [ref=e232]:
+                - generic [ref=e233]:
+                  - link "Moschino Toy Boy 100 ML" [ref=e234] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/moschino-toy-boy/
+                    - generic [ref=e236]: "-21%"
+                  - generic [ref=e238]:
+                    - 'button "Añadir al carrito: “Moschino Toy Boy 100 ML”" [ref=e240] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e242] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/moschino-toy-boy/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Moschino Toy Boy 100 ML" [level=3] [ref=e243]:
+                  - link "Moschino Toy Boy 100 ML" [ref=e244] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/moschino-toy-boy/
+                - generic [ref=e245]:
+                  - deletion [ref=e246]:
+                    - generic [ref=e248]: $ 360.000
+                  - generic: "El precio original era: $ 360.000."
+                  - insertion [ref=e249]:
+                    - generic [ref=e251]: $ 284.000
+                  - generic: "El precio actual es: $ 284.000."
+                - generic [ref=e252]: 1 Opción disponible
+              - generic [ref=e255]:
+                - generic [ref=e256]:
+                  - link "Armaf Odyssey Bahamas 100 ML" [ref=e257] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/armaf-odyssey-bahamas-100-ml/
+                    - generic:
+                      - img
+                    - generic [ref=e259]: "-11%"
+                  - generic [ref=e261]:
+                    - 'button "Añadir al carrito: “Armaf Odyssey Bahamas 100 ML”" [ref=e263] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e265] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/armaf-odyssey-bahamas-100-ml/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Armaf Odyssey Bahamas 100 ML" [level=3] [ref=e266]:
+                  - link "Armaf Odyssey Bahamas 100 ML" [ref=e267] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/armaf-odyssey-bahamas-100-ml/
+                - generic [ref=e268]:
+                  - deletion [ref=e269]:
+                    - generic [ref=e271]: $ 290.000
+                  - generic: "El precio original era: $ 290.000."
+                  - insertion [ref=e272]:
+                    - generic [ref=e274]: $ 259.000
+                  - generic: "El precio actual es: $ 259.000."
+                - generic [ref=e275]: 1 Opción disponible
+              - generic [ref=e278]:
+                - generic [ref=e279]:
+                  - link "Scandal Le Parfum Jean Paul Gaultier 100 ML" [ref=e280] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/scandal-le-parfum-jean-paul-gaultier/
+                    - generic [ref=e282]: "-21%"
+                  - generic [ref=e284]:
+                    - 'button "Añadir al carrito: “Scandal Le Parfum Jean Paul Gaultier 100 ML”" [ref=e286] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e288] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/scandal-le-parfum-jean-paul-gaultier/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Scandal Le Parfum Jean Paul Gaultier 100 ML" [level=3] [ref=e289]:
+                  - link "Scandal Le Parfum Jean Paul Gaultier 100 ML" [ref=e290] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/scandal-le-parfum-jean-paul-gaultier/
+                - generic [ref=e291]:
+                  - deletion [ref=e292]:
+                    - generic [ref=e294]: $ 580.000
+                  - generic: "El precio original era: $ 580.000."
+                  - insertion [ref=e295]:
+                    - generic [ref=e297]: $ 459.000
+                  - generic: "El precio actual es: $ 459.000."
+                - generic [ref=e298]: 1 Opción disponible
+              - generic [ref=e301]:
+                - generic [ref=e302]:
+                  - link "212 VIP Black Carolina Herrera 100 ML" [ref=e303] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/212-vip-black-carolina-herrera-2/
+                    - generic [ref=e305]: "-15%"
+                  - generic [ref=e307]:
+                    - 'button "Añadir al carrito: “212 VIP Black Carolina Herrera 100 ML”" [ref=e309] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e311] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/212-vip-black-carolina-herrera-2/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "212 VIP Black Carolina Herrera 100 ML" [level=3] [ref=e312]:
+                  - link "212 VIP Black Carolina Herrera 100 ML" [ref=e313] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/212-vip-black-carolina-herrera-2/
+                - generic [ref=e314]:
+                  - deletion [ref=e315]:
+                    - generic [ref=e317]: $ 470.000
+                  - generic: "El precio original era: $ 470.000."
+                  - insertion [ref=e318]:
+                    - generic [ref=e320]: $ 399.000
+                  - generic: "El precio actual es: $ 399.000."
+                - generic [ref=e321]: 1 Opción disponible
+              - generic [ref=e324]:
+                - generic [ref=e325]:
+                  - link "Versace Eros Najim Parfum 100 ML" [ref=e326] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/versace-eros-najim/
+                    - generic [ref=e328]: "-16%"
+                  - generic [ref=e330]:
+                    - 'button "Añadir al carrito: “Versace Eros Najim Parfum 100 ML”" [ref=e332] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e334] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/versace-eros-najim/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Versace Eros Najim Parfum 100 ML" [level=3] [ref=e335]:
+                  - link "Versace Eros Najim Parfum 100 ML" [ref=e336] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/versace-eros-najim/
+                - generic [ref=e337]:
+                  - deletion [ref=e338]:
+                    - generic [ref=e340]: $ 440.000
+                  - generic: "El precio original era: $ 440.000."
+                  - insertion [ref=e341]:
+                    - generic [ref=e343]: $ 369.000
+                  - generic: "El precio actual es: $ 369.000."
+                - generic [ref=e344]: 1 Opción disponible
+              - generic [ref=e347]:
+                - generic [ref=e348]:
+                  - link "Rayhaan Pacific EDP 100 ML" [ref=e349] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/rayhaan-pacific/
+                    - generic [ref=e351]: "-13%"
+                  - generic [ref=e353]:
+                    - 'button "Añadir al carrito: “Rayhaan Pacific EDP 100 ML”" [ref=e355] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e357] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/rayhaan-pacific/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Rayhaan Pacific EDP 100 ML" [level=3] [ref=e358]:
+                  - link "Rayhaan Pacific EDP 100 ML" [ref=e359] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/rayhaan-pacific/
+                - generic [ref=e360]:
+                  - deletion [ref=e361]:
+                    - generic [ref=e363]: $ 240.000
+                  - generic: "El precio original era: $ 240.000."
+                  - insertion [ref=e364]:
+                    - generic [ref=e366]: $ 209.000
+                  - generic: "El precio actual es: $ 209.000."
+                - generic [ref=e367]: 1 Opción disponible
+              - generic [ref=e370]:
+                - generic [ref=e371]:
+                  - link "Le Male Le Parfum Jean Paul Gaultier 125 ML" [ref=e372] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/le-male-le-parfum-jean-paul-gaultier/
+                    - generic [ref=e374]: "-24%"
+                  - generic [ref=e376]:
+                    - 'button "Añadir al carrito: “Le Male Le Parfum Jean Paul Gaultier 125 ML”" [ref=e378] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e380] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/le-male-le-parfum-jean-paul-gaultier/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Le Male Le Parfum Jean Paul Gaultier 125 ML" [level=3] [ref=e381]:
+                  - link "Le Male Le Parfum Jean Paul Gaultier 125 ML" [ref=e382] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/le-male-le-parfum-jean-paul-gaultier/
+                - generic [ref=e383]:
+                  - deletion [ref=e384]:
+                    - generic [ref=e386]: $ 590.000
+                  - generic: "El precio original era: $ 590.000."
+                  - insertion [ref=e387]:
+                    - generic [ref=e389]: $ 449.000
+                  - generic: "El precio actual es: $ 449.000."
+                - generic [ref=e390]: 1 Opción disponible
+              - generic [ref=e393]:
+                - generic [ref=e394]:
+                  - link "Valentino Uomo Born In Roma EDT 100 ML" [ref=e395] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/valentino-uomo-born-in-roma/
+                    - generic [ref=e397]: "-16%"
+                  - generic [ref=e399]:
+                    - 'button "Añadir al carrito: “Valentino Uomo Born In Roma EDT 100 ML”" [ref=e401] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e403] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/valentino-uomo-born-in-roma/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Valentino Uomo Born In Roma EDT 100 ML" [level=3] [ref=e404]:
+                  - link "Valentino Uomo Born In Roma EDT 100 ML" [ref=e405] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/valentino-uomo-born-in-roma/
+                - generic [ref=e406]:
+                  - deletion [ref=e407]:
+                    - generic [ref=e409]: $ 620.000
+                  - generic: "El precio original era: $ 620.000."
+                  - insertion [ref=e410]:
+                    - generic [ref=e412]: $ 519.000
+                  - generic: "El precio actual es: $ 519.000."
+                - generic [ref=e413]: 1 Opción disponible
+              - generic [ref=e416]:
+                - generic [ref=e417]:
+                  - link "Fakhar Rose Lattafa 100 ML" [ref=e418] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/fakhar-rose-lattafa/
+                    - generic [ref=e420]: "-13%"
+                  - generic [ref=e422]:
+                    - 'button "Añadir al carrito: “Fakhar Rose Lattafa 100 ML”" [ref=e424] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e426] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/fakhar-rose-lattafa/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Fakhar Rose Lattafa 100 ML" [level=3] [ref=e427]:
+                  - link "Fakhar Rose Lattafa 100 ML" [ref=e428] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/fakhar-rose-lattafa/
+                - generic [ref=e429]:
+                  - deletion [ref=e430]:
+                    - generic [ref=e432]: $ 230.000
+                  - generic: "El precio original era: $ 230.000."
+                  - insertion [ref=e433]:
+                    - generic [ref=e435]: $ 199.000
+                  - generic: "El precio actual es: $ 199.000."
+                - generic [ref=e436]: 1 Opción disponible
+              - generic [ref=e439]:
+                - generic [ref=e440]:
+                  - link "Lacoste Blanc EDP 100 ML" [ref=e441] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/lacoste-blanc-edp/
+                    - generic [ref=e443]: "-21%"
+                  - generic [ref=e445]:
+                    - 'button "Añadir al carrito: “Lacoste Blanc EDP 100 ML”" [ref=e447] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e449] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/lacoste-blanc-edp/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Lacoste Blanc EDP 100 ML" [level=3] [ref=e450]:
+                  - link "Lacoste Blanc EDP 100 ML" [ref=e451] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/lacoste-blanc-edp/
+                - generic [ref=e452]:
+                  - deletion [ref=e453]:
+                    - generic [ref=e455]: $ 380.000
+                  - generic: "El precio original era: $ 380.000."
+                  - insertion [ref=e456]:
+                    - generic [ref=e458]: $ 299.000
+                  - generic: "El precio actual es: $ 299.000."
+                - generic [ref=e459]: 1 Opción disponible
+              - generic [ref=e462]:
+                - generic [ref=e463]:
+                  - link "Versace Eros Pour Femme EDT 100 ML" [ref=e464] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/versace-eros-pour-femme-edt/
+                    - generic [ref=e466]: "-23%"
+                  - generic [ref=e468]:
+                    - 'button "Añadir al carrito: “Versace Eros Pour Femme EDT 100 ML”" [ref=e470] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e472] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/versace-eros-pour-femme-edt/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Versace Eros Pour Femme EDT 100 ML" [level=3] [ref=e473]:
+                  - link "Versace Eros Pour Femme EDT 100 ML" [ref=e474] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/versace-eros-pour-femme-edt/
+                - generic [ref=e475]:
+                  - deletion [ref=e476]:
+                    - generic [ref=e478]: $ 420.000
+                  - generic: "El precio original era: $ 420.000."
+                  - insertion [ref=e479]:
+                    - generic [ref=e481]: $ 324.000
+                  - generic: "El precio actual es: $ 324.000."
+                - generic [ref=e482]: 1 Opción disponible
+              - generic [ref=e485]:
+                - generic [ref=e486]:
+                  - link "Vulcan Baie French Avenue 100 ML" [ref=e487] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/vulcan-baie-french-avenue-100-ml/
+                    - generic [ref=e489]: "-16%"
+                  - generic [ref=e491]:
+                    - 'button "Añadir al carrito: “Vulcan Baie French Avenue 100 ML”" [ref=e493] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e495] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/vulcan-baie-french-avenue-100-ml/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Vulcan Baie French Avenue 100 ML" [level=3] [ref=e496]:
+                  - link "Vulcan Baie French Avenue 100 ML" [ref=e497] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/vulcan-baie-french-avenue-100-ml/
+                - generic [ref=e498]:
+                  - deletion [ref=e499]:
+                    - generic [ref=e501]: $ 330.000
+                  - generic: "El precio original era: $ 330.000."
+                  - insertion [ref=e502]:
+                    - generic [ref=e504]: $ 276.000
+                  - generic: "El precio actual es: $ 276.000."
+                - generic [ref=e505]: 1 Opción disponible
+              - generic [ref=e508]:
+                - generic [ref=e509]:
+                  - link "Fakhar Gold Lattafa 100 ML" [ref=e510] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/fakhar-gold-extrait-lattafa/
+                    - generic [ref=e512]: "-14%"
+                  - generic [ref=e514]:
+                    - 'button "Añadir al carrito: “Fakhar Gold Lattafa 100 ML”" [ref=e516] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e518] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/fakhar-gold-extrait-lattafa/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Fakhar Gold Lattafa 100 ML" [level=3] [ref=e519]:
+                  - link "Fakhar Gold Lattafa 100 ML" [ref=e520] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/fakhar-gold-extrait-lattafa/
+                - generic [ref=e521]:
+                  - deletion [ref=e522]:
+                    - generic [ref=e524]: $ 240.000
+                  - generic: "El precio original era: $ 240.000."
+                  - insertion [ref=e525]:
+                    - generic [ref=e527]: $ 206.000
+                  - generic: "El precio actual es: $ 206.000."
+                - generic [ref=e528]: 1 Opción disponible
+              - generic [ref=e531]:
+                - generic [ref=e532]:
+                  - link "212 VIP Rosé Carolina Herrera" [ref=e533] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/212-vip-rose/
+                    - generic [ref=e535]: "-21%"
+                  - generic [ref=e537]:
+                    - 'button "Añadir al carrito: “212 VIP Rosé Carolina Herrera”" [ref=e539] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e541] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/212-vip-rose/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "212 VIP Rosé Carolina Herrera" [level=3] [ref=e542]:
+                  - link "212 VIP Rosé Carolina Herrera" [ref=e543] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/212-vip-rose/
+                - generic [ref=e544]:
+                  - deletion [ref=e545]:
+                    - generic [ref=e547]: $ 540.000
+                  - generic: "El precio original era: $ 540.000."
+                  - insertion [ref=e548]:
+                    - generic [ref=e550]: $ 429.000
+                  - generic: "El precio actual es: $ 429.000."
+                - generic [ref=e551]: 1 Opción disponible
+              - generic [ref=e554]:
+                - generic [ref=e555]:
+                  - link "Mandarin Sky Vintage Edition 100 ML" [ref=e556] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/mandarin-sky-vintage-edition-100-ml/
+                    - generic [ref=e558]: "-15%"
+                  - generic [ref=e560]:
+                    - 'button "Añadir al carrito: “Mandarin Sky Vintage Edition 100 ML”" [ref=e562] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e564] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/mandarin-sky-vintage-edition-100-ml/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Mandarin Sky Vintage Edition 100 ML" [level=3] [ref=e565]:
+                  - link "Mandarin Sky Vintage Edition 100 ML" [ref=e566] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/mandarin-sky-vintage-edition-100-ml/
+                - generic [ref=e567]:
+                  - deletion [ref=e568]:
+                    - generic [ref=e570]: $ 300.000
+                  - generic: "El precio original era: $ 300.000."
+                  - insertion [ref=e571]:
+                    - generic [ref=e573]: $ 254.000
+                  - generic: "El precio actual es: $ 254.000."
+                - generic [ref=e574]: 1 Opción disponible
+              - generic [ref=e577]:
+                - generic [ref=e578]:
+                  - link "Island Breeze Armaf 100 ML" [ref=e579] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/island-breeze-armaf/
+                    - generic:
+                      - img
+                    - generic [ref=e581]: "-14%"
+                  - generic [ref=e583]:
+                    - 'button "Añadir al carrito: “Island Breeze Armaf 100 ML”" [ref=e585] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e587] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/island-breeze-armaf/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Island Breeze Armaf 100 ML" [level=3] [ref=e588]:
+                  - link "Island Breeze Armaf 100 ML" [ref=e589] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/island-breeze-armaf/
+                - generic [ref=e590]:
+                  - deletion [ref=e591]:
+                    - generic [ref=e593]: $ 320.000
+                  - generic: "El precio original era: $ 320.000."
+                  - insertion [ref=e594]:
+                    - generic [ref=e596]: $ 276.000
+                  - generic: "El precio actual es: $ 276.000."
+                - generic [ref=e597]: 1 Opción disponible
+              - generic [ref=e600]:
+                - generic [ref=e601]:
+                  - link "Rayhaan Tiger EDP 100 ML" [ref=e602] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/rayhaan-tiger/
+                    - generic [ref=e604]: "-20%"
+                  - generic [ref=e606]:
+                    - 'button "Añadir al carrito: “Rayhaan Tiger EDP 100 ML”" [ref=e608] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e610] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/rayhaan-tiger/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Rayhaan Tiger EDP 100 ML" [level=3] [ref=e611]:
+                  - link "Rayhaan Tiger EDP 100 ML" [ref=e612] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/rayhaan-tiger/
+                - generic [ref=e613]:
+                  - deletion [ref=e614]:
+                    - generic [ref=e616]: $ 260.000
+                  - generic: "El precio original era: $ 260.000."
+                  - insertion [ref=e617]:
+                    - generic [ref=e619]: $ 209.000
+                  - generic: "El precio actual es: $ 209.000."
+                - generic [ref=e620]: 1 Opción disponible
+              - generic [ref=e623]:
+                - generic [ref=e624]:
+                  - link "Burberry Her EDT 100 ML" [ref=e625] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/burberry-her-edt-100-ml/
+                    - generic [ref=e627]: "-19%"
+                  - generic [ref=e629]:
+                    - 'button "Añadir al carrito: “Burberry Her EDT 100 ML”" [ref=e631] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e633] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/burberry-her-edt-100-ml/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Burberry Her EDT 100 ML" [level=3] [ref=e634]:
+                  - link "Burberry Her EDT 100 ML" [ref=e635] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/burberry-her-edt-100-ml/
+                - generic [ref=e636]:
+                  - deletion [ref=e637]:
+                    - generic [ref=e639]: $ 520.000
+                  - generic: "El precio original era: $ 520.000."
+                  - insertion [ref=e640]:
+                    - generic [ref=e642]: $ 419.000
+                  - generic: "El precio actual es: $ 419.000."
+                - generic [ref=e643]: 1 Opción disponible
+              - generic [ref=e646]:
+                - generic [ref=e647]:
+                  - link "Rome Imagine Mast Perfume 100 ML" [ref=e648] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/rome-imagine-mast-perfume/
+                    - generic [ref=e650]: "-16%"
+                  - generic [ref=e652]:
+                    - 'button "Añadir al carrito: “Rome Imagine Mast Perfume 100 ML”" [ref=e654] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e656] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/rome-imagine-mast-perfume/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Rome Imagine Mast Perfume 100 ML" [level=3] [ref=e657]:
+                  - link "Rome Imagine Mast Perfume 100 ML" [ref=e658] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/rome-imagine-mast-perfume/
+                - generic [ref=e659]:
+                  - deletion [ref=e660]:
+                    - generic [ref=e662]: $ 260.000
+                  - generic: "El precio original era: $ 260.000."
+                  - insertion [ref=e663]:
+                    - generic [ref=e665]: $ 219.000
+                  - generic: "El precio actual es: $ 219.000."
+                - generic [ref=e666]: 1 Opción disponible
+              - generic [ref=e669]:
+                - generic [ref=e670]:
+                  - link "Gucci Flora Gorgeous Orchid 100 ML" [ref=e671] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/gucci-flora-gorgeous-orchid/
+                    - generic [ref=e673]: "-14%"
+                  - generic [ref=e675]:
+                    - 'button "Añadir al carrito: “Gucci Flora Gorgeous Orchid 100 ML”" [ref=e677] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e679] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/gucci-flora-gorgeous-orchid/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Gucci Flora Gorgeous Orchid 100 ML" [level=3] [ref=e680]:
+                  - link "Gucci Flora Gorgeous Orchid 100 ML" [ref=e681] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/gucci-flora-gorgeous-orchid/
+                - generic [ref=e682]:
+                  - deletion [ref=e683]:
+                    - generic [ref=e685]: $ 520.000
+                  - generic: "El precio original era: $ 520.000."
+                  - insertion [ref=e686]:
+                    - generic [ref=e688]: $ 449.000
+                  - generic: "El precio actual es: $ 449.000."
+                - generic [ref=e689]: 1 Opción disponible
+              - generic [ref=e692]:
+                - generic [ref=e693]:
+                  - link "La Belle Paradise Garden JPG 100 ML" [ref=e694] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/la-belle-paradise-garden-jpg/
+                    - generic [ref=e696]: "-21%"
+                  - generic [ref=e698]:
+                    - 'button "Añadir al carrito: “La Belle Paradise Garden JPG 100 ML”" [ref=e700] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e702] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/la-belle-paradise-garden-jpg/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "La Belle Paradise Garden JPG 100 ML" [level=3] [ref=e703]:
+                  - link "La Belle Paradise Garden JPG 100 ML" [ref=e704] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/la-belle-paradise-garden-jpg/
+                - generic [ref=e705]:
+                  - deletion [ref=e706]:
+                    - generic [ref=e708]: $ 590.000
+                  - generic: "El precio original era: $ 590.000."
+                  - insertion [ref=e709]:
+                    - generic [ref=e711]: $ 469.000
+                  - generic: "El precio actual es: $ 469.000."
+                - generic [ref=e712]: 1 Opción disponible
+              - generic [ref=e715]:
+                - generic [ref=e716]:
+                  - link "Miss Armaf Attitude 100 ML" [ref=e717] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/miss-armaf-attitude/
+                    - generic [ref=e719]: "-10%"
+                  - generic [ref=e721]:
+                    - 'button "Añadir al carrito: “Miss Armaf Attitude 100 ML”" [ref=e723] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e725] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/miss-armaf-attitude/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Miss Armaf Attitude 100 ML" [level=3] [ref=e726]:
+                  - link "Miss Armaf Attitude 100 ML" [ref=e727] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/miss-armaf-attitude/
+                - generic [ref=e728]:
+                  - deletion [ref=e729]:
+                    - generic [ref=e731]: $ 300.000
+                  - generic: "El precio original era: $ 300.000."
+                  - insertion [ref=e732]:
+                    - generic [ref=e734]: $ 269.000
+                  - generic: "El precio actual es: $ 269.000."
+                - generic [ref=e735]: 1 Opción disponible
+              - generic [ref=e738]:
+                - generic [ref=e739]:
+                  - link "Fakhar Man Platin 100 ML (Dupe YSL Y ELIXIR)" [ref=e740] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/fakhar-man-platin-100-ml-dupe-ysl-y-elixir/
+                    - generic [ref=e742]: "-18%"
+                  - generic [ref=e744]:
+                    - 'button "Añadir al carrito: “Fakhar Man Platin 100 ML (Dupe YSL Y ELIXIR)”" [ref=e746] [cursor=pointer]':
+                      - text: 
+                      - generic: Añadir al carrito
+                    - text:  
+                    - link " Añadir a la lista de deseos" [ref=e748] [cursor=pointer]:
+                      - /url: https://maferperfumes.com/producto/fakhar-man-platin-100-ml-dupe-ysl-y-elixir/
+                      - text: 
+                      - generic: Añadir a la lista de deseos
+                - heading "Fakhar Man Platin 100 ML (Dupe YSL Y ELIXIR)" [level=3] [ref=e749]:
+                  - link "Fakhar Man Platin 100 ML (Dupe YSL Y ELIXIR)" [ref=e750] [cursor=pointer]:
+                    - /url: https://maferperfumes.com/producto/fakhar-man-platin-100-ml-dupe-ysl-y-elixir/
+                - generic [ref=e751]:
+                  - deletion [ref=e752]:
+                    - generic [ref=e754]: $ 260.000
+                  - generic: "El precio original era: $ 260.000."
+                  - insertion [ref=e755]:
+                    - generic [ref=e757]: $ 214.000
+                  - generic: "El precio actual es: $ 214.000."
+                - generic [ref=e758]: 1 Opción disponible
+            - navigation "Paginación de producto" [ref=e761]:
+              - list [ref=e762]:
+                - listitem [ref=e763]:
+                  - generic "Página 1" [ref=e764]: "1"
+                - listitem [ref=e765]:
+                  - link "Página 2" [ref=e766] [cursor=pointer]:
+                    - /url: /nuevas-ofertas/?product-page=2
+                    - text: "2"
+                - listitem [ref=e767]:
+                  - link " →" [ref=e768] [cursor=pointer]:
+                    - /url: /nuevas-ofertas/?product-page=2
+    - contentinfo:
+      - complementary [ref=e770]:
+        - generic [ref=e773]:
+          - img "Mafer Perfumes" [ref=e774]
+          - paragraph [ref=e775]:
+            - text: Ofrecemos una exclusiva selección de aromas para cualquier evento, desde perfumes frescos para el día a día hasta elegantes perfumes para ocasiones especiales.
+            - text: Encuentra el perfume ideal que resalte tu personalidad y deja una impresión inolvidable.
+        - generic [ref=e777]:
+          - heading "Enlaces Rápidos" [level=5] [ref=e778]
+          - list [ref=e780]:
+            - listitem [ref=e781]:
+              - link "Términos y condiciones" [ref=e782] [cursor=pointer]:
+                - /url: https://maferperfumes.com/terminos-y-condiciones/
+            - listitem [ref=e783]:
+              - link "Politica de privacidad" [ref=e784] [cursor=pointer]:
+                - /url: https://maferperfumes.com/politica-de-privacidad/
+            - listitem [ref=e785]:
+              - link "Medios de pago" [ref=e786] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e789]:
+          - heading "Contácto Digital" [level=3] [ref=e790]
+          - list [ref=e791]:
+            - listitem [ref=e792]:
+              - generic [ref=e793]: 
+              - link "+57 (304) 444 1454" [ref=e794] [cursor=pointer]:
+                - /url: https://wa.me/573044441454
+            - listitem [ref=e795]:
+              - generic [ref=e796]: 
+              - link "@maferperfumes" [ref=e797] [cursor=pointer]:
+                - /url: https://instagram.com/maferperfumes
+            - listitem [ref=e798]:
+              - generic [ref=e799]: 
+              - generic [ref=e800]:
+                - strong [ref=e801]: "Domingo - Domingo:"
+                - text: 9:00 am a 8:00 pm
+            - listitem [ref=e802]:
+              - generic [ref=e803]: 
+              - link "sac@maferperfumes.co" [ref=e804] [cursor=pointer]:
+                - /url: mailto:sac@maferperfumes.co
+        - generic [ref=e807]:
+          - heading "VÍSITANOS EN NUESTRO PUNTO FISICO" [level=3] [ref=e808]
+          - list [ref=e809]:
+            - listitem [ref=e810]:
+              - generic [ref=e811]: 
+              - generic [ref=e812]:
+                - strong [ref=e813]: "Domingo - Domingo:"
+                - text: 10:00 am a 8:00 pm
+            - listitem [ref=e814]:
+              - generic [ref=e815]: 
+              - link "Cúcuta, CC Jardín Plaza Local 96" [ref=e816] [cursor=pointer]:
+                - /url: https://maps.app.goo.gl/3zZAPNyzFUsB42reA?g_st=ipc
+                - strong [ref=e817]: Cúcuta, CC Jardín Plaza Local 96
+      - generic [ref=e819]:
+        - generic [ref=e820]:
+          - text: MaferPerfumes © 2025. Todos los derechos reservados. Creado por
+          - link "GEMETECH IT SERVICES" [ref=e821] [cursor=pointer]:
+            - /url: https://gemetechitservices.com
+        - img "payments" [ref=e823]
+  - link "Botón de desplazamiento a la parte superior":
+    - /url: "#"
+    - text: 
+  - generic [ref=e824]:
+    - link " Cerrar" [ref=e827] [cursor=pointer]:
+      - /url: "#"
+    - list [ref=e828]:
+      - listitem [ref=e829]:
+        - link "Inicio" [ref=e830] [cursor=pointer]:
+          - /url: https://maferperfumes.com
+          - generic [ref=e831]: Inicio
+      - listitem [ref=e832]:
+        - link "Nuevos Lanzamientos" [ref=e833] [cursor=pointer]:
+          - /url: https://maferperfumes.com/catalogo/?orderby=date
+          - generic [ref=e834]: Nuevos Lanzamientos
+      - listitem [ref=e835]:
+        - link "Familias Olfativas" [ref=e836] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e837]: Familias Olfativas
+      - listitem [ref=e838]:
+        - link "Perfumes" [ref=e839] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e840]: Perfumes
+      - listitem [ref=e841]:
+        - link "CATALOGO" [ref=e842] [cursor=pointer]:
+          - /url: https://maferperfumes.com/catalogo
+          - generic [ref=e843]: CATALOGO
+      - listitem [ref=e844]:
+        - link "OFERTAS" [ref=e845] [cursor=pointer]:
+          - /url: https://maferperfumes.com/nuevas-ofertas
+          - generic [ref=e846]: OFERTAS
+  - generic [ref=e848]:
+    - generic [ref=e849]: Carrito
+    - link " Cerrar" [ref=e851] [cursor=pointer]:
+      - /url: "#"
+  - generic [ref=e854]:
+    - link " Mi cuenta" [ref=e856] [cursor=pointer]:
+      - /url: https://maferperfumes.com/mi-cuenta/
+      - generic [ref=e857]: 
+      - generic [ref=e858]: Mi cuenta
+    - link "Ofertas" [ref=e860] [cursor=pointer]:
+      - /url: https://maferperfumes.com/nuevas-ofertas
+      - generic [ref=e862]: Ofertas
+    - generic "Mi carrito" [ref=e863]:
+      - link " 0 Carrito" [ref=e864] [cursor=pointer]:
+        - /url: https://maferperfumes.com/carrito/
+        - generic [ref=e865]:
+          - text: 
+          - generic [ref=e866]: "0"
+        - generic [ref=e867]: Carrito
+    - link " Tienda" [ref=e869] [cursor=pointer]:
+      - /url: https://maferperfumes.com/catalogo/
+      - generic [ref=e870]: 
+      - generic [ref=e871]: Tienda

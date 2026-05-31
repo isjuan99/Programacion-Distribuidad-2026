@@ -16,6 +16,11 @@ from app.api.reports import router as reports_router
 from app.api.admin import router as admin_router
 from app.api.addresses import router as addresses_router
 from app.api.returns import router as returns_router
+from app.api.contact import router as contact_router
+from app.api.wishlist import router as wishlist_router
+from app.api.loyalty import router as loyalty_router
+from app.api.payments import router as payments_router
+import app.models.wishlist  # ensure tables are created
 
 # Create tables
 Base.metadata.create_all(bind=engine)
@@ -59,6 +64,10 @@ app.include_router(reports_router, prefix="/api/v1")
 app.include_router(admin_router, prefix="/api/v1")
 app.include_router(addresses_router, prefix="/api/v1")
 app.include_router(returns_router, prefix="/api/v1")
+app.include_router(contact_router, prefix="/api/v1")
+app.include_router(wishlist_router, prefix="/api/v1")
+app.include_router(loyalty_router, prefix="/api/v1")
+app.include_router(payments_router, prefix="/api/v1")
 
 
 @app.get("/api/v1/health")

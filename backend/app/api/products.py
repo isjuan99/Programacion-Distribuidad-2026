@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy.orm import Session, joinedload
+from sqlalchemy.orm import Session, joinedload, selectinload
 from sqlalchemy import func, or_, cast, String as SAString
 from typing import Optional, List
 import re
@@ -50,6 +50,9 @@ async def list_products(
     search: Optional[str] = None,
     status: Optional[str] = None,
     featured: Optional[bool] = None,
+    on_sale: Optional[bool] = None,
+    gender: Optional[str] = None,
+    category_names: Optional[str] = None,
     top_notes: Optional[str] = None,
     heart_notes: Optional[str] = None,
     base_notes: Optional[str] = None,
@@ -57,7 +60,7 @@ async def list_products(
     db: Session = Depends(get_db),
 ):
     query = db.query(Product).options(
-        joinedload(Product.variants),
+        selectinload(Product.variants),
         joinedload(Product.brand),
         joinedload(Product.category),
     )
@@ -69,18 +72,40 @@ async def list_products(
         query = query.filter(Product.brand_id == brand_id)
     if featured is not None:
         query = query.filter(Product.is_featured == featured)
+    if gender:
+        query = query.filter(Product.gender == gender)
+    if category_names:
+        from app.models.category import Category
+        terms = [t.strip() for t in category_names.split(',') if t.strip()]
+        cat_subq = (
+            db.query(Category.id)
+            .filter(or_(*[Category.name.ilike(f'%{t}%') for t in terms]))
+            .subquery()
+        )
+        query = query.filter(Product.category_id.in_(cat_subq))
+    if on_sale:
+        sale_subq = (
+            db.query(ProductVariant.product_id)
+            .filter(
+                ProductVariant.compare_at_price.isnot(None),
+                ProductVariant.compare_at_price > ProductVariant.price,
+            )
+            .subquery()
+        )
+        query = query.filter(Product.id.in_(sale_subq))
     if search:
         query = query.filter(
             or_(Product.name.ilike(f"%{search}%"), Product.description.ilike(f"%{search}%"))
         )
     if min_price or max_price or size_ml:
-        query = query.join(ProductVariant)
+        variant_q = db.query(ProductVariant.product_id)
         if min_price:
-            query = query.filter(ProductVariant.price >= min_price)
+            variant_q = variant_q.filter(ProductVariant.price >= min_price)
         if max_price:
-            query = query.filter(ProductVariant.price <= max_price)
+            variant_q = variant_q.filter(ProductVariant.price <= max_price)
         if size_ml:
-            query = query.filter(ProductVariant.size_ml == size_ml)
+            variant_q = variant_q.filter(ProductVariant.size_ml == size_ml)
+        query = query.filter(Product.id.in_(variant_q.subquery()))
 
     # Olfactory notes filter
     for notes_param in [top_notes, heart_notes, base_notes]:
@@ -117,7 +142,7 @@ async def search_suggestions(
         return []
     from app.models.category import Brand
     products = db.query(Product).options(
-        joinedload(Product.variants),
+        selectinload(Product.variants),
         joinedload(Product.brand),
     ).filter(
         Product.status == ProductStatus.active,
@@ -128,7 +153,7 @@ async def search_suggestions(
     ).limit(5).all()
 
     brand_matches = db.query(Product).options(
-        joinedload(Product.variants),
+        selectinload(Product.variants),
         joinedload(Product.brand),
     ).join(Product.brand).filter(
         Product.status == ProductStatus.active,
@@ -162,7 +187,7 @@ async def list_bundles(
     db: Session = Depends(get_db),
 ):
     query = db.query(Product).options(
-        joinedload(Product.variants),
+        selectinload(Product.variants),
         joinedload(Product.brand),
         joinedload(Product.category),
     ).filter(Product.is_bundle == True, Product.status == ProductStatus.active)
@@ -178,7 +203,7 @@ async def list_bundles(
 @router.get("/{product_id}", response_model=ProductResponse)
 async def get_product(product_id: int, db: Session = Depends(get_db)):
     product = db.query(Product).options(
-        joinedload(Product.variants),
+        selectinload(Product.variants),
         joinedload(Product.brand),
         joinedload(Product.category),
     ).filter(Product.id == product_id).first()
@@ -217,11 +242,44 @@ async def update_product(
     db: Session = Depends(get_db),
     _: object = Depends(get_current_admin),
 ):
-    product = db.query(Product).filter(Product.id == product_id).first()
+    product = db.query(Product).options(
+        selectinload(Product.variants)
+    ).filter(Product.id == product_id).first()
     if not product:
         raise HTTPException(status_code=404, detail="Producto no encontrado")
-    for field, value in data.model_dump(exclude_none=True).items():
+
+    update_data = data.model_dump(exclude_none=True)
+    variants_data = update_data.pop('variants', None)
+
+    for field, value in update_data.items():
         setattr(product, field, value)
+
+    if variants_data is not None:
+        from app.models.order import OrderItem
+        existing = {v.id: v for v in product.variants}
+        updated_ids = set()
+
+        for v_data in variants_data:
+            v_id = v_data.pop('id', None)
+            if v_id and v_id in existing:
+                # Actualiza variante existente sin borrarla
+                v = existing[v_id]
+                for field, val in v_data.items():
+                    setattr(v, field, val)
+                updated_ids.add(v_id)
+            else:
+                # Crea variante nueva
+                db.add(ProductVariant(**v_data, product_id=product.id))
+
+        # Solo elimina variantes que no están en el update Y no tienen pedidos
+        for v_id, v in existing.items():
+            if v_id not in updated_ids:
+                in_orders = db.query(func.count(OrderItem.id)).filter(
+                    OrderItem.variant_id == v_id
+                ).scalar()
+                if in_orders == 0:
+                    db.delete(v)
+
     db.commit()
     db.refresh(product)
     return ProductResponse.model_validate(_enrich(product, db))
@@ -246,7 +304,7 @@ async def get_related_products(
     db: Session = Depends(get_db),
 ):
     product = db.query(Product).options(
-        joinedload(Product.variants),
+        selectinload(Product.variants),
         joinedload(Product.brand),
         joinedload(Product.category),
     ).filter(Product.id == product_id).first()
@@ -263,7 +321,7 @@ async def get_related_products(
                 seen_ids.add(p.id)
 
     base_q = db.query(Product).options(
-        joinedload(Product.variants),
+        selectinload(Product.variants),
         joinedload(Product.brand),
         joinedload(Product.category),
     ).filter(
@@ -316,7 +374,7 @@ async def get_fragrance_profile(
         return []
 
     candidates = db.query(Product).options(
-        joinedload(Product.variants),
+        selectinload(Product.variants),
         joinedload(Product.brand),
     ).filter(
         Product.status == ProductStatus.active,

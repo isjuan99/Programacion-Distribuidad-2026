@@ -55,7 +55,7 @@
             <p class="text-white text-sm truncate">{{ s.name }}</p>
             <p class="text-gray-500 text-xs">{{ s.brand }}</p>
           </div>
-          <span v-if="s.price" class="text-[#c9a84c] text-sm shrink-0">${{ s.price }}</span>
+          <span v-if="s.price" class="text-[#c9a84c] text-sm shrink-0">{{ formatCOP(s.price) }}</span>
         </RouterLink>
 
         <RouterLink
@@ -80,6 +80,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { formatCOP } from '../../utils/currency'
 import api from '../../router/api'
 
 const router = useRouter()

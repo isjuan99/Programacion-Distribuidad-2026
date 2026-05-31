@@ -1,0 +1,294 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Aroma-Distribuido" [ref=e6] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e10]:
+        - img [ref=e11]
+        - textbox "Buscar" [ref=e13]
+      - generic [ref=e14]:
+        - navigation [ref=e15]:
+          - link "Catálogo" [ref=e16] [cursor=pointer]:
+            - /url: /shop
+          - link "Colecciones" [ref=e17] [cursor=pointer]:
+            - /url: /shop
+          - link "Contacto" [ref=e18] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=e20]:
+          - link "Iniciar Sesión" [ref=e21] [cursor=pointer]:
+            - /url: /login
+            - img [ref=e22]
+          - link "Carrito" [ref=e24] [cursor=pointer]:
+            - /url: /cart
+            - img [ref=e25]
+  - generic [ref=e27]:
+    - button [ref=e34] [cursor=pointer]:
+      - img [ref=e35]
+    - button [ref=e37] [cursor=pointer]:
+      - img [ref=e38]
+    - generic [ref=e40]:
+      - paragraph [ref=e41]: Collection 2024
+      - heading "Descubre tu esencia perfecta" [level=1] [ref=e42]
+      - paragraph [ref=e43]: Una colección exclusiva de fragancias nicho y de diseñador, curada para el individuo exigente.
+      - generic [ref=e44]:
+        - link "Comprar Ahora" [ref=e45] [cursor=pointer]:
+          - /url: /shop
+        - link "Ver Colecciones →" [ref=e46] [cursor=pointer]:
+          - /url: /shop
+      - generic [ref=e47]:
+        - button [ref=e48] [cursor=pointer]
+        - button [ref=e49] [cursor=pointer]
+        - button [ref=e50] [cursor=pointer]
+        - button [ref=e51] [cursor=pointer]
+        - button [ref=e52] [cursor=pointer]
+  - generic [ref=e55]:
+    - link "Floral" [ref=e56] [cursor=pointer]:
+      - /url: /shop?category=1
+      - img [ref=e58]
+      - paragraph [ref=e60]: Floral
+    - link "Amaderado" [ref=e61] [cursor=pointer]:
+      - /url: /shop?category=2
+      - img [ref=e63]
+      - paragraph [ref=e65]: Amaderado
+    - link "Tom Ford" [ref=e66] [cursor=pointer]:
+      - /url: /shop?category=3
+      - img [ref=e68]
+      - paragraph [ref=e70]: Tom Ford
+    - link "Orientales" [ref=e71] [cursor=pointer]:
+      - /url: /shop?category=4
+      - img [ref=e73]
+      - paragraph [ref=e75]: Orientales
+    - link "Acuáticos / Marinos" [ref=e76] [cursor=pointer]:
+      - /url: /shop?category=5
+      - img [ref=e78]
+      - paragraph [ref=e80]: Acuáticos / Marinos
+    - link "Especiados" [ref=e81] [cursor=pointer]:
+      - /url: /shop?category=6
+      - img [ref=e83]
+      - paragraph [ref=e85]: Especiados
+    - link "Frutales" [ref=e86] [cursor=pointer]:
+      - /url: /shop?category=7
+      - img [ref=e88]
+      - paragraph [ref=e90]: Frutales
+  - generic [ref=e92]:
+    - generic [ref=e93]:
+      - generic [ref=e94]:
+        - paragraph [ref=e95]: Selección Curada
+        - heading "Fragancias Destacadas" [level=2] [ref=e96]
+      - link "Ver todo" [ref=e97] [cursor=pointer]:
+        - /url: /shop
+    - generic [ref=e98]:
+      - generic [ref=e99] [cursor=pointer]:
+        - generic [ref=e100]:
+          - img "BLEU DE CHANEL" [ref=e101]
+          - button "Agregar al Carrito" [ref=e103]
+        - generic [ref=e104]:
+          - paragraph [ref=e105]: Chanel
+          - heading "BLEU DE CHANEL" [level=3] [ref=e106]
+          - generic [ref=e108]: $650000.00
+      - generic [ref=e109] [cursor=pointer]:
+        - generic [ref=e110]:
+          - img "Nautica Voyage" [ref=e111]
+          - button "Agregar al Carrito" [ref=e113]
+        - generic [ref=e114]:
+          - paragraph [ref=e115]: NAUTICA
+          - heading "Nautica Voyage" [level=3] [ref=e116]
+          - generic [ref=e118]: $120000.00
+      - generic [ref=e119] [cursor=pointer]:
+        - generic [ref=e120]:
+          - img "Asad Elixir" [ref=e121]
+          - button "Agregar al Carrito" [ref=e123]
+        - generic [ref=e124]:
+          - paragraph [ref=e125]: LATTAFA
+          - heading "Asad Elixir" [level=3] [ref=e126]
+          - generic [ref=e128]: $200.00
+  - generic [ref=e130]:
+    - generic [ref=e131]:
+      - generic [ref=e132]: Envío Premium
+      - generic [ref=e133]: ·
+      - generic [ref=e134]: Embalaje de Lujo
+      - generic [ref=e135]: ·
+      - generic [ref=e136]: Autenticidad Garantizada
+      - generic [ref=e137]: ·
+      - generic [ref=e138]: Devolución Fácil
+      - generic [ref=e139]: ·
+    - generic [ref=e140]:
+      - generic [ref=e141]: Envío Premium
+      - generic [ref=e142]: ·
+      - generic [ref=e143]: Embalaje de Lujo
+      - generic [ref=e144]: ·
+      - generic [ref=e145]: Autenticidad Garantizada
+      - generic [ref=e146]: ·
+      - generic [ref=e147]: Devolución Fácil
+      - generic [ref=e148]: ·
+    - generic [ref=e149]:
+      - generic [ref=e150]: Envío Premium
+      - generic [ref=e151]: ·
+      - generic [ref=e152]: Embalaje de Lujo
+      - generic [ref=e153]: ·
+      - generic [ref=e154]: Autenticidad Garantizada
+      - generic [ref=e155]: ·
+      - generic [ref=e156]: Devolución Fácil
+      - generic [ref=e157]: ·
+    - generic [ref=e158]:
+      - generic [ref=e159]: Envío Premium
+      - generic [ref=e160]: ·
+      - generic [ref=e161]: Embalaje de Lujo
+      - generic [ref=e162]: ·
+      - generic [ref=e163]: Autenticidad Garantizada
+      - generic [ref=e164]: ·
+      - generic [ref=e165]: Devolución Fácil
+      - generic [ref=e166]: ·
+    - generic [ref=e167]:
+      - generic [ref=e168]: Envío Premium
+      - generic [ref=e169]: ·
+      - generic [ref=e170]: Embalaje de Lujo
+      - generic [ref=e171]: ·
+      - generic [ref=e172]: Autenticidad Garantizada
+      - generic [ref=e173]: ·
+      - generic [ref=e174]: Devolución Fácil
+      - generic [ref=e175]: ·
+    - generic [ref=e176]:
+      - generic [ref=e177]: Envío Premium
+      - generic [ref=e178]: ·
+      - generic [ref=e179]: Embalaje de Lujo
+      - generic [ref=e180]: ·
+      - generic [ref=e181]: Autenticidad Garantizada
+      - generic [ref=e182]: ·
+      - generic [ref=e183]: Devolución Fácil
+      - generic [ref=e184]: ·
+  - generic [ref=e186]:
+    - generic [ref=e187]:
+      - paragraph [ref=e188]: Recién Llegado
+      - heading "Nuevas Llegadas" [level=2] [ref=e189]
+    - generic [ref=e190]:
+      - generic [ref=e191] [cursor=pointer]:
+        - generic [ref=e192]:
+          - generic [ref=e193]: NEW
+          - img "Ralph Lauren" [ref=e194]
+          - button "Agregar al Carrito" [ref=e196]
+        - generic [ref=e197]:
+          - paragraph [ref=e198]: Polo Ralph Lauren
+          - heading "Ralph Lauren" [level=3] [ref=e199]
+          - generic [ref=e201]: $350000.00
+      - generic [ref=e202] [cursor=pointer]:
+        - generic [ref=e203]:
+          - generic [ref=e204]: NEW
+          - img "Eros Versace" [ref=e205]
+          - button "Agregar al Carrito" [ref=e207]
+        - generic [ref=e208]:
+          - paragraph [ref=e209]: Versace
+          - heading "Eros Versace" [level=3] [ref=e210]
+          - generic [ref=e212]: $0.00
+      - generic [ref=e213] [cursor=pointer]:
+        - generic [ref=e214]:
+          - img "212 NYC Carolina Herrera" [ref=e215]
+          - button "Agregar al Carrito" [ref=e217]
+        - generic [ref=e218]:
+          - paragraph [ref=e219]: Carolina Herrera
+          - heading "212 NYC Carolina Herrera" [level=3] [ref=e220]
+          - generic [ref=e222]: $120000.00
+      - generic [ref=e223] [cursor=pointer]:
+        - generic [ref=e224]:
+          - img "BLEU DE CHANEL" [ref=e225]
+          - button "Agregar al Carrito" [ref=e227]
+        - generic [ref=e228]:
+          - paragraph [ref=e229]: Chanel
+          - heading "BLEU DE CHANEL" [level=3] [ref=e230]
+          - generic [ref=e232]: $650000.00
+      - generic [ref=e233] [cursor=pointer]:
+        - generic [ref=e234]:
+          - img "1 Million Rabanne" [ref=e235]
+          - button "Agregar al Carrito" [ref=e237]
+        - generic [ref=e238]:
+          - paragraph [ref=e239]: Paco Rabanne
+          - heading "1 Million Rabanne" [level=3] [ref=e240]
+          - generic [ref=e242]: $450000.00
+      - generic [ref=e243] [cursor=pointer]:
+        - generic [ref=e244]:
+          - img "Nautica Voyage" [ref=e245]
+          - button "Agregar al Carrito" [ref=e247]
+        - generic [ref=e248]:
+          - paragraph [ref=e249]: NAUTICA
+          - heading "Nautica Voyage" [level=3] [ref=e250]
+          - generic [ref=e252]: $120000.00
+  - generic [ref=e255]:
+    - generic [ref=e256]:
+      - img [ref=e258]
+      - heading "Envío Premium" [level=3] [ref=e260]
+      - paragraph [ref=e261]: Entrega discreta con firma requerida
+    - generic [ref=e262]:
+      - img [ref=e264]
+      - heading "Autenticidad" [level=3] [ref=e266]
+      - paragraph [ref=e267]: Fragancias 100% originales y certificadas
+    - generic [ref=e268]:
+      - img [ref=e270]
+      - heading "Devolución fácil" [level=3] [ref=e272]
+      - paragraph [ref=e273]: 30 días sin preguntas para devoluciones
+    - generic [ref=e274]:
+      - img [ref=e276]
+      - heading "Consultoría" [level=3] [ref=e278]
+      - paragraph [ref=e279]: Asesoramiento experto para encontrar tu aroma
+  - generic [ref=e281]:
+    - generic [ref=e282]:
+      - paragraph [ref=e283]: Soporte
+      - heading "Preguntas Frecuentes" [level=2] [ref=e284]
+      - paragraph [ref=e285]: Todo lo que necesitas saber sobre nuestros productos y servicios.
+    - generic [ref=e286]:
+      - generic [ref=e287]:
+        - button "Devoluciones y reembolsos" [ref=e288] [cursor=pointer]:
+          - generic [ref=e289]: Devoluciones y reembolsos
+          - img [ref=e291]
+        - paragraph [ref=e293]: La satisfacción de nuestros clientes es nuestra prioridad número uno. Si hay algún problema con tu pedido, comunícate con nosotros por correo electrónico a aromadistribuido@gmail.com y lo resolveremos a la brevedad posible.
+      - generic [ref=e294]:
+        - button "Seguridad de pago" [ref=e295] [cursor=pointer]:
+          - generic [ref=e296]: Seguridad de pago
+          - img [ref=e298]
+        - paragraph [ref=e300]: Todas las pasarelas de pago directo cumplen con los estándares establecidos por PCI-DSS, administrados por el PCI Security Standards Council. Este es un esfuerzo conjunto de marcas líderes como Visa, MasterCard, American Express y Discover, garantizando que tu información financiera esté siempre protegida.
+      - generic [ref=e301]:
+        - button "Tiempos de entrega" [ref=e302] [cursor=pointer]:
+          - generic [ref=e303]: Tiempos de entrega
+          - img [ref=e305]
+        - paragraph [ref=e307]: La entrega estándar suele tardar entre 7 y 10 días laborables. No ofrecemos garantías sobre tiempos de envío superiores al promedio y no aceptaremos reclamos por demoras fuera de nuestro control. El tiempo de envío se refiere al período comprendido entre la realización del pedido y la entrega al transportista. Si tu pedido no ha llegado después de dos semanas, contáctanos a aromadistribuido@gmail.com y analizaremos los detalles de tu caso.
+      - generic [ref=e308]:
+        - button "Notificaciones de nuevo en stock" [ref=e309] [cursor=pointer]:
+          - generic [ref=e310]: Notificaciones de nuevo en stock
+          - img [ref=e312]
+        - paragraph [ref=e314]: Los productos se reabastecen periódicamente según la disponibilidad de nuestros proveedores. Si un producto que deseas está agotado, te recomendamos agregarlo a tu lista de deseos o contactarnos a aromadistribuido@gmail.com para recibir una notificación personalizada cuando vuelva a estar disponible.
+    - generic [ref=e315]:
+      - paragraph [ref=e316]: ¿Tienes otra pregunta? Estamos aquí para ayudarte.
+      - link "Contáctanos" [ref=e317] [cursor=pointer]:
+        - /url: mailto:aromadistribuido@gmail.com
+  - contentinfo [ref=e318]:
+    - generic [ref=e319]:
+      - generic [ref=e320]:
+        - generic [ref=e321]:
+          - heading "Aroma-Distribuido" [level=3] [ref=e322]
+          - paragraph [ref=e323]: Curadores de fragancias finas. Elevando el arte del aroma a través de colecciones exclusivas y artesanía de herencia.
+        - generic [ref=e324]:
+          - heading "Explorar" [level=4] [ref=e325]
+          - list [ref=e326]:
+            - listitem [ref=e327]:
+              - link "Catálogo" [ref=e328] [cursor=pointer]:
+                - /url: /shop
+            - listitem [ref=e329]:
+              - link "Colecciones" [ref=e330] [cursor=pointer]:
+                - /url: /shop?collections=1
+            - listitem [ref=e331]:
+              - link "Contacto" [ref=e332] [cursor=pointer]:
+                - /url: /contact
+        - generic [ref=e333]:
+          - heading "Atención al Cliente" [level=4] [ref=e334]
+          - list [ref=e335]:
+            - listitem [ref=e336]:
+              - link "Política de Privacidad" [ref=e337] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=e338]:
+              - link "Términos de Servicio" [ref=e339] [cursor=pointer]:
+                - /url: /terms
+            - listitem [ref=e340]:
+              - link "Envíos y Devoluciones" [ref=e341] [cursor=pointer]:
+                - /url: /shipping
+      - generic [ref=e342]:
+        - paragraph [ref=e343]: © 2024 Aroma-Distribuido. Todos los derechos reservados.
+        - button "EN" [ref=e345] [cursor=pointer]

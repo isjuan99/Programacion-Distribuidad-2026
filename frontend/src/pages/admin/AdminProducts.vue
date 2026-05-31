@@ -109,7 +109,8 @@
     <!-- Create / Edit panel -->
     <transition name="slide">
       <div v-if="showCreate || editingProduct"
-        class="fixed inset-y-0 right-0 w-[440px] bg-white border-l border-gray-200 z-50 overflow-y-auto shadow-2xl">
+        class="fixed inset-y-0 right-0 w-[440px] bg-white border-l border-gray-200 z-50 overflow-y-auto shadow-2xl"
+        @click.stop>
         <div class="p-8">
           <div class="flex justify-between items-start mb-6">
             <div>
@@ -204,30 +205,58 @@
 
             <hr class="border-gray-100" />
 
-            <!-- Variants -->
+            <!-- Variante única -->
             <div>
-              <div class="flex justify-between items-center mb-3">
-                <p class="text-[10px] tracking-widest uppercase text-gold">{{ $t('admin.variants_pricing') }}</p>
-                <button type="button" @click="addVariant"
-                  class="text-xs text-gold hover:underline">+ Variante</button>
-              </div>
-              <div class="grid grid-cols-3 gap-2 mb-1">
-                <label class="text-xs text-gray-500 font-medium">Tamaño</label>
-                <label class="text-xs text-gray-500 font-medium">Precio (USD) <span class="text-red-500">*</span></label>
-                <label class="text-xs text-gray-500 font-medium">Stock disponible <span class="text-red-500">*</span></label>
-              </div>
-              <div v-for="(v, i) in form.variants" :key="i" class="grid grid-cols-3 gap-2 mb-2">
-                <select v-model="v.size_ml"
-                  class="border border-gray-200 text-aroma-dark px-2 py-2 text-xs focus:outline-none focus:border-gold-dark bg-white">
-                  <option :value="30">30ml</option>
-                  <option :value="50">50ml</option>
-                  <option :value="100">100ml</option>
-                  <option :value="150">150ml</option>
+              <p class="text-[10px] tracking-widest uppercase text-gold mb-4">Precio y Stock</p>
+
+              <!-- Tamaño -->
+              <div class="mb-3">
+                <label class="text-xs text-gray-500 block mb-1">Tamaño</label>
+                <select v-model="mainVariant.size_ml"
+                  class="w-full border border-gray-200 text-aroma-dark px-3 py-2.5 text-sm focus:outline-none focus:border-gold-dark bg-white">
+                  <option :value="30">30 ml</option>
+                  <option :value="50">50 ml</option>
+                  <option :value="100">100 ml</option>
+                  <option :value="150">150 ml</option>
+                  <option :value="200">200 ml</option>
                 </select>
-                <input v-model.number="v.price" type="number" step="0.01" placeholder="Ej: 150.00" required
-                  class="border border-gray-200 text-aroma-dark px-2 py-2 text-xs focus:outline-none focus:border-gold-dark" />
-                <input v-model.number="v.stock" type="number" placeholder="Ej: 25" required
-                  class="border border-gray-200 text-aroma-dark px-2 py-2 text-xs focus:outline-none focus:border-gold-dark" />
+              </div>
+
+              <!-- Precio -->
+              <div class="grid grid-cols-2 gap-3 mb-3">
+                <div>
+                  <label class="text-xs text-gray-500 block mb-1">
+                    Precio <span class="text-red-400">*</span>
+                  </label>
+                  <input
+                    :value="mainVariant.price ?? ''"
+                    @input="mainVariant.price = $event.target.value === '' ? 0 : Number($event.target.value)"
+                    type="number" step="1" placeholder="Ej: 150000"
+                    class="w-full border border-gray-200 text-aroma-dark px-3 py-2.5 text-sm focus:outline-none focus:border-gold-dark" />
+                </div>
+                <div>
+                  <label class="text-xs text-gray-500 block mb-1">Stock</label>
+                  <input
+                    :value="mainVariant.stock ?? ''"
+                    @input="mainVariant.stock = $event.target.value === '' ? 0 : Number($event.target.value)"
+                    type="number" placeholder="Ej: 25"
+                    class="w-full border border-gray-200 text-aroma-dark px-3 py-2.5 text-sm focus:outline-none focus:border-gold-dark" />
+                </div>
+              </div>
+
+              <!-- Precio de oferta -->
+              <div class="bg-orange-50 border border-orange-200 rounded p-3">
+                <label class="text-xs text-orange-700 block mb-1 font-medium">
+                  Precio original (opcional — activa el badge de oferta)
+                </label>
+                <input
+                  :value="mainVariant.compare_at_price ?? ''"
+                  @input="mainVariant.compare_at_price = $event.target.value === '' ? null : Number($event.target.value)"
+                  type="number" step="1" placeholder="Ej: 180000 — dejar vacío si no hay oferta"
+                  class="w-full border border-orange-300 text-aroma-dark px-3 py-2 text-sm focus:outline-none focus:border-orange-400 bg-white placeholder-orange-300" />
+                <p v-if="mainVariant.compare_at_price && mainVariant.price" class="text-orange-600 text-xs mt-1.5">
+                  Descuento: {{ Math.round((1 - mainVariant.price / mainVariant.compare_at_price) * 100) }}% off
+                </p>
               </div>
             </div>
 
@@ -249,6 +278,21 @@
               <textarea v-model="form.description" rows="4"
                 class="w-full border border-gray-200 text-aroma-dark px-3 py-2.5 text-sm focus:outline-none focus:border-gold-dark resize-none"
                 placeholder="Historia y descripción de la fragancia..." />
+            </div>
+
+            <!-- Género -->
+            <div>
+              <p class="text-[10px] tracking-widest uppercase text-gold mb-3">Género</p>
+              <div class="grid grid-cols-3 gap-2">
+                <label v-for="g in genderOptions" :key="g.value"
+                  class="flex items-center gap-2 border px-3 py-2.5 cursor-pointer transition-colors text-xs"
+                  :class="form.gender === g.value
+                    ? 'border-gold bg-gold/10 text-gold font-medium'
+                    : 'border-gray-200 text-gray-500 hover:border-gray-400'">
+                  <input type="radio" :value="g.value" v-model="form.gender" class="sr-only" />
+                  {{ g.label }}
+                </label>
+              </div>
             </div>
 
             <!-- Status -->
@@ -300,7 +344,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import AdminSidebar from '../../components/layout/AdminSidebar.vue'
 import api from '../../router/api'
 
@@ -317,16 +361,33 @@ const editingProduct = ref(null)
 const notesInput = ref('')
 const formLoading = ref(false)
 const formError = ref('')
-
 const uploadingImage = ref(false)
 const uploadError = ref('')
 
-const form = ref({
-  name: '', brand_id: null, category_id: null, description: '',
-  status: 'draft', is_featured: false, is_new: false, is_bundle: false,
-  images: [],
-  variants: [{ size_ml: 50, price: 0, stock: 0 }],
-})
+const genderOptions = [
+  { value: null,     label: 'Sin especificar' },
+  { value: 'hombre', label: '♂ Hombre' },
+  { value: 'mujer',  label: '♀ Mujer' },
+  { value: 'unisex', label: '⚧ Unisex' },
+]
+
+function emptyVariant() {
+  return { id: undefined, size_ml: 50, price: 0, compare_at_price: null, stock: 0 }
+}
+
+function emptyForm() {
+  return {
+    name: '', brand_id: null, category_id: null, description: '',
+    status: 'draft', is_featured: false, is_new: false, is_bundle: false,
+    gender: null, images: [],
+    variants: [emptyVariant()],
+  }
+}
+
+const form = ref(emptyForm())
+
+// Referencia directa a la única variante editable
+const mainVariant = computed(() => form.value.variants[0])
 
 async function uploadImage(event) {
   const file = event.target.files[0]
@@ -336,9 +397,7 @@ async function uploadImage(event) {
   try {
     const fd = new FormData()
     fd.append('file', file)
-    const { data } = await api.post('/upload/image', fd, {
-      headers: { 'Content-Type': undefined },
-    })
+    const { data } = await api.post('/upload/image', fd, { headers: { 'Content-Type': undefined } })
     form.value.images.push(data.url)
   } catch (e) {
     uploadError.value = e.response?.data?.detail || 'Error al subir imagen'
@@ -352,13 +411,11 @@ function removeImage(index) {
   form.value.images.splice(index, 1)
 }
 
-function addVariant() {
-  form.value.variants.push({ size_ml: 100, price: 0, stock: 0 })
-}
-
 function editProduct(p) {
   editingProduct.value = p
-  form.value = { ...p, variants: p.variants || [] }
+  // Toma solo la primera variante para editar
+  const v = p.variants?.[0] ? { ...p.variants[0] } : emptyVariant()
+  form.value = { ...p, variants: [v] }
   notesInput.value = p.olfactory_notes?.join(', ') || ''
   showCreate.value = false
 }
@@ -367,12 +424,7 @@ function closePanel() {
   showCreate.value = false
   editingProduct.value = null
   formError.value = ''
-  form.value = {
-    name: '', brand_id: null, category_id: null, description: '',
-    status: 'draft', is_featured: false, is_new: false, is_bundle: false,
-    images: [],
-    variants: [{ size_ml: 50, price: 0, stock: 0 }],
-  }
+  form.value = emptyForm()
   notesInput.value = ''
 }
 
@@ -384,8 +436,19 @@ async function handleSubmit() {
   formLoading.value = true
   formError.value = ''
   try {
+    const v = mainVariant.value
+    const cleanVariant = {
+      id: v.id || undefined,
+      size_ml: Number(v.size_ml) || 50,
+      price: Number(v.price) || 0,
+      compare_at_price: v.compare_at_price != null && v.compare_at_price !== ''
+        ? Number(v.compare_at_price) : null,
+      stock: Number(v.stock) || 0,
+      sku: v.sku || undefined,
+    }
     const payload = {
       ...form.value,
+      variants: [cleanVariant],
       olfactory_notes: notesInput.value.split(',').map(n => n.trim()).filter(Boolean),
     }
     if (editingProduct.value) {
@@ -396,7 +459,10 @@ async function handleSubmit() {
     closePanel()
     await load()
   } catch (e) {
-    formError.value = e.response?.data?.detail || 'Error al guardar'
+    const detail = e.response?.data?.detail
+    formError.value = Array.isArray(detail)
+      ? detail.map(d => d.msg).join(', ')
+      : (detail || 'Error al guardar el producto')
   } finally {
     formLoading.value = false
   }

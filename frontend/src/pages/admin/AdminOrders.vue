@@ -155,31 +155,27 @@
           </div>
 
           <!-- Tracking form (admin) -->
-          <div class="mt-4 pt-4 border-t border-gray-800">
-            <h4 class="text-xs tracking-widest text-gray-400 uppercase mb-3">{{ $t('admin.tracking_info') }}</h4>
+          <div class="mt-4 pt-4 border-t border-gray-200">
+            <h4 class="text-xs tracking-widest text-gray-500 uppercase mb-3">{{ $t('admin.tracking_info') }}</h4>
             <div class="grid grid-cols-2 gap-3 mb-3">
               <div>
                 <label class="block text-xs text-gray-500 mb-1">{{ $t('admin.tracking_company') }}</label>
-                <select v-model="trackingForm.tracking_company" class="w-full bg-transparent border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none">
+                <select v-model="trackingForm.tracking_company" @change="onCompanyChange"
+                  class="w-full bg-white border border-gray-300 text-gray-800 px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none">
                   <option value="">Seleccionar...</option>
-                  <option>FedEx</option>
-                  <option>UPS</option>
-                  <option>DHL</option>
-                  <option>USPS</option>
-                  <option>Correos de Colombia</option>
-                  <option>Servientrega</option>
+                  <option v-for="c in carriers" :key="c.name" :value="c.name">{{ c.name }}</option>
                 </select>
               </div>
               <div>
                 <label class="block text-xs text-gray-500 mb-1">{{ $t('admin.tracking_number') }}</label>
                 <input v-model="trackingForm.tracking_number" type="text" placeholder="Ej: 1Z9999999999"
-                  class="w-full bg-transparent border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none"/>
+                  class="w-full bg-white border border-gray-300 text-gray-800 px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none"/>
               </div>
             </div>
             <div class="mb-3">
-              <label class="block text-xs text-gray-500 mb-1">{{ $t('admin.tracking_url') }} ({{ $t('common.optional') }})</label>
+              <label class="block text-xs text-gray-500 mb-1">{{ $t('admin.tracking_url') }}</label>
               <input v-model="trackingForm.tracking_url" type="url" placeholder="https://..."
-                class="w-full bg-transparent border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none"/>
+                class="w-full bg-white border border-gray-300 text-gray-800 px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none"/>
             </div>
             <button
               @click="saveTracking(selectedOrder?.id)"
@@ -214,6 +210,20 @@ const showExportMenu = ref(false)
 const exportLoading = ref(false)
 
 const trackingForm = ref({ tracking_number: '', tracking_company: '', tracking_url: '' })
+
+const carriers = [
+  { name: 'FedEx',        url: 'https://www.fedex.com/es-co/home.html' },
+  { name: 'Servientrega', url: 'https://servientregainternacional.com/Forms/Rastreo' },
+  { name: 'UPS',          url: 'https://www.ups.com/track?loc=es_CO&requester=ST/' },
+  { name: 'DHL',          url: 'https://www.dhl.com/co-es/home/rastreo.html' },
+  { name: 'Coordinadora', url: 'https://coordinadora.com/rastreo/rastreo-de-guia/detalle-de-rastreo-de-guia/' },
+  { name: 'Envia',        url: 'https://envia.co/' },
+]
+
+function onCompanyChange() {
+  const carrier = carriers.find(c => c.name === trackingForm.value.tracking_company)
+  trackingForm.value.tracking_url = carrier ? carrier.url : ''
+}
 
 const statusTabs = [
   { value: 'all', label: 'Todos' },
