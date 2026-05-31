@@ -1,8 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException, Query, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, Query, BackgroundTasks, Request
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session, joinedload
 from typing import Optional
-import random, string, io, csv
+import random, string, io, csv, logging
 from datetime import date as date_type
 
 from app.core.database import get_db
@@ -16,8 +16,16 @@ from app.schemas.order import (
 )
 from app.utils.email import send_order_confirmation_email, send_tracking_email
 from app.schemas.common import MessageResponse
+from app.core.rabbitmq import publish_event, EVENT_ORDER_CREATED, EVENT_ORDER_CONFIRMED, EVENT_ORDER_SHIPPED
+from app.core.redis_client import invalidate_product_caches
 
-router = APIRouter(prefix="/orders", tags=["orders"])
+router = APIRouter(
+    prefix="/orders",
+    tags=["Pedidos"],
+    responses={404: {"description": "Pedido no encontrado"}},
+)
+
+logger = logging.getLogger(__name__)
 
 SHIPPING_COST = {"standard": 0.0, "express": 25.0}
 TAX_RATE = 0.08
@@ -27,7 +35,13 @@ def _generate_order_number() -> str:
     return "AD-" + "".join(random.choices(string.digits, k=4))
 
 
-@router.post("", response_model=OrderResponse, status_code=201)
+@router.post(
+    "",
+    response_model=OrderResponse,
+    status_code=201,
+    summary="Crear pedido",
+    description="Crea un pedido. Valida stock, aplica cupones y publica evento `order.created` en RabbitMQ.",
+)
 async def create_order(
     data: OrderCreate,
     background_tasks: BackgroundTasks,
@@ -122,6 +136,7 @@ async def create_order(
 
     db.commit()
     db.refresh(order)
+
     items_for_email = [
         {"product_name": i.product_name, "size_ml": i.size_ml, "quantity": i.quantity, "total_price": i.total_price}
         for i in order.items
@@ -135,6 +150,30 @@ async def create_order(
         items_for_email,
         order.total,
         shipping_addr,
+    )
+
+    # Publish RabbitMQ event
+    await publish_event(EVENT_ORDER_CREATED, {
+        "order_id": order.id,
+        "order_number": order.order_number,
+        "user_id": order.user_id,
+        "email": order.shipping_email,
+        "total": order.total,
+        "items_count": len(order.items),
+        "shipping_method": order.shipping_method,
+    })
+
+    # Invalidate product caches (stock changed)
+    await invalidate_product_caches()
+
+    logger.info(
+        "Order created",
+        extra={
+            "event": "order_created",
+            "order_id": order.id,
+            "order_number": order.order_number,
+            "total": order.total,
+        },
     )
     return OrderResponse.model_validate(order)
 
@@ -288,7 +327,12 @@ async def admin_list_orders(
     )
 
 
-@router.patch("/{order_id}/status", response_model=OrderResponse)
+@router.patch(
+    "/{order_id}/status",
+    response_model=OrderResponse,
+    summary="Actualizar estado (Admin)",
+    description="Actualiza el estado del pedido y publica evento en RabbitMQ.",
+)
 async def update_order_status(
     order_id: int,
     data: OrderStatusUpdate,
@@ -301,6 +345,17 @@ async def update_order_status(
     order.status = data.status
     db.commit()
     db.refresh(order)
+
+    await publish_event(EVENT_ORDER_CONFIRMED, {
+        "order_id": order.id,
+        "order_number": order.order_number,
+        "new_status": data.status,
+        "email": order.shipping_email,
+    })
+    logger.info(
+        "Order status updated",
+        extra={"event": "order_status_updated", "order_id": order_id, "new_status": data.status},
+    )
     return OrderResponse.model_validate(order)
 
 

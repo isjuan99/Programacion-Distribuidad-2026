@@ -17,7 +17,11 @@ from app.schemas.user import (
 from app.schemas.common import MessageResponse
 from app.utils.email import send_password_reset_email, send_welcome_email, send_verification_email
 
-router = APIRouter(prefix="/auth", tags=["auth"])
+router = APIRouter(
+    prefix="/auth",
+    tags=["Autenticación"],
+    responses={401: {"description": "No autenticado"}, 403: {"description": "Sin permisos"}},
+)
 
 
 def _make_verification_token() -> str:

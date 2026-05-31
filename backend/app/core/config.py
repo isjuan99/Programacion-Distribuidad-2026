@@ -27,6 +27,21 @@ class Settings(BaseSettings):
     GOOGLE_CLIENT_ID: str = ""
     APPLE_CLIENT_ID: str = ""
 
+    # Redis
+    REDIS_URL: str = "redis://localhost:6379/0"
+    CACHE_TTL_PRODUCTS: int = 300        # 5 minutes
+    CACHE_TTL_CATEGORIES: int = 600      # 10 minutes
+    CACHE_TTL_FEATURED: int = 120        # 2 minutes
+    CACHE_TTL_SEARCH: int = 180          # 3 minutes
+
+    # RabbitMQ
+    RABBITMQ_URL: str = "amqp://aroma_user:aroma_secret@localhost:5672/"
+    RABBITMQ_EXCHANGE: str = "aroma_events"
+
+    # Service metadata
+    SERVICE_NAME: str = "aroma-backend"
+    ENVIRONMENT: str = "development"
+
     class Config:
         env_file = ".env"
 

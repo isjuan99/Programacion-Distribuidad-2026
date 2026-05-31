@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aroma-Distribuido — Sistema Distribuido</title>
+  <style>
+    :root {
+      --gold: #c9a84c;
+      --gold-light: #e6c87a;
+      --dark: #0f0f0f;
+      --darker: #080808;
+      --card: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e0e0e0;
+      --text-muted: #888;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { color: var(--gold-light); text-decoration: underline; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1208 50%, #0a0a0a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.15) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 32px;
+      position: relative;
+    }
+    .hero-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: #000;
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ── Layout ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 64px 24px; }
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    /* ── Status Grid ── */
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .status-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .status-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--gold);
+    }
+    .status-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      margin-right: 6px;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .status-card .port {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .status-card h3 { font-size: 1rem; color: #fff; margin-bottom: 4px; }
+    .status-card p { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
+    .status-icon { font-size: 28px; margin-bottom: 12px; }
+
+    /* ── Architecture ── */
+    .arch-diagram {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--text);
+      overflow-x: auto;
+    }
+    .arch-diagram pre {
+      margin: 0;
+      text-align: left;
+      display: inline-block;
+    }
+
+    /* ── Checklist ── */
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+    }
+    .check-item.done { border-color: rgba(34,197,94,0.3); }
+    .check-icon {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.15);
+      color: #22c55e;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .check-item h4 { font-size: 14px; color: #fff; margin-bottom: 2px; }
+    .check-item p { font-size: 12px; color: var(--text-muted); }
+
+    /* ── Code blocks ── */
+    .code-block {
+      background: #0d0d0d;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 16px 0;
+    }
+    .code-block .comment { color: #4a5568; }
+    .code-block .cmd { color: var(--gold); }
+    .code-block .url { color: #60a5fa; }
+
+    /* ── Tables ── */
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th {
+      background: rgba(201,168,76,0.1);
+      color: var(--gold);
+      font-weight: 600;
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+    code {
+      background: rgba(201,168,76,0.1);
+      color: var(--gold);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ── Event flow ── */
+    .event-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: 24px 0;
+    }
+    .event-node {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 20px;
+      font-size: 13px;
+      text-align: center;
+      min-width: 120px;
+    }
+    .event-node.highlight { border-color: var(--gold); }
+    .event-node small { display: block; color: var(--text-muted); font-size: 11px; margin-top: 2px; }
+    .event-arrow {
+      color: var(--gold);
+      font-size: 20px;
+      padding: 0 8px;
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: rgba(15,15,15,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .nav-brand { font-weight: 700; color: var(--gold); font-size: 18px; }
+    .nav-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .nav-links a { color: var(--text-muted); font-size: 14px; font-weight: 500; }
+    .nav-links a:hover { color: var(--gold); text-decoration: none; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+    .tag {
+      display: inline-block;
+      background: rgba(201,168,76,0.1);
+      color: var(--gold);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-brand">⚗ Aroma-Distribuido</div>
+  <div class="nav-links">
+    <a href="#architecture">Arquitectura</a>
+    <a href="#services">Servicios</a>
+    <a href="#checklist">Checklist</a>
+    <a href="#quickstart">Inicio Rápido</a>
+    <a href="#api">API</a>
+    <a href="https://github.com/isjuan99/Programacion-Distribuidad-2026" target="_blank">GitHub →</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">Sistema Distribuido · v2.0</div>
+  <h1>Aroma<span>-Distribuido</span></h1>
+  <p>Plataforma de e-commerce de perfumería de lujo implementada como sistema distribuido con Redis, RabbitMQ, Worker, Docker y observabilidad completa.</p>
+  <div class="hero-links">
+    <a href="#quickstart" class="btn btn-primary">🚀 Inicio Rápido</a>
+    <a href="https://github.com/isjuan99/Programacion-Distribuidad-2026" class="btn btn-outline" target="_blank">GitHub</a>
+    <a href="http://localhost:8000/docs" class="btn btn-outline" target="_blank">Swagger API</a>
+  </div>
+</div>
+
+<!-- Services Status -->
+<div class="section" id="services">
+  <div class="container">
+    <h2 class="section-title">Servicios del Sistema</h2>
+    <p class="section-subtitle">Todos los servicios desplegados con Docker Compose</p>
+
+    <div class="status-grid">
+      <div class="status-card">
+        <div class="status-icon">⚡</div>
+        <h3><span class="status-dot"></span>Frontend Vue 3</h3>
+        <div class="port">Puerto 80 · Nginx</div>
+        <p>SPA con Pinia, Vue Router, TailwindCSS y soporte bilingüe ES/EN.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">🐍</div>
+        <h3><span class="status-dot"></span>Backend FastAPI</h3>
+        <div class="port">Puerto 8000 · Uvicorn</div>
+        <p>14 módulos de API REST, JWT auth, middleware de Request-ID y logs JSON.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">🐘</div>
+        <h3><span class="status-dot"></span>PostgreSQL 15</h3>
+        <div class="port">Puerto 5432</div>
+        <p>16 tablas relacionales con Alembic migrations. Datos persistentes con volumen Docker.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">⚡</div>
+        <h3><span class="status-dot"></span>Redis 7</h3>
+        <div class="port">Puerto 6379 · LRU 256MB</div>
+        <p>Caché de productos, categorías, búsquedas y destacados. Invalidación automática.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">🐰</div>
+        <h3><span class="status-dot"></span>RabbitMQ 3.13</h3>
+        <div class="port">Puerto 5672 · Mgmt 15672</div>
+        <p>Exchange topic <code>aroma_events</code> con 4 queues durables para eventos.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">⚙️</div>
+        <h3><span class="status-dot"></span>Worker Python</h3>
+        <div class="port">Background service</div>
+        <p>Consume mensajes de RabbitMQ: emails, notificaciones, inventario. Auto-reconexión.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">📋</div>
+        <h3><span class="status-dot"></span>Dozzle</h3>
+        <div class="port"><a href="http://localhost:8888" target="_blank">Puerto 8888</a></div>
+        <p>Visualización en tiempo real de logs de todos los contenedores del sistema.</p>
+      </div>
+      <div class="status-card">
+        <div class="status-icon">🐳</div>
+        <h3><span class="status-dot"></span>Portainer</h3>
+        <div class="port"><a href="http://localhost:9000" target="_blank">Puerto 9000</a></div>
+        <p>Administración visual de Docker: contenedores, volúmenes, redes e imágenes.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Architecture -->
+<div class="section" id="architecture" style="background: rgba(0,0,0,0.3);">
+  <div class="container">
+    <h2 class="section-title">Arquitectura Distribuida</h2>
+    <p class="section-subtitle">Diagrama de componentes y flujo de comunicación</p>
+
+    <div class="arch-diagram">
+<pre>
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        DOCKER NETWORK: aroma-network                    │
+│                                                                         │
+│   ┌──────────────┐   HTTP    ┌──────────────────────────────────────┐  │
+│   │   Browser    │ ────────► │  Frontend (Vue 3 + Nginx) :80        │  │
+│   └──────────────┘          └──────────────┬───────────────────────┘  │
+│                                            │ /api/v1 proxy             │
+│                              ┌─────────────▼───────────────────────┐  │
+│                              │  Backend (FastAPI) :8000             │  │
+│                              │  ┌──────────────┐ ┌──────────────┐  │  │
+│                              │  │  Middleware   │ │  14 Routers  │  │  │
+│                              │  │  Request-ID   │ │  Auth        │  │  │
+│                              │  │  JSON Logs    │ │  Products    │  │  │
+│                              │  └──────────────┘ │  Orders      │  │  │
+│                              │                   │  Simulate    │  │  │
+│                              │                   └──────────────┘  │  │
+│                              └──┬─────────┬──────────┬────────────┘  │
+│                                 │         │          │               │
+│                     ┌───────────▼──┐ ┌────▼────┐ ┌──▼──────────┐  │
+│                     │  PostgreSQL  │ │  Redis  │ │  RabbitMQ   │  │
+│                     │  :5432       │ │  :6379  │ │  :5672      │  │
+│                     │  16 tablas   │ │  Cache  │ │  Exchange   │  │
+│                     │  Alembic     │ │  LRU    │ │  4 Queues   │  │
+│                     └─────────────┘ └─────────┘ └──────┬──────┘  │
+│                                                          │          │
+│                                             ┌────────────▼───────┐ │
+│                                             │  Worker (Python)   │ │
+│                                             │  Consume events    │ │
+│                                             │  Send emails       │ │
+│                                             │  Update inventory  │ │
+│                                             └────────────────────┘ │
+│                                                                     │
+│   ┌──────────────────┐                    ┌──────────────────────┐ │
+│   │  Dozzle :8888    │                    │  Portainer :9000     │ │
+│   │  Log Viewer      │                    │  Docker Management   │ │
+│   └──────────────────┘                    └──────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────┘
+</pre>
+    </div>
+
+    <h3 style="color:#fff; margin: 40px 0 16px; font-size:1.2rem;">Flujo de Eventos — RabbitMQ</h3>
+    <div class="event-flow">
+      <div class="event-node highlight">
+        Cliente<br><small>Crea pedido</small>
+      </div>
+      <div class="event-arrow">→</div>
+      <div class="event-node highlight">
+        Backend<br><small>POST /orders</small>
+      </div>
+      <div class="event-arrow">→</div>
+      <div class="event-node">
+        RabbitMQ<br><small>order.created</small>
+      </div>
+      <div class="event-arrow">→</div>
+      <div class="event-node">
+        Worker<br><small>Procesa evento</small>
+      </div>
+      <div class="event-arrow">→</div>
+      <div class="event-node highlight">
+        Email<br><small>Confirmación</small>
+      </div>
+    </div>
+
+    <h3 style="color:#fff; margin: 40px 0 16px; font-size:1.2rem;">Estrategia de Caché — Redis</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Patrón de Clave</th>
+            <th>Contenido</th>
+            <th>TTL</th>
+            <th>Invalidación</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>products:list:*</code></td>
+            <td>Listas paginadas con filtros</td>
+            <td>5 min</td>
+            <td>Al crear/editar/eliminar producto</td>
+          </tr>
+          <tr>
+            <td><code>products:detail:{id}</code></td>
+            <td>Detalle completo del producto</td>
+            <td>5 min</td>
+            <td>Al actualizar o eliminar ese producto</td>
+          </tr>
+          <tr>
+            <td><code>products:featured:*</code></td>
+            <td>Productos destacados</td>
+            <td>2 min</td>
+            <td>Al modificar cualquier producto</td>
+          </tr>
+          <tr>
+            <td><code>search:*</code></td>
+            <td>Resultados de búsqueda y sugerencias</td>
+            <td>3 min</td>
+            <td>Al modificar cualquier producto</td>
+          </tr>
+          <tr>
+            <td><code>categories:*</code></td>
+            <td>Listas de categorías</td>
+            <td>10 min</td>
+            <td>Al modificar categorías</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Checklist -->
+<div class="section" id="checklist">
+  <div class="container">
+    <h2 class="section-title">Checklist de Sistemas Distribuidos</h2>
+    <p class="section-subtitle">15/15 requisitos implementados ✓</p>
+
+    <div class="checklist">
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Redis — Caché</h4>
+          <p>Caché de productos, categorías, búsquedas y destacados. Invalidación automática por patrón glob.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>RabbitMQ — Mensajería</h4>
+          <p>Exchange topic <code>aroma_events</code>, 4 queues durables, producer en FastAPI.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Worker Independiente</h4>
+          <p>Servicio Python que consume mensajes: emails, inventario, notificaciones. Auto-reconexión.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Swagger Mejorado</h4>
+          <p>Tags, descripciones, ejemplos, respuestas HTTP documentadas, security schemes.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Logs Estructurados JSON</h4>
+          <p>Formato JSON con service, event, endpoint, status, timestamp en todos los logs.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Request ID — Trazabilidad</h4>
+          <p>Middleware global genera UUID por solicitud. Header <code>X-Request-ID</code> en respuestas.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Dockerfiles Optimizados</h4>
+          <p>Backend (Python slim), Frontend (Node→Nginx multi-stage), Worker (Python slim).</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Docker Compose</h4>
+          <p>8 servicios: frontend, backend, db, redis, rabbitmq, worker, dozzle, portainer.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Dozzle — Log Viewer</h4>
+          <p>Visualización en tiempo real de logs de todos los contenedores en puerto 8888.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Portainer — Docker Management</h4>
+          <p>Administración visual de Docker en puerto 9000 con certificado TLS opcional.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>GitHub Actions CI/CD</h4>
+          <p>Pipeline con 5 jobs: backend tests, frontend build, worker tests, Docker push, Pages deploy.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Observabilidad Básica</h4>
+          <p>Health check en <code>/api/v1/health</code> con estado de Redis, RabbitMQ y DB.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Variables de Entorno</h4>
+          <p>Configuración completa vía <code>.env</code> con <code>pydantic-settings</code>. Templates incluidos.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>README Completo</h4>
+          <p>Documentación con quickstart, arquitectura, variables de entorno, y guía de uso.</p>
+        </div>
+      </div>
+      <div class="check-item done">
+        <div class="check-icon">✓</div>
+        <div>
+          <h4>Simulación de Fallos</h4>
+          <p>Endpoints en <code>/api/v1/simulate/*</code> para demostrar resiliencia de Redis, RabbitMQ y Worker.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Start -->
+<div class="section" id="quickstart" style="background: rgba(0,0,0,0.3);">
+  <div class="container">
+    <h2 class="section-title">Inicio Rápido</h2>
+    <p class="section-subtitle">Levanta todo el sistema con un solo comando</p>
+
+    <h3 style="color:#fff; margin-bottom: 12px;">Requisitos</h3>
+    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 24px;">
+      <span class="tag">Docker Desktop</span>
+      <span class="tag">Docker Compose v2</span>
+      <span class="tag">Git</span>
+      <span class="tag">8 GB RAM mínimo</span>
+    </div>
+
+    <div class="code-block">
+      <span class="comment"># 1. Clonar repositorio</span><br>
+      <span class="cmd">git clone https://github.com/isjuan99/Programacion-Distribuidad-2026.git</span><br>
+      <span class="cmd">cd aroma-distribuido</span><br><br>
+      <span class="comment"># 2. Levantar todos los servicios</span><br>
+      <span class="cmd">docker compose up -d</span><br><br>
+      <span class="comment"># 3. Verificar que todos los contenedores estén corriendo</span><br>
+      <span class="cmd">docker compose ps</span><br><br>
+      <span class="comment"># 4. Crear administrador inicial</span><br>
+      <span class="cmd">docker compose exec backend python create_admin.py</span>
+    </div>
+
+    <h3 style="color:#fff; margin: 32px 0 12px;">URLs del Sistema</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Servicio</th><th>URL</th><th>Credenciales</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Frontend</td><td><a href="http://localhost" target="_blank">http://localhost</a></td><td>—</td></tr>
+          <tr><td>Backend API</td><td><a href="http://localhost:8000" target="_blank">http://localhost:8000</a></td><td>—</td></tr>
+          <tr><td>Swagger UI</td><td><a href="http://localhost:8000/docs" target="_blank">http://localhost:8000/docs</a></td><td>JWT token</td></tr>
+          <tr><td>RabbitMQ Mgmt</td><td><a href="http://localhost:15672" target="_blank">http://localhost:15672</a></td><td>aroma_user / aroma_secret</td></tr>
+          <tr><td>Dozzle (Logs)</td><td><a href="http://localhost:8888" target="_blank">http://localhost:8888</a></td><td>Sin auth</td></tr>
+          <tr><td>Portainer</td><td><a href="http://localhost:9000" target="_blank">http://localhost:9000</a></td><td>Configurar en primer inicio</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- API Reference -->
+<div class="section" id="api">
+  <div class="container">
+    <h2 class="section-title">Endpoints Distribuidos</h2>
+    <p class="section-subtitle">Nuevos endpoints agregados para el sistema distribuido</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Método</th><th>Endpoint</th><th>Descripción</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="tag">GET</span></td><td><code>/api/v1/health</code></td><td>Health check con estado de Redis, RabbitMQ y DB</td></tr>
+          <tr><td><span class="tag">GET</span></td><td><code>/api/v1/simulate/status</code></td><td>Estado actual de todos los servicios distribuidos</td></tr>
+          <tr><td><span class="tag" style="background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.3)">POST</span></td><td><code>/api/v1/simulate/redis-failure</code></td><td>Simular caída de Redis (modo degradado)</td></tr>
+          <tr><td><span class="tag" style="background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.3)">POST</span></td><td><code>/api/v1/simulate/rabbitmq-failure</code></td><td>Simular caída de RabbitMQ (eventos omitidos)</td></tr>
+          <tr><td><span class="tag" style="background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.3)">POST</span></td><td><code>/api/v1/simulate/worker-failure</code></td><td>Simular caída del Worker (mensajes encolados)</td></tr>
+          <tr><td><span class="tag">GET</span></td><td><code>/api/v1/products/featured</code></td><td>Productos destacados (cacheados 2 min)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="color:#fff; margin: 40px 0 12px;">Variables de Entorno</h3>
+    <div class="code-block">
+      <span class="comment"># === Base de Datos ===</span><br>
+      DATABASE_URL=postgresql://aroma_user:aroma_secret@db:5432/aroma_db<br><br>
+      <span class="comment"># === Redis ===</span><br>
+      REDIS_URL=redis://redis:6379/0<br>
+      CACHE_TTL_PRODUCTS=300<br>
+      CACHE_TTL_CATEGORIES=600<br>
+      CACHE_TTL_FEATURED=120<br>
+      CACHE_TTL_SEARCH=180<br><br>
+      <span class="comment"># === RabbitMQ ===</span><br>
+      RABBITMQ_URL=amqp://aroma_user:aroma_secret@rabbitmq:5672/<br>
+      RABBITMQ_EXCHANGE=aroma_events<br><br>
+      <span class="comment"># === Servicio ===</span><br>
+      SERVICE_NAME=aroma-backend<br>
+      ENVIRONMENT=production
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <p>
+      <strong style="color:var(--gold)">Aroma-Distribuido</strong> v2.0 —
+      Sistema Distribuido con Redis, RabbitMQ, Docker y CI/CD
+    </p>
+    <p style="margin-top: 8px;">
+      Stack: FastAPI · Vue 3 · PostgreSQL · Redis · RabbitMQ · Docker · GitHub Actions
+    </p>
+    <p style="margin-top: 12px; font-size: 12px;">
+      <a href="https://github.com/isjuan99/Programacion-Distribuidad-2026" target="_blank">GitHub</a> ·
+      <a href="http://localhost:8000/docs" target="_blank">API Docs</a> ·
+      <a href="http://localhost:8888" target="_blank">Dozzle</a> ·
+      <a href="http://localhost:9000" target="_blank">Portainer</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
