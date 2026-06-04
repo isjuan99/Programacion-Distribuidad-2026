@@ -900,7 +900,9 @@ async function handleReturnImageUpload(event) {
         headers: { 'Content-Type': 'multipart/form-data' }
       })
       returnImages.value.push({ preview: URL.createObjectURL(file), url: data.url })
-    } catch {}
+    } catch {
+      alert('Error al subir la imagen. Verifica el formato y tamaño (máx. 2MB).')
+    }
     event.target.value = ''
   }
 }
@@ -1054,6 +1056,7 @@ function openReturnForm(orderId) {
 }
 
 async function submitReturn() {
+  if (returnBlocked.value) return
   try {
     await api.post('/returns', {
       order_id: returnOrderId.value,

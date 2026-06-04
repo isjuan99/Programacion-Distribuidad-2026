@@ -276,7 +276,7 @@ function openReturn(ret) {
   statusForm.value = {
     status:         ret.status,
     admin_notes:    ret.admin_notes || '',
-    refund_amount:  ret.refund_amount || null,
+    refund_amount:  ret.refund_amount ?? null,
     return_label_url: ret.return_label_url || '',
     return_address: ret.return_address || '',
     refund_type:    ret.refund_type || 'card',
