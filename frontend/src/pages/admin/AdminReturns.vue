@@ -1,67 +1,74 @@
 <template>
   <div class="p-6 lg:p-8 max-w-7xl mx-auto">
-    <!-- Header -->
     <div class="mb-8">
       <h1 class="text-2xl font-light tracking-widest text-white">{{ $t('admin.returns') }}</h1>
       <p class="text-gray-500 text-sm mt-1">{{ $t('admin.returns_subtitle') }}</p>
     </div>
 
-    <!-- Status filter tabs -->
+    <!-- Filtros de estado -->
     <div class="flex gap-1 mb-6 border-b border-gray-800 overflow-x-auto">
-      <button
-        v-for="tab in statusTabs"
-        :key="tab.value"
+      <button v-for="tab in statusTabs" :key="tab.value"
         @click="activeStatus = tab.value; loadReturns()"
         class="px-4 py-2 text-sm transition-colors shrink-0"
         :class="activeStatus === tab.value
           ? 'text-[#c9a84c] border-b-2 border-[#c9a84c]'
-          : 'text-gray-500 hover:text-gray-300'"
-      >
+          : 'text-gray-500 hover:text-gray-300'">
         {{ tab.label }}
       </button>
     </div>
 
-    <!-- Loading -->
     <div v-if="loading" class="text-center py-16 text-gray-500 text-sm">{{ $t('common.loading') }}</div>
 
-    <!-- Returns table -->
+    <!-- Tabla -->
     <div v-else-if="returns.length" class="overflow-x-auto">
       <table class="w-full text-sm">
         <thead>
           <tr class="border-b border-gray-800">
             <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">ID</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">{{ $t('admin.order') }}</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">{{ $t('admin.reason') }}</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">{{ $t('admin.status') }}</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">{{ $t('common.date') }}</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">{{ $t('common.actions') }}</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Pedido</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Motivo</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Fotos</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Guía</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Estado</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Fecha</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Acción</th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-800">
           <tr v-for="ret in returns" :key="ret.id" class="hover:bg-white/2 transition-colors">
             <td class="py-3 px-4 text-gray-400">#{{ ret.id }}</td>
-            <td class="py-3 px-4 text-gray-300">{{ $t('admin.order') }} #{{ ret.order_id }}</td>
-            <td class="py-3 px-4 text-gray-300 max-w-xs truncate">{{ ret.reason }}</td>
+            <td class="py-3 px-4 text-gray-300">#{{ ret.order_id }}</td>
+            <td class="py-3 px-4 text-gray-300 max-w-[160px] truncate">{{ ret.reason }}</td>
             <td class="py-3 px-4">
-              <span
-                class="text-xs px-2 py-1 rounded-sm"
+              <div v-if="ret.images?.length" class="flex gap-1">
+                <img v-for="(img, i) in ret.images.slice(0, 3)" :key="i"
+                  :src="img" class="w-10 h-10 object-cover border border-gray-700 rounded-sm cursor-pointer hover:border-[#c9a84c] transition-colors"
+                  @click="lightboxImg = img" />
+              </div>
+              <span v-else class="text-gray-600 text-xs">—</span>
+            </td>
+            <td class="py-3 px-4">
+              <span v-if="ret.tracking_number" class="font-mono text-xs text-blue-400">{{ ret.tracking_number }}</span>
+              <span v-else class="text-gray-600 text-xs">—</span>
+            </td>
+            <td class="py-3 px-4">
+              <span class="text-xs px-2 py-1 rounded-sm"
                 :class="{
                   'bg-yellow-500/20 text-yellow-400': ret.status === 'pending',
-                  'bg-green-500/20 text-green-400': ret.status === 'approved' || ret.status === 'refunded',
-                  'bg-red-500/20 text-red-400': ret.status === 'rejected',
-                  'bg-blue-500/20 text-blue-400': ret.status === 'shipped',
-                }"
-              >
+                  'bg-green-500/20 text-green-400':  ret.status === 'approved',
+                  'bg-red-500/20 text-red-400':      ret.status === 'rejected',
+                  'bg-blue-500/20 text-blue-400':    ret.status === 'shipped',
+                  'bg-amber-500/20 text-amber-400':  ret.status === 'received',
+                  'bg-[#c9a84c]/20 text-[#c9a84c]':  ret.status === 'refunded',
+                }">
                 {{ statusLabel(ret.status) }}
               </span>
             </td>
             <td class="py-3 px-4 text-gray-500 text-xs">{{ formatDate(ret.created_at) }}</td>
             <td class="py-3 px-4">
-              <button
-                @click="openReturn(ret)"
-                class="text-xs text-[#c9a84c] border border-[#c9a84c]/30 px-3 py-1 hover:bg-[#c9a84c]/10 transition-colors"
-              >
-                {{ $t('common.review') }}
+              <button @click="openReturn(ret)"
+                class="text-xs text-[#c9a84c] border border-[#c9a84c]/30 px-3 py-1 hover:bg-[#c9a84c]/10 transition-colors">
+                Gestionar
               </button>
             </td>
           </tr>
@@ -71,77 +78,132 @@
 
     <div v-else class="text-center py-16 text-gray-500 text-sm">{{ $t('admin.no_returns') }}</div>
 
-    <!-- Review modal -->
-    <div
-      v-if="selectedReturn"
-      class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4"
-      @click.self="selectedReturn = null"
-    >
+    <!-- Modal de gestión -->
+    <div v-if="selectedReturn" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 px-4"
+      @click.self="selectedReturn = null">
       <div class="bg-[#111] border border-gray-800 p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto">
         <div class="flex items-center justify-between mb-6">
-          <h3 class="text-white font-light">{{ $t('returns.return_details') }} #{{ selectedReturn.id }}</h3>
+          <h3 class="text-white font-light text-lg">Devolución #{{ selectedReturn.id }}</h3>
           <button @click="selectedReturn = null" class="text-gray-500 hover:text-white text-xl leading-none">×</button>
         </div>
 
+        <!-- Info del cliente -->
         <div class="space-y-4 mb-6">
-          <div>
-            <p class="text-xs text-gray-500 mb-1 uppercase tracking-widest">{{ $t('returns.reason') }}</p>
-            <p class="text-sm text-gray-200">{{ selectedReturn.reason }}</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <p class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Motivo</p>
+              <p class="text-sm text-gray-200">{{ selectedReturn.reason }}</p>
+            </div>
+            <div>
+              <p class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Pedido</p>
+              <p class="text-sm text-gray-200">#{{ selectedReturn.order_id }}</p>
+            </div>
           </div>
           <div v-if="selectedReturn.comments">
-            <p class="text-xs text-gray-500 mb-1 uppercase tracking-widest">{{ $t('returns.comments') }}</p>
+            <p class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Comentarios</p>
             <p class="text-sm text-gray-400 leading-relaxed">{{ selectedReturn.comments }}</p>
           </div>
-          <div v-if="selectedReturn.images?.length" class="flex gap-2 flex-wrap">
-            <img
-              v-for="(img, i) in selectedReturn.images"
-              :key="i"
-              :src="img"
-              class="w-20 h-20 object-cover border border-gray-700"
-            />
+          <div v-if="selectedReturn.tracking_number">
+            <p class="text-xs text-gray-500 mb-1 uppercase tracking-widest">Número de guía</p>
+            <p class="text-sm font-mono text-blue-400">{{ selectedReturn.tracking_number }}</p>
+          </div>
+          <!-- Fotos -->
+          <div v-if="selectedReturn.images?.length">
+            <p class="text-xs text-gray-500 mb-2 uppercase tracking-widest">Fotos del cliente</p>
+            <div class="flex gap-2 flex-wrap">
+              <img v-for="(img, i) in selectedReturn.images" :key="i"
+                :src="img" class="w-20 h-20 object-cover border border-gray-700 rounded-sm cursor-pointer hover:border-[#c9a84c] transition-colors"
+                @click="lightboxImg = img" />
+            </div>
           </div>
         </div>
 
-        <form @submit.prevent="updateReturnStatus" class="space-y-4 border-t border-gray-800 pt-4">
+        <!-- Formulario de actualización -->
+        <form @submit.prevent="updateReturnStatus" class="space-y-4 border-t border-gray-800 pt-5">
+          <!-- Estado -->
           <div>
-            <label class="block text-xs text-gray-400 mb-1 uppercase tracking-widest">{{ $t('admin.update_status') }}</label>
-            <select
-              v-model="statusForm.status"
-              class="w-full bg-[#0a0a0a] border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none"
-            >
-              <option value="pending">{{ $t('returns.status_pending') }}</option>
-              <option value="approved">{{ $t('returns.status_approved') }}</option>
-              <option value="rejected">{{ $t('returns.status_rejected') }}</option>
-              <option value="shipped">{{ $t('returns.status_shipped') }}</option>
-              <option value="refunded">{{ $t('returns.status_refunded') }}</option>
+            <label class="block text-xs text-gray-400 mb-1 uppercase tracking-widest">Actualizar estado</label>
+            <select v-model="statusForm.status"
+              class="w-full bg-[#0a0a0a] border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none">
+              <option value="pending">Pendiente</option>
+              <option value="approved">Aprobada</option>
+              <option value="rejected">Rechazada</option>
+              <option value="shipped">Enviada por cliente</option>
+              <option value="received">Recibida</option>
+              <option value="refunded">Reembolsada</option>
             </select>
           </div>
+
+          <!-- Notas del admin -->
           <div>
-            <label class="block text-xs text-gray-400 mb-1 uppercase tracking-widest">{{ $t('admin.admin_notes') }}</label>
-            <textarea
-              v-model="statusForm.admin_notes"
-              rows="3"
+            <label class="block text-xs text-gray-400 mb-1 uppercase tracking-widest">Notas para el cliente</label>
+            <textarea v-model="statusForm.admin_notes" rows="2"
               class="w-full bg-[#0a0a0a] border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none resize-none"
-              :placeholder="$t('admin.notes_placeholder')"
-            ></textarea>
+              placeholder="Mensaje que verá el cliente..."></textarea>
           </div>
-          <div v-if="statusForm.status === 'refunded'">
-            <label class="block text-xs text-gray-400 mb-1 uppercase tracking-widest">{{ $t('returns.refund_amount') }}</label>
-            <input
-              v-model="statusForm.refund_amount"
-              type="number"
-              step="0.01"
-              class="w-full bg-[#0a0a0a] border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none"
-            />
+
+          <!-- Instrucciones de envío (cuando se aprueba) -->
+          <div v-if="statusForm.status === 'approved'" class="border border-[#c9a84c]/20 bg-[#c9a84c]/5 p-4 space-y-3">
+            <p class="text-xs text-[#c9a84c] uppercase tracking-widest font-medium">Instrucciones de envío</p>
+            <div class="flex gap-3">
+              <label class="flex items-center gap-1.5 cursor-pointer text-xs text-gray-300">
+                <input type="checkbox" v-model="statusForm.include_address" class="accent-[#c9a84c]" />
+                Dar dirección
+              </label>
+              <label class="flex items-center gap-1.5 cursor-pointer text-xs text-gray-300">
+                <input type="checkbox" v-model="statusForm.include_label" class="accent-[#c9a84c]" />
+                Subir etiqueta
+              </label>
+            </div>
+            <div v-if="statusForm.include_address">
+              <label class="block text-xs text-gray-400 mb-1">Dirección de devolución</label>
+              <textarea v-model="statusForm.return_address" rows="3"
+                class="w-full bg-[#0a0a0a] border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none resize-none"
+                placeholder="Calle 123 #45-67&#10;Bogotá, Colombia&#10;CP: 110111"/>
+            </div>
+            <div v-if="statusForm.include_label">
+              <label class="block text-xs text-gray-400 mb-1">URL de la etiqueta prepagada</label>
+              <input v-model="statusForm.return_label_url" type="url"
+                class="w-full bg-[#0a0a0a] border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none"
+                placeholder="https://..." />
+            </div>
           </div>
-          <button
-            type="submit"
-            class="w-full bg-[#c9a84c] text-black py-3 text-sm tracking-widest hover:bg-[#b8943e] transition-colors"
-          >
-            {{ $t('admin.save_status') }}
+
+          <!-- Tipo de reembolso (cuando se reembolsa) -->
+          <div v-if="statusForm.status === 'refunded'" class="border border-[#c9a84c]/20 bg-[#c9a84c]/5 p-4 space-y-3">
+            <p class="text-xs text-[#c9a84c] uppercase tracking-widest font-medium">Tipo de reembolso</p>
+            <div class="flex gap-4">
+              <label v-for="opt in refundTypes" :key="opt.value"
+                class="flex items-center gap-1.5 cursor-pointer text-xs text-gray-300">
+                <input type="radio" :value="opt.value" v-model="statusForm.refund_type" class="accent-[#c9a84c]" />
+                {{ opt.label }}
+              </label>
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Monto a reembolsar (COP)</label>
+              <input v-model="statusForm.refund_amount" type="number" step="1000"
+                class="w-full bg-[#0a0a0a] border border-gray-700 text-white px-3 py-2 text-sm focus:border-[#c9a84c] focus:outline-none"
+                placeholder="0" />
+            </div>
+            <p v-if="statusForm.refund_type === 'points' && statusForm.refund_amount"
+              class="text-xs text-[#c9a84c]">
+              = {{ Math.floor(statusForm.refund_amount / 10) }} puntos de lealtad
+            </p>
+          </div>
+
+          <button type="submit"
+            class="w-full bg-[#c9a84c] text-black py-3 text-sm tracking-widest hover:bg-[#b8943e] transition-colors font-medium">
+            Guardar cambios
           </button>
         </form>
       </div>
+    </div>
+
+    <!-- Lightbox fotos -->
+    <div v-if="lightboxImg" class="fixed inset-0 bg-black/90 flex items-center justify-center z-[60]"
+      @click="lightboxImg = null">
+      <img :src="lightboxImg" class="max-w-full max-h-[90vh] object-contain" @click.stop />
+      <button @click="lightboxImg = null" class="absolute top-4 right-4 text-white hover:text-[#c9a84c] text-2xl">×</button>
     </div>
   </div>
 </template>
@@ -156,25 +218,44 @@ const returns = ref([])
 const loading = ref(false)
 const selectedReturn = ref(null)
 const activeStatus = ref('')
-const statusForm = ref({ status: 'pending', admin_notes: '', refund_amount: null })
+const lightboxImg = ref(null)
+
+const statusForm = ref({
+  status: 'pending',
+  admin_notes: '',
+  refund_amount: null,
+  return_label_url: '',
+  return_address: '',
+  refund_type: 'card',
+  include_address: false,
+  include_label: false,
+})
+
+const refundTypes = [
+  { value: 'card',     label: 'Tarjeta' },
+  { value: 'points',   label: 'Puntos' },
+  { value: 'exchange', label: 'Cambio' },
+]
 
 const statusTabs = [
-  { label: t('common.all'), value: '' },
-  { label: t('returns.status_pending'), value: 'pending' },
-  { label: t('returns.status_approved'), value: 'approved' },
-  { label: t('returns.status_rejected'), value: 'rejected' },
-  { label: t('returns.status_refunded'), value: 'refunded' },
+  { label: 'Todos',        value: '' },
+  { label: 'Pendientes',   value: 'pending' },
+  { label: 'Aprobadas',    value: 'approved' },
+  { label: 'Rechazadas',   value: 'rejected' },
+  { label: 'En camino',    value: 'shipped' },
+  { label: 'Recibidas',    value: 'received' },
+  { label: 'Reembolsadas', value: 'refunded' },
 ]
 
 function statusLabel(status) {
-  const map = {
-    pending: t('returns.status_pending'),
-    approved: t('returns.status_approved'),
-    rejected: t('returns.status_rejected'),
-    shipped: t('returns.status_shipped'),
-    refunded: t('returns.status_refunded'),
-  }
-  return map[status] || status
+  return {
+    pending:  'Pendiente',
+    approved: 'Aprobada',
+    rejected: 'Rechazada',
+    shipped:  'En camino',
+    received: 'Recibida',
+    refunded: 'Reembolsada',
+  }[status] || status
 }
 
 async function loadReturns() {
@@ -193,15 +274,28 @@ async function loadReturns() {
 function openReturn(ret) {
   selectedReturn.value = ret
   statusForm.value = {
-    status: ret.status,
-    admin_notes: ret.admin_notes || '',
-    refund_amount: ret.refund_amount || null
+    status:         ret.status,
+    admin_notes:    ret.admin_notes || '',
+    refund_amount:  ret.refund_amount || null,
+    return_label_url: ret.return_label_url || '',
+    return_address: ret.return_address || '',
+    refund_type:    ret.refund_type || 'card',
+    include_address: !!ret.return_address,
+    include_label:   !!ret.return_label_url,
   }
 }
 
 async function updateReturnStatus() {
   try {
-    await api.put(`/returns/${selectedReturn.value.id}/status`, statusForm.value)
+    const payload = {
+      status:      statusForm.value.status,
+      admin_notes: statusForm.value.admin_notes || null,
+      refund_amount:    statusForm.value.refund_amount || null,
+      refund_type:      statusForm.value.status === 'refunded' ? statusForm.value.refund_type : null,
+      return_address:   statusForm.value.include_address ? statusForm.value.return_address : null,
+      return_label_url: statusForm.value.include_label   ? statusForm.value.return_label_url : null,
+    }
+    await api.put(`/returns/${selectedReturn.value.id}/status`, payload)
     selectedReturn.value = null
     await loadReturns()
   } catch (e) {
