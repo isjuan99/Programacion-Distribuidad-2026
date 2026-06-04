@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, BackgroundTasks, Query
 from sqlalchemy.orm import Session, joinedload
-from typing import Optional, List
+from typing import Optional, List, Literal
 from datetime import datetime, timedelta
 from pydantic import BaseModel
 
@@ -28,7 +28,7 @@ class ReturnStatusUpdate(BaseModel):
     refund_amount: Optional[float] = None
     return_label_url: Optional[str] = None
     return_address: Optional[str] = None
-    refund_type: Optional[str] = None  # 'card', 'points', 'exchange'
+    refund_type: Optional[Literal['card', 'points', 'exchange']] = None
 
 
 class TrackingUpdate(BaseModel):
@@ -183,7 +183,7 @@ async def update_return_status(
         ret.refund_type = data.refund_type
 
     # Award loyalty points when refund type is 'points'
-    if data.status == ReturnStatus.refunded.value and data.refund_type == "points" and data.refund_amount:
+    if data.status == ReturnStatus.refunded.value and ret.status != ReturnStatus.refunded.value and data.refund_type == "points" and data.refund_amount is not None:
         points_earned = int(data.refund_amount / 10)
         if points_earned > 0:
             ret.user.loyalty_points = (ret.user.loyalty_points or 0) + points_earned
@@ -198,7 +198,7 @@ async def update_return_status(
     db.commit()
     db.refresh(ret)
 
-    if data.status in ("approved", "rejected", "received", "refunded"):
+    if data.status in ("approved", "rejected", "shipped", "received", "refunded"):
         background_tasks.add_task(
             send_return_status_email,
             ret.user.email,

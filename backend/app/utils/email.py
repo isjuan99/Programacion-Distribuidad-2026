@@ -1,3 +1,4 @@
+import html
 import aiosmtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -305,10 +306,11 @@ async def send_return_status_email(
               </a>
             </div>"""
         if return_address:
+            safe_address = html.escape(str(return_address))
             shipping_block += f"""
             <div style='background:#111;border:1px solid #333;padding:16px;margin-top:12px;'>
               <p style='color:#aaa;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px;'>Direcci&#243;n de env&#237;o</p>
-              <p style='color:#f5f0e8;font-family:monospace;font-size:13px;white-space:pre-wrap;margin:0;'>{return_address}</p>
+              <p style='color:#f5f0e8;font-family:monospace;font-size:13px;white-space:pre-wrap;margin:0;'>{safe_address}</p>
             </div>"""
         body += shipping_block
         body += "<p style='color:#888;font-size:13px;margin-top:20px;'>Una vez enviado, ingresa tu n&#250;mero de gu&#237;a en tu cuenta para que podamos rastrear el paquete.</p>"
@@ -323,7 +325,8 @@ async def send_return_status_email(
         color = "#3b82f6"
         body = "<p style='color:#ccc;line-height:1.7;'>Hemos registrado tu n&#250;mero de gu&#237;a. Cuando recibamos el paquete te notificaremos.</p>"
         if tracking_number:
-            body += f"<div style='background:#111;border:1px solid #333;padding:16px;margin-top:16px;'><p style='color:#aaa;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;'>N&#250;mero de gu&#237;a</p><p style='color:#f5f0e8;font-family:monospace;font-size:16px;margin:0;'>{tracking_number}</p></div>"
+            safe_tracking = html.escape(str(tracking_number))
+            body += f"<div style='background:#111;border:1px solid #333;padding:16px;margin-top:16px;'><p style='color:#aaa;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;'>N&#250;mero de gu&#237;a</p><p style='color:#f5f0e8;font-family:monospace;font-size:16px;margin:0;'>{safe_tracking}</p></div>"
 
     elif return_status == "received":
         title = "Paquete recibido"
