@@ -10,6 +10,7 @@ class ReturnStatus(str, enum.Enum):
     approved = "approved"
     rejected = "rejected"
     shipped = "shipped"
+    received = "received"
     refunded = "refunded"
 
 
@@ -26,6 +27,9 @@ class Return(Base):
     admin_notes = Column(Text, nullable=True)
     refund_amount = Column(Float, nullable=True)
     return_label_url = Column(String(500), nullable=True)
+    tracking_number = Column(String(100), nullable=True)
+    return_address = Column(String(500), nullable=True)
+    refund_type = Column(String(20), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
 
