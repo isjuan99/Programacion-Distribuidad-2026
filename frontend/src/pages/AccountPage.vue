@@ -551,9 +551,26 @@
 
     <!-- Modal devolución -->
     <div v-if="showReturnForm" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4" @click.self="showReturnForm = false">
-      <div class="bg-white rounded-sm p-6 w-full max-w-md shadow-xl">
+      <div class="bg-white rounded-sm p-6 w-full max-w-md shadow-xl max-h-[90vh] overflow-y-auto">
         <h3 class="font-display text-xl text-[#111010] mb-5">Solicitar Devolución</h3>
         <form @submit.prevent="submitReturn" class="space-y-4">
+
+          <!-- Condición -->
+          <div>
+            <label class="block text-xs text-gray-500 mb-2 uppercase tracking-widest">Condición del producto</label>
+            <div class="flex gap-4">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" v-model="returnForm.condition" value="unopened" class="accent-gold" />
+                <span class="text-sm text-[#111010]">Sin abrir</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input type="radio" v-model="returnForm.condition" value="opened" class="accent-gold" />
+                <span class="text-sm text-[#111010]">Abierto / Usado</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Motivo -->
           <div>
             <label class="block text-xs text-gray-500 mb-1 uppercase tracking-widest">Motivo</label>
             <select v-model="returnForm.reason" required
@@ -562,13 +579,43 @@
               <option v-for="r in returnReasons" :key="r" :value="r">{{ r }}</option>
             </select>
           </div>
+
+          <!-- Alerta bloqueo -->
+          <div v-if="returnBlocked" class="bg-amber-50 border border-amber-200 rounded-sm p-3">
+            <p class="text-xs text-amber-700 font-medium">Solo aceptamos devoluciones de productos abiertos si llegaron dañados o incorrectos.</p>
+          </div>
+
+          <!-- Comentarios -->
           <div>
             <label class="block text-xs text-gray-500 mb-1 uppercase tracking-widest">Comentarios (opcional)</label>
             <textarea v-model="returnForm.comments" rows="3"
-              class="w-full border border-gray-300 text-[#111010] px-3 py-2.5 text-sm focus:border-gold focus:outline-none rounded-sm resize-none"/>
+              class="w-full border border-gray-300 text-[#111010] px-3 py-2.5 text-sm focus:border-gold focus:outline-none rounded-sm resize-none"
+              placeholder="Describe el problema con más detalle"/>
           </div>
-          <div class="flex gap-3">
-            <button type="submit" class="flex-1 bg-gold text-white py-3 text-sm hover:bg-gold-dark transition-colors rounded-sm">
+
+          <!-- Fotos -->
+          <div>
+            <label class="block text-xs text-gray-500 mb-2 uppercase tracking-widest">Fotos del producto (opcional, máx. 3)</label>
+            <div class="flex gap-2 flex-wrap">
+              <div v-for="(img, i) in returnImages" :key="i" class="relative w-16 h-16 group shrink-0">
+                <img :src="img.preview" class="w-full h-full object-cover rounded-sm border border-gray-200"/>
+                <button type="button" @click="removeReturnImage(i)"
+                  class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity leading-none">×</button>
+              </div>
+              <label v-if="returnImages.length < 3"
+                class="w-16 h-16 border border-dashed border-gray-300 hover:border-gold bg-gray-50 hover:bg-gold/5 flex flex-col items-center justify-center text-gray-400 hover:text-gold cursor-pointer transition-all rounded-sm shrink-0">
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
+                </svg>
+                <span class="text-[10px] mt-0.5">Foto</span>
+                <input type="file" accept="image/jpeg,image/png,image/webp" multiple class="hidden" @change="handleReturnImageUpload"/>
+              </label>
+            </div>
+          </div>
+
+          <div class="flex gap-3 pt-2">
+            <button type="submit" :disabled="returnBlocked"
+              class="flex-1 bg-gold text-white py-3 text-sm hover:bg-gold-dark transition-colors rounded-sm disabled:opacity-40">
               Enviar solicitud
             </button>
             <button type="button" @click="showReturnForm = false"
@@ -638,8 +685,25 @@ const cardForm = ref({ number: '', expiry: '', cvc: '', setDefault: false })
 const returns = ref([])
 const showReturnForm = ref(false)
 const returnOrderId = ref(null)
-const returnForm = ref({ reason: '', comments: '' })
+const returnForm = ref({ reason: '', comments: '', condition: 'unopened' })
+const returnImages = ref([])
 const returnReasons = ['Producto dañado', 'No coincide con la descripción', 'Cambio de opinión', 'Producto incorrecto recibido', 'Calidad insatisfactoria']
+
+const RETURN_STEPS = [
+  { value: 'pending',  label: 'Solicitada'  },
+  { value: 'approved', label: 'Aprobada'    },
+  { value: 'shipped',  label: 'Enviada'     },
+  { value: 'received', label: 'Recibida'    },
+  { value: 'refunded', label: 'Reembolsada' },
+]
+
+const trackingNumbers = ref({})
+const trackingLoading = ref({})
+
+const returnBlocked = computed(() =>
+  returnForm.value.condition === 'opened' &&
+  returnForm.value.reason === 'Cambio de opinión'
+)
 
 const menuItems = [
   { tab: 'profile',  i18n: 'account.profile',     icon: '👤' },
@@ -671,7 +735,79 @@ function statusBadgeClass(s) {
 }
 
 function returnStatusLabel(s) {
-  return { pending: 'Pendiente', approved: 'Aprobada', rejected: 'Rechazada', shipped: 'En camino', refunded: 'Reembolsada' }[s] || s
+  return {
+    pending:  'Pendiente',
+    approved: 'Aprobada',
+    rejected: 'Rechazada',
+    shipped:  'En camino',
+    received: 'Recibida',
+    refunded: 'Reembolsada',
+  }[s] || s
+}
+
+function returnStatusBadgeClass(s) {
+  return {
+    pending:  'bg-yellow-100 text-yellow-700',
+    approved: 'bg-emerald-100 text-emerald-700',
+    rejected: 'bg-red-100 text-red-700',
+    shipped:  'bg-blue-100 text-blue-700',
+    received: 'bg-amber-100 text-amber-700',
+    refunded: 'bg-gray-100 text-gray-700',
+  }[s] || 'bg-gray-100 text-gray-500'
+}
+
+function getStepIndex(status) {
+  return RETURN_STEPS.findIndex(s => s.value === status)
+}
+
+function isStepDone(status, idx) {
+  return idx < getStepIndex(status)
+}
+
+function isStepActive(status, idx) {
+  return idx === getStepIndex(status)
+}
+
+function getStepClass(status, idx) {
+  if (isStepDone(status, idx))  return 'bg-gold border-gold'
+  if (isStepActive(status, idx)) return 'border-gold bg-white'
+  return 'border-gray-300 bg-white'
+}
+
+async function handleReturnImageUpload(event) {
+  const files = Array.from(event.target.files || [])
+  for (const file of files) {
+    if (returnImages.value.length >= 3) break
+    const formData = new FormData()
+    formData.append('file', file)
+    try {
+      const { data } = await api.post('/upload/review-image', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      })
+      returnImages.value.push({ preview: URL.createObjectURL(file), url: data.url })
+    } catch {}
+    event.target.value = ''
+  }
+}
+
+function removeReturnImage(idx) {
+  URL.revokeObjectURL(returnImages.value[idx].preview)
+  returnImages.value.splice(idx, 1)
+}
+
+async function submitTracking(returnId) {
+  const tracking = trackingNumbers.value[returnId]
+  if (!tracking) return
+  trackingLoading.value[returnId] = true
+  try {
+    await api.put(`/returns/${returnId}/tracking`, { tracking_number: tracking })
+    await loadReturns()
+    trackingNumbers.value[returnId] = ''
+  } catch (e) {
+    alert(e.response?.data?.detail || 'Error al confirmar el envío')
+  } finally {
+    trackingLoading.value[returnId] = false
+  }
 }
 
 // ── Direcciones ──────────────────────────────────────────────────
@@ -797,16 +933,26 @@ async function loadReturns() {
 
 function openReturnForm(orderId) {
   returnOrderId.value = orderId
-  returnForm.value = { reason: '', comments: '' }
+  returnForm.value = { reason: '', comments: '', condition: 'unopened' }
+  returnImages.value = []
   showReturnForm.value = true
 }
 
 async function submitReturn() {
   try {
-    await api.post('/returns', { order_id: returnOrderId.value, ...returnForm.value })
+    await api.post('/returns', {
+      order_id: returnOrderId.value,
+      reason: returnForm.value.reason,
+      comments: returnForm.value.comments,
+      images: returnImages.value.map(i => i.url),
+    })
     showReturnForm.value = false
+    returnForm.value = { reason: '', comments: '', condition: 'unopened' }
+    returnImages.value = []
     await loadReturns()
-  } catch (e) { alert(e.response?.data?.detail || 'Error') }
+  } catch (e) {
+    alert(e.response?.data?.detail || 'Error')
+  }
 }
 
 async function handleLogout() {
