@@ -274,22 +274,91 @@ async def send_contact_confirmation_email(to: str, name: str):
     await _send(to, "Recibimos tu mensaje — Aroma-Distribuido", html)
 
 
-async def send_return_status_email(to: str, first_name: str, order_number: str, return_status: str, admin_notes: str = None):
-    status_messages = {
-        "approved": ("Tu solicitud ha sido aprobada", "Hemos aprobado tu solicitud de devoluci&#243;n. Te contactaremos con las instrucciones de env&#237;o.", "#22c55e"),
-        "rejected": ("Solicitud no aprobada", "Despu&#233;s de revisar tu solicitud, no podemos procesarla en este momento.", "#ef4444"),
-        "refunded": ("Reembolso procesado", "Hemos procesado tu reembolso. Deber&#237;a reflejarse en tu cuenta en 3-5 d&#237;as h&#225;biles.", "#c9a84c"),
-    }
-    title, message, color = status_messages.get(return_status, ("Actualizaci&#243;n de devoluci&#243;n", "Hay una actualizaci&#243;n en tu solicitud.", "#c9a84c"))
-    notes_section = f"<p style='color:#888;font-size:14px;border-left:2px solid #333;padding-left:16px;margin-top:16px;'>{admin_notes}</p>" if admin_notes else ""
+async def send_return_status_email(
+    to: str,
+    first_name: str,
+    order_number: str,
+    return_status: str,
+    admin_notes: str = None,
+    tracking_number: str = None,
+    return_address: str = None,
+    return_label_url: str = None,
+    refund_type: str = None,
+    refund_amount: float = None,
+):
+    def _notes_block(notes):
+        if not notes:
+            return ""
+        return f"<p style='color:#888;font-size:13px;border-left:2px solid #333;padding-left:16px;margin-top:16px;'>{notes}</p>"
+
+    if return_status == "approved":
+        title = "Devoluci&#243;n aprobada"
+        color = "#22c55e"
+        body = "<p style='color:#ccc;line-height:1.7;'>Tu solicitud de devoluci&#243;n ha sido aprobada. Por favor env&#237;a el producto siguiendo las instrucciones a continuaci&#243;n.</p>"
+        shipping_block = ""
+        if return_label_url:
+            shipping_block += f"""
+            <div style='background:#111;border:1px solid #333;padding:16px;margin-top:16px;'>
+              <p style='color:#aaa;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px;'>Etiqueta prepagada</p>
+              <a href='{return_label_url}' style='display:inline-block;background:#22c55e;color:#fff;padding:10px 24px;text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;'>
+                DESCARGAR ETIQUETA
+              </a>
+            </div>"""
+        if return_address:
+            shipping_block += f"""
+            <div style='background:#111;border:1px solid #333;padding:16px;margin-top:12px;'>
+              <p style='color:#aaa;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px;'>Direcci&#243;n de env&#237;o</p>
+              <p style='color:#f5f0e8;font-family:monospace;font-size:13px;white-space:pre-wrap;margin:0;'>{return_address}</p>
+            </div>"""
+        body += shipping_block
+        body += "<p style='color:#888;font-size:13px;margin-top:20px;'>Una vez enviado, ingresa tu n&#250;mero de gu&#237;a en tu cuenta para que podamos rastrear el paquete.</p>"
+
+    elif return_status == "rejected":
+        title = "Solicitud no aprobada"
+        color = "#ef4444"
+        body = f"<p style='color:#ccc;line-height:1.7;'>Despu&#233;s de revisar tu solicitud para el pedido #{order_number}, no podemos procesarla en este momento.</p>"
+
+    elif return_status == "shipped":
+        title = "Gu&#237;a registrada &#8212; En camino"
+        color = "#3b82f6"
+        body = "<p style='color:#ccc;line-height:1.7;'>Hemos registrado tu n&#250;mero de gu&#237;a. Cuando recibamos el paquete te notificaremos.</p>"
+        if tracking_number:
+            body += f"<div style='background:#111;border:1px solid #333;padding:16px;margin-top:16px;'><p style='color:#aaa;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;'>N&#250;mero de gu&#237;a</p><p style='color:#f5f0e8;font-family:monospace;font-size:16px;margin:0;'>{tracking_number}</p></div>"
+
+    elif return_status == "received":
+        title = "Paquete recibido"
+        color = "#f59e0b"
+        body = "<p style='color:#ccc;line-height:1.7;'>Hemos recibido e inspeccionado tu paquete. Estamos procesando tu reembolso.</p>"
+
+    elif return_status == "refunded":
+        title = "Reembolso procesado"
+        color = "#c9a84c"
+        refund_labels = {"card": "Tarjeta original", "points": "Puntos de lealtad", "exchange": "Cambio de producto"}
+        refund_label = refund_labels.get(refund_type, refund_type or "")
+        amount_str = f"${refund_amount:,.0f} COP" if refund_amount else ""
+        body = "<p style='color:#ccc;line-height:1.7;'>Hemos procesado tu reembolso.</p>"
+        if refund_label or amount_str:
+            body += "<div style='background:#111;border:1px solid #333;padding:16px;margin-top:16px;display:flex;gap:32px;'>"
+            if refund_label:
+                body += f"<div><p style='color:#aaa;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 4px;'>Tipo</p><p style='color:#f5f0e8;font-size:14px;margin:0;'>{refund_label}</p></div>"
+            if amount_str:
+                body += f"<div><p style='color:#aaa;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin:0 0 4px;'>Monto</p><p style='color:#c9a84c;font-size:14px;font-weight:bold;margin:0;'>{amount_str}</p></div>"
+            body += "</div>"
+        if refund_type != "points":
+            body += "<p style='color:#888;font-size:13px;margin-top:16px;'>Puede tardar 3-5 d&#237;as h&#225;biles en reflejarse en tu cuenta.</p>"
+    else:
+        title = "Actualizaci&#243;n de devoluci&#243;n"
+        color = "#c9a84c"
+        body = "<p style='color:#ccc;line-height:1.7;'>Hay una actualizaci&#243;n en tu solicitud de devoluci&#243;n.</p>"
+
     html = f"""
     <div style="font-family:Georgia,serif;max-width:600px;margin:0 auto;background:#0a0a0a;color:#f5f0e8;padding:40px;">
       <h1 style="font-size:28px;letter-spacing:8px;color:#c9a84c;margin:0 0 4px;">AROMA</h1>
       <p style="font-size:11px;letter-spacing:4px;color:#888;margin:0 0 40px;">DISTRIBUIDO</p>
       <h2 style="font-size:20px;font-weight:normal;color:{color};margin:0 0 8px;">{title}</h2>
       <p style="color:#888;margin:0 0 16px;">Pedido #{order_number}</p>
-      <p style="color:#ccc;line-height:1.7;margin:0 0 16px;">{message}</p>
-      {notes_section}
+      {body}
+      {_notes_block(admin_notes)}
       <a href="{settings.FRONTEND_URL}/account"
          style="display:inline-block;background:#c9a84c;color:#0a0a0a;padding:14px 36px;text-decoration:none;letter-spacing:3px;font-size:13px;font-weight:bold;margin-top:24px;">
         VER MI CUENTA
@@ -297,4 +366,4 @@ async def send_return_status_email(to: str, first_name: str, order_number: str, 
       <p style="color:#555;font-size:11px;margin-top:40px;">&#169; 2026 Aroma-Distribuido.</p>
     </div>
     """
-    await _send(to, "Actualizaci&#243;n de devoluci&#243;n — Aroma-Distribuido", html)
+    await _send(to, f"Devoluci&#243;n #{order_number} &#8212; {title} | Aroma-Distribuido", html)
