@@ -83,6 +83,17 @@ export const useAuthStore = defineStore('auth', () => {
     _setTokens(data)
   }
 
+  // Modal de autenticación global
+  const authModal = ref({ show: false, redirect: '/', tab: 'login' })
+
+  function openAuthModal(redirect = '/', tab = 'login') {
+    authModal.value = { show: true, redirect, tab }
+  }
+
+  function closeAuthModal() {
+    authModal.value = { show: false, redirect: '/', tab: 'login' }
+  }
+
   return {
     user, accessToken, refreshToken,
     isAuthenticated, isAdmin,
@@ -90,5 +101,6 @@ export const useAuthStore = defineStore('auth', () => {
     refreshAccessToken, fetchMe,
     forgotPassword, resetPassword,
     verifyEmail, resendVerification, googleLogin,
+    authModal, openAuthModal, closeAuthModal,
   }
 })

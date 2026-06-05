@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import List, Optional
+from datetime import datetime
 
 
 class MessageResponse(BaseModel):
@@ -80,4 +81,5 @@ class ReviewResponse(BaseModel):
     images: Optional[List[str]] = None
     is_approved: bool
     user_name: Optional[str] = None
+    created_at: Optional[datetime] = None
     model_config = {"from_attributes": True}

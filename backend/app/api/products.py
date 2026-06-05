@@ -356,7 +356,7 @@ async def create_product(
     await invalidate_product_caches()
     logger.info(
         "Product created — cache invalidated",
-        extra={"event": "product_created", "product_id": product.id, "name": product.name},
+        extra={"event": "product_created", "product_id": product.id, "product_name": product.name},
     )
 
     return ProductResponse.model_validate(_enrich(product, db))

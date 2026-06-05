@@ -9,6 +9,20 @@
         {{ badge }}
       </span>
 
+      <!-- Wishlist heart -->
+      <button
+        @click.stop="handleWishlist"
+        class="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-sm hover:scale-110 transition-transform"
+        :title="wished ? 'Quitar de favoritos' : 'Agregar a favoritos'"
+      >
+        <svg class="w-4 h-4 transition-colors" viewBox="0 0 24 24"
+          :class="wished ? 'fill-red-500 text-red-500' : 'fill-transparent text-gray-400 stroke-gray-400'"
+          stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+        </svg>
+      </button>
+
       <img v-if="product.images?.[0]"
         :src="product.images[0]"
         :alt="product.name"
@@ -61,6 +75,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useCartStore } from '../../stores/cart'
+import { useWishlistStore } from '../../stores/wishlist'
 import { formatCOP } from '../../utils/currency'
 
 const props = defineProps({
@@ -69,6 +84,7 @@ const props = defineProps({
 })
 
 const cart = useCartStore()
+const wishlist = useWishlistStore()
 
 const baseVariant = computed(() => props.product.variants?.[0] || null)
 const basePrice = computed(() => baseVariant.value?.price ?? null)
@@ -98,9 +114,15 @@ const badgeClass = computed(() => ({
   'bg-[#e85d04] text-white': badge.value?.includes('%'),
 }))
 
+const wished = computed(() => wishlist.isWished(props.product.id))
+
 function handleAddToCart() {
   if (baseVariant.value) {
     cart.addItem(props.product, baseVariant.value, 1)
   }
+}
+
+function handleWishlist() {
+  wishlist.toggle(props.product)
 }
 </script>

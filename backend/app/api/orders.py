@@ -11,6 +11,7 @@ from app.models.user import User
 from app.models.order import Order, OrderItem, OrderStatus
 from app.models.product import ProductVariant
 from app.models.category import Coupon
+from app.models.wishlist import LoyaltyTransaction
 from app.schemas.order import (
     OrderCreate, OrderResponse, OrderListResponse, OrderStatusUpdate, TrackingUpdate
 )
@@ -137,6 +138,21 @@ async def create_order(
     db.commit()
     db.refresh(order)
 
+    # Award loyalty points (1 point per $1,000 COP) for authenticated users
+    if current_user:
+        earned = int(order.total / 1000)
+        if earned > 0:
+            current_user.loyalty_points = (current_user.loyalty_points or 0) + earned
+            tx = LoyaltyTransaction(
+                user_id=current_user.id,
+                points=earned,
+                type="earned",
+                description=f"Compra #{order.order_number}",
+                order_id=order.id,
+            )
+            db.add(tx)
+            db.commit()
+
     items_for_email = [
         {"product_name": i.product_name, "size_ml": i.size_ml, "quantity": i.quantity, "total_price": i.total_price}
         for i in order.items
@@ -185,7 +201,9 @@ async def my_orders(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    query = db.query(Order).options(joinedload(Order.items)).filter(
+    query = db.query(Order).options(
+        joinedload(Order.items).joinedload(OrderItem.product)
+    ).filter(
         Order.user_id == current_user.id
     ).order_by(Order.created_at.desc())
     total = query.count()
@@ -296,7 +314,9 @@ async def get_order(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    order = db.query(Order).options(joinedload(Order.items)).filter(
+    order = db.query(Order).options(
+        joinedload(Order.items).joinedload(OrderItem.product)
+    ).filter(
         Order.id == order_id
     ).first()
     if not order:
@@ -315,7 +335,9 @@ async def admin_list_orders(
     db: Session = Depends(get_db),
     _: User = Depends(get_current_admin),
 ):
-    query = db.query(Order).options(joinedload(Order.items)).order_by(Order.created_at.desc())
+    query = db.query(Order).options(
+        joinedload(Order.items).joinedload(OrderItem.product)
+    ).order_by(Order.created_at.desc())
     if status:
         query = query.filter(Order.status == status)
     total = query.count()

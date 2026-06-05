@@ -72,7 +72,8 @@ router.beforeEach((to, from, next) => {
     return next({ name: 'Login', query: { redirect: to.fullPath } })
   }
   if (to.meta.requiresAuth && !auth.isAuthenticated) {
-    return next({ name: 'Login', query: { redirect: to.fullPath } })
+    auth.openAuthModal(to.fullPath, 'login')
+    return next(false)
   }
   // Already authenticated: admins go to dashboard, clients go to home
   if (to.meta.guestOnly && auth.isAuthenticated) {

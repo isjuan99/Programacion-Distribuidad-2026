@@ -156,6 +156,7 @@ async def create_review(
         title=data.title,
         body=data.body,
         images=data.images or [],
+        is_approved=True,
     )
     db.add(review)
     db.commit()

@@ -165,28 +165,168 @@
             </div>
             <div v-else class="space-y-4">
               <div v-for="order in orders" :key="order.id"
-                class="bg-white border border-gray-200 rounded-sm p-5 shadow-sm hover:border-gray-300 transition-colors">
-                <div class="flex items-center justify-between gap-4 mb-3">
+                class="bg-white border border-gray-200 rounded-sm shadow-sm transition-colors"
+                :class="expandedOrderId === order.id ? 'border-gold/40' : 'hover:border-gray-300'">
+
+                <!-- Cabecera del pedido -->
+                <div class="p-5">
+                  <div class="flex items-center justify-between gap-4 mb-3">
+                    <div>
+                      <p class="font-medium text-[#111010]">#AROMA-{{ order.order_number }}</p>
+                      <p class="text-xs text-gray-400 mt-0.5">{{ formatDate(order.created_at) }}</p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <span class="text-sm font-bold text-[#111010]">{{ formatCOP(order.total) }}</span>
+                      <span class="px-2.5 py-1 rounded-full text-xs font-medium" :class="statusBadgeClass(order.status)">
+                        {{ statusLabel(order.status) }}
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Miniaturas de productos -->
+                  <div v-if="order.items?.length && expandedOrderId !== order.id" class="flex gap-1.5 mb-3">
+                    <div v-for="item in order.items.slice(0, 5)" :key="item.id"
+                      class="w-9 h-9 bg-gray-100 border border-gray-200 rounded overflow-hidden shrink-0">
+                      <img v-if="item.image" :src="item.image" :alt="item.product_name" class="w-full h-full object-cover" />
+                      <div v-else class="w-full h-full flex items-center justify-center text-gray-300 text-xs">🧴</div>
+                    </div>
+                    <div v-if="order.items.length > 5"
+                      class="w-9 h-9 bg-gray-100 border border-gray-200 rounded flex items-center justify-center text-xs text-gray-400 font-medium">
+                      +{{ order.items.length - 5 }}
+                    </div>
+                  </div>
+
+                  <!-- Botones de acción -->
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <button @click="toggleOrderDetail(order.id)"
+                      class="flex items-center gap-1.5 text-xs border px-3 py-1.5 transition-colors rounded-sm"
+                      :class="expandedOrderId === order.id
+                        ? 'border-gold text-gold bg-gold/5'
+                        : 'border-gray-200 text-gray-600 hover:border-gold hover:text-gold'">
+                      <svg class="w-3.5 h-3.5 transition-transform duration-200"
+                        :class="expandedOrderId === order.id ? 'rotate-180' : ''"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                      {{ expandedOrderId === order.id ? 'Ocultar detalle' : 'Ver pedido' }}
+                    </button>
+                    <button v-if="order.status === 'delivered'" @click="openReturnForm(order.id)"
+                      class="text-xs text-gray-400 border border-gray-200 px-3 py-1.5 hover:border-gray-400 hover:text-gray-600 transition-colors rounded-sm">
+                      Solicitar devolución
+                    </button>
+                  </div>
+                </div>
+
+                <!-- ── Detalle expandido ─────────────────────────────── -->
+                <div v-if="expandedOrderId === order.id"
+                  class="border-t border-gray-100 px-5 pb-5 pt-4 space-y-5">
+
+                  <!-- Productos -->
                   <div>
-                    <p class="font-medium text-[#111010]">#AROMA-{{ order.order_number }}</p>
-                    <p class="text-xs text-gray-400 mt-0.5">{{ formatDate(order.created_at) }}</p>
+                    <p class="text-[10px] tracking-widest uppercase text-gray-400 mb-3">
+                      Productos ({{ order.items.length }} {{ order.items.length === 1 ? 'ítem' : 'ítems' }})
+                    </p>
+                    <div class="space-y-3">
+                      <div v-for="item in order.items" :key="item.id"
+                        class="flex items-center gap-4 py-3 border-b border-gray-50 last:border-0">
+                        <!-- Foto del producto -->
+                        <div class="w-16 h-16 bg-gray-100 border border-gray-200 rounded-sm overflow-hidden shrink-0">
+                          <img v-if="item.image" :src="item.image" :alt="item.product_name"
+                            class="w-full h-full object-cover" />
+                          <div v-else class="w-full h-full flex items-center justify-center text-gray-300 text-2xl">🧴</div>
+                        </div>
+                        <!-- Info del ítem -->
+                        <div class="flex-1 min-w-0">
+                          <p class="text-sm font-medium text-[#111010] leading-tight">{{ item.product_name }}</p>
+                          <p class="text-xs text-gray-400 mt-0.5">{{ item.size_ml }} ml</p>
+                          <div class="flex items-center gap-2 mt-1.5">
+                            <span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+                              × {{ item.quantity }}
+                            </span>
+                            <span class="text-xs text-gray-400">{{ formatCOP(item.unit_price) }} c/u</span>
+                          </div>
+                        </div>
+                        <!-- Subtotal ítem -->
+                        <div class="text-right shrink-0">
+                          <p class="text-sm font-semibold text-[#111010]">{{ formatCOP(item.total_price) }}</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div class="flex items-center gap-3">
-                    <span class="text-sm font-bold text-[#111010]">{{ formatCOP(order.total) }}</span>
-                    <span class="px-2.5 py-1 rounded-full text-xs font-medium" :class="statusBadgeClass(order.status)">
-                      {{ statusLabel(order.status) }}
-                    </span>
+
+                  <!-- Resumen de costos + Dirección -->
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                    <!-- Resumen de costos -->
+                    <div class="bg-gray-50 rounded-sm p-4">
+                      <p class="text-[10px] tracking-widest uppercase text-gray-400 mb-3">Resumen de costos</p>
+                      <div class="space-y-1.5 text-sm">
+                        <div class="flex justify-between text-gray-600">
+                          <span>Subtotal</span>
+                          <span>{{ formatCOP(order.subtotal) }}</span>
+                        </div>
+                        <div v-if="order.discount > 0" class="flex justify-between text-green-600">
+                          <span>Descuento <span v-if="order.coupon_code" class="font-mono text-xs bg-green-100 px-1 rounded">{{ order.coupon_code }}</span></span>
+                          <span>-{{ formatCOP(order.discount) }}</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                          <span>Envío</span>
+                          <span>{{ order.shipping_cost > 0 ? formatCOP(order.shipping_cost) : 'Gratis' }}</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600">
+                          <span>IVA (8%)</span>
+                          <span>{{ formatCOP(order.tax) }}</span>
+                        </div>
+                        <div class="flex justify-between font-semibold text-[#111010] pt-2 border-t border-gray-200 mt-2">
+                          <span>Total</span>
+                          <span class="text-gold">{{ formatCOP(order.total) }}</span>
+                        </div>
+                      </div>
+                      <div v-if="order.payment_method" class="mt-3 pt-3 border-t border-gray-200">
+                        <p class="text-[10px] tracking-widest uppercase text-gray-400 mb-1">Método de pago</p>
+                        <p class="text-xs text-gray-600 capitalize">
+                          {{ order.payment_method === 'card' ? '💳 Tarjeta' : order.payment_method }}
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Dirección de envío -->
+                    <div class="bg-gray-50 rounded-sm p-4">
+                      <p class="text-[10px] tracking-widest uppercase text-gray-400 mb-3">Dirección de envío</p>
+                      <div class="text-sm text-gray-600 space-y-0.5">
+                        <p class="font-medium text-[#111010]">{{ order.shipping_first_name }} {{ order.shipping_last_name }}</p>
+                        <p>{{ order.shipping_address }}</p>
+                        <p>{{ order.shipping_city }}, {{ order.shipping_postal_code }}</p>
+                        <p>{{ order.shipping_country }}</p>
+                        <p class="text-xs text-gray-400 mt-1">{{ order.shipping_email }}</p>
+                      </div>
+                      <div v-if="order.shipping_method" class="mt-3 pt-3 border-t border-gray-200">
+                        <p class="text-[10px] tracking-widest uppercase text-gray-400 mb-1">Tipo de envío</p>
+                        <p class="text-xs text-gray-600">
+                          {{ order.shipping_method === 'express' ? '⚡ Express' : '📦 Estándar' }}
+                        </p>
+                      </div>
+                    </div>
                   </div>
+
+                  <!-- Tracking -->
+                  <div v-if="order.tracking_number" class="bg-blue-50 border border-blue-200 rounded-sm p-4">
+                    <p class="text-[10px] tracking-widest uppercase text-blue-500 mb-2">Información de envío</p>
+                    <div class="flex items-center justify-between flex-wrap gap-3">
+                      <div>
+                        <p class="text-sm font-medium text-blue-800">🚚 {{ order.tracking_company }}</p>
+                        <p class="font-mono text-xs text-blue-600 mt-0.5">{{ order.tracking_number }}</p>
+                      </div>
+                      <a v-if="order.tracking_url" :href="order.tracking_url" target="_blank"
+                        class="text-xs bg-blue-600 text-white px-4 py-2 rounded-sm hover:bg-blue-700 transition-colors">
+                        Rastrear paquete →
+                      </a>
+                    </div>
+                  </div>
+
                 </div>
-                <div v-if="order.tracking_number" class="bg-blue-50 border border-blue-200 rounded p-3 mt-3 text-xs">
-                  <p class="text-blue-600 font-medium">🚚 {{ order.tracking_company }} · <span class="font-mono">{{ order.tracking_number }}</span></p>
-                  <a v-if="order.tracking_url" :href="order.tracking_url" target="_blank"
-                    class="text-blue-500 underline mt-1 inline-block">Rastrear paquete →</a>
-                </div>
-                <button v-if="order.status === 'delivered'" @click="openReturnForm(order.id)"
-                  class="text-xs text-gray-400 border border-gray-200 px-3 py-1.5 hover:border-gray-400 hover:text-gray-600 transition-colors mt-3 rounded-sm">
-                  Solicitar devolución
-                </button>
+                <!-- ── Fin detalle expandido ─────────────────────────── -->
+
               </div>
             </div>
           </div>
@@ -747,7 +887,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import Header from '../components/layout/Header.vue'
@@ -767,7 +907,12 @@ const activeTab = ref('profile')
 // Pedidos
 const orders = ref([])
 const loadingOrders = ref(false)
+const expandedOrderId = ref(null)
 const lastOrder = computed(() => orders.value[0] || null)
+
+function toggleOrderDetail(orderId) {
+  expandedOrderId.value = expandedOrderId.value === orderId ? null : orderId
+}
 
 // Direcciones
 const addresses = ref([])
@@ -1078,13 +1223,21 @@ async function handleLogout() {
   router.push('/')
 }
 
-onMounted(async () => {
+async function loadOrders() {
   loadingOrders.value = true
   try {
     const { data } = await api.get('/orders/my-orders', { params: { per_page: 10 } })
     orders.value = data.items
   } catch {} finally { loadingOrders.value = false }
+}
 
+watch(activeTab, (tab) => {
+  if (tab === 'orders') loadOrders()
+  if (tab === 'returns') loadReturns()
+})
+
+onMounted(async () => {
+  await loadOrders()
   await Promise.all([loadAddresses(), loadWishlist(), loadReturns(), loadPaymentMethods(), loadLoyalty()])
 })
 </script>

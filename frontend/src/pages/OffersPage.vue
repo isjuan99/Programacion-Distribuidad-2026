@@ -111,11 +111,13 @@ import { useRouter } from 'vue-router'
 import Header from '../components/layout/Header.vue'
 import Footer from '../components/layout/Footer.vue'
 import { useCartStore } from '../stores/cart'
+import { useWishlistStore } from '../stores/wishlist'
 import { formatCOP } from '../utils/currency'
 import api from '../router/api'
 
 const router = useRouter()
 const cart = useCartStore()
+const wishlist = useWishlistStore()
 
 const products = ref([])
 const total = ref(0)
@@ -194,9 +196,14 @@ const OfferCard = defineComponent({
         ? Math.round((1 - price.value / compareAt.value) * 100)
         : null
     )
+    const wished = computed(() => wishlist.isWished(props.product.id))
     function addToCart(e) {
       e.stopPropagation()
       if (variant.value) cart.addItem(props.product, variant.value, 1)
+    }
+    function toggleWishlist(e) {
+      e.stopPropagation()
+      wishlist.toggle(props.product)
     }
     return () => h('div', {
       class: 'group cursor-pointer bg-white border border-gray-100 hover:border-gray-300 hover:shadow-md transition-all duration-300',
@@ -208,6 +215,22 @@ const OfferCard = defineComponent({
         pct.value ? h('span', {
           class: 'absolute top-3 left-3 z-10 bg-[#e85d04] text-white text-[10px] font-bold px-2.5 py-1 rounded-full'
         }, `-${pct.value}%`) : null,
+        // Wishlist heart
+        h('button', {
+          class: 'absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-sm hover:scale-110 transition-transform',
+          title: wished.value ? 'Quitar de favoritos' : 'Agregar a favoritos',
+          onClick: toggleWishlist,
+        }, h('svg', {
+          class: 'w-4 h-4 transition-colors',
+          viewBox: '0 0 24 24',
+          stroke: 'currentColor',
+          'stroke-width': '2',
+          style: { fill: wished.value ? '#ef4444' : 'transparent', color: wished.value ? '#ef4444' : '#9ca3af' },
+        }, h('path', {
+          'stroke-linecap': 'round',
+          'stroke-linejoin': 'round',
+          d: 'M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z',
+        }))),
         // Product image
         props.product.images?.[0]
           ? h('img', {

@@ -75,6 +75,14 @@ class OrderItem(Base):
     order = relationship("Order", back_populates="items")
     product = relationship("Product", back_populates="order_items")
 
+    @property
+    def image(self):
+        if self.product and self.product.images:
+            imgs = self.product.images
+            if isinstance(imgs, list) and imgs:
+                return imgs[0]
+        return None
+
 
 class Address(Base):
     __tablename__ = "addresses"

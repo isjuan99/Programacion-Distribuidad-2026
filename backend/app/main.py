@@ -41,6 +41,7 @@ async def lifespan(app: FastAPI):
     logger.info("Starting Aroma-Distribuido backend", extra={"event": "startup"})
     Base.metadata.create_all(bind=engine)
     os.makedirs(os.path.join(settings.UPLOAD_DIR, "products"), exist_ok=True)
+    os.makedirs(os.path.join(settings.UPLOAD_DIR, "reviews"), exist_ok=True)
     await get_redis()
     await get_rabbitmq_channel()
     yield

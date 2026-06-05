@@ -110,11 +110,13 @@
                 <option value="delivered">Entregado</option>
                 <option value="cancelled">Cancelado</option>
               </select>
-              <button @click="updateStatus"
-                class="bg-gold text-aroma-dark px-4 py-2 text-xs tracking-widest uppercase hover:bg-gold-light">
-                OK
+              <button @click="updateStatus" :disabled="statusSaving"
+                class="bg-gold text-aroma-dark px-4 py-2 text-xs tracking-widest uppercase hover:bg-gold-light disabled:opacity-50">
+                {{ statusSaving ? '...' : 'OK' }}
               </button>
             </div>
+            <p v-if="statusMsg === 'ok'" class="text-xs text-green-600 mt-1">Estado guardado correctamente</p>
+            <p v-else-if="statusMsg" class="text-xs text-red-500 mt-1">{{ statusMsg }}</p>
           </div>
 
           <!-- Shipping info -->
@@ -208,6 +210,8 @@ const activeStatus = ref('all')
 
 const showExportMenu = ref(false)
 const exportLoading = ref(false)
+const statusSaving = ref(false)
+const statusMsg = ref('')
 
 const trackingForm = ref({ tracking_number: '', tracking_company: '', tracking_url: '' })
 
@@ -293,9 +297,18 @@ function statusClass(s) {
 
 async function updateStatus() {
   if (!selectedOrder.value) return
-  await api.patch(`/orders/${selectedOrder.value.id}/status`, { status: newStatus.value })
-  selectedOrder.value.status = newStatus.value
-  await load()
+  statusSaving.value = true
+  statusMsg.value = ''
+  try {
+    await api.patch(`/orders/${selectedOrder.value.id}/status`, { status: newStatus.value })
+    selectedOrder.value.status = newStatus.value
+    statusMsg.value = 'ok'
+    await load()
+  } catch (e) {
+    statusMsg.value = e.response?.data?.detail || 'Error al guardar el estado'
+  } finally {
+    statusSaving.value = false
+  }
 }
 
 async function load() {

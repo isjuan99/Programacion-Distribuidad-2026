@@ -36,6 +36,7 @@ class OrderItemResponse(BaseModel):
     quantity: int
     unit_price: float
     total_price: float
+    image: Optional[str] = None
     model_config = {"from_attributes": True}
 
 

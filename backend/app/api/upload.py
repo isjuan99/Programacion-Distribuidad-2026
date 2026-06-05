@@ -3,7 +3,7 @@ from fastapi.responses import FileResponse
 import os, uuid, shutil
 from PIL import Image
 from app.core.config import settings
-from app.core.dependencies import get_current_admin
+from app.core.dependencies import get_current_admin, get_current_user
 from app.models.user import User
 
 router = APIRouter(prefix="/upload", tags=["upload"])
@@ -42,6 +42,38 @@ async def upload_image(
             img.save(filepath, optimize=True, quality=85)
 
     return {"url": f"/uploads/products/{filename}", "filename": filename}
+
+
+@router.post("/review-image")
+async def upload_review_image(
+    file: UploadFile = File(...),
+    current_user: User = Depends(get_current_user),
+):
+    if file.content_type not in ALLOWED_TYPES:
+        raise HTTPException(status_code=400, detail="Tipo de imagen no permitido (jpeg/png/webp)")
+
+    content = await file.read()
+    max_bytes = 2 * 1024 * 1024  # 2MB limit for review images
+    if len(content) > max_bytes:
+        raise HTTPException(status_code=400, detail="Imagen demasiado grande (máx 2MB)")
+
+    ext = file.filename.rsplit(".", 1)[-1].lower() if "." in file.filename else "jpg"
+    filename = f"review_{uuid.uuid4()}.{ext}"
+    upload_dir = os.path.join(settings.UPLOAD_DIR, "reviews")
+    os.makedirs(upload_dir, exist_ok=True)
+    filepath = os.path.join(upload_dir, filename)
+
+    with open(filepath, "wb") as f:
+        f.write(content)
+
+    with Image.open(filepath) as img:
+        if img.width > 800:
+            ratio = 800 / img.width
+            new_size = (800, int(img.height * ratio))
+            img = img.resize(new_size, Image.LANCZOS)
+            img.save(filepath, optimize=True, quality=85)
+
+    return {"url": f"/uploads/reviews/{filename}", "filename": filename}
 
 
 @router.delete("/image/{filename}", status_code=204)

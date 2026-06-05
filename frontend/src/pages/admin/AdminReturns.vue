@@ -1,18 +1,19 @@
 <template>
+  <AdminSidebar>
   <div class="p-6 lg:p-8 max-w-7xl mx-auto">
     <div class="mb-8">
-      <h1 class="text-2xl font-light tracking-widest text-white">{{ $t('admin.returns') }}</h1>
+      <h1 class="text-2xl font-light tracking-widest text-[#111010]">{{ $t('admin.returns') }}</h1>
       <p class="text-gray-500 text-sm mt-1">{{ $t('admin.returns_subtitle') }}</p>
     </div>
 
     <!-- Filtros de estado -->
-    <div class="flex gap-1 mb-6 border-b border-gray-800 overflow-x-auto">
+    <div class="flex gap-1 mb-6 border-b border-gray-200 overflow-x-auto">
       <button v-for="tab in statusTabs" :key="tab.value"
         @click="activeStatus = tab.value; loadReturns()"
         class="px-4 py-2 text-sm transition-colors shrink-0"
         :class="activeStatus === tab.value
           ? 'text-[#c9a84c] border-b-2 border-[#c9a84c]'
-          : 'text-gray-500 hover:text-gray-300'">
+          : 'text-gray-500 hover:text-gray-700'">
         {{ tab.label }}
       </button>
     </div>
@@ -23,51 +24,51 @@
     <div v-else-if="returns.length" class="overflow-x-auto">
       <table class="w-full text-sm">
         <thead>
-          <tr class="border-b border-gray-800">
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">ID</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Pedido</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Motivo</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Fotos</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Guía</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Estado</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Fecha</th>
-            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-400 font-normal">Acción</th>
+          <tr class="border-b border-gray-200 bg-gray-50">
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-500 font-normal">ID</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-500 font-normal">Pedido</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-500 font-normal">Motivo</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-500 font-normal">Fotos</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-500 font-normal">Guía</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-500 font-normal">Estado</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-500 font-normal">Fecha</th>
+            <th class="text-left py-3 px-4 text-xs tracking-widest text-gray-500 font-normal">Acción</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-800">
-          <tr v-for="ret in returns" :key="ret.id" class="hover:bg-white/2 transition-colors">
-            <td class="py-3 px-4 text-gray-400">#{{ ret.id }}</td>
-            <td class="py-3 px-4 text-gray-300">#{{ ret.order_id }}</td>
-            <td class="py-3 px-4 text-gray-300 max-w-[160px] truncate">{{ ret.reason }}</td>
+        <tbody class="divide-y divide-gray-100">
+          <tr v-for="ret in returns" :key="ret.id" class="hover:bg-gray-50 transition-colors">
+            <td class="py-3 px-4 text-[#111010] font-medium">#{{ ret.id }}</td>
+            <td class="py-3 px-4 text-[#111010] font-medium">#{{ ret.order_id }}</td>
+            <td class="py-3 px-4 text-gray-700 max-w-[160px] truncate">{{ ret.reason }}</td>
             <td class="py-3 px-4">
               <div v-if="ret.images?.length" class="flex gap-1">
                 <img v-for="(img, i) in ret.images.slice(0, 3)" :key="i"
-                  :src="img" class="w-10 h-10 object-cover border border-gray-700 rounded-sm cursor-pointer hover:border-[#c9a84c] transition-colors"
+                  :src="img" class="w-10 h-10 object-cover border border-gray-300 rounded-sm cursor-pointer hover:border-[#c9a84c] transition-colors"
                   @click="lightboxImg = img" />
               </div>
-              <span v-else class="text-gray-600 text-xs">—</span>
+              <span v-else class="text-gray-400 text-xs">—</span>
             </td>
             <td class="py-3 px-4">
-              <span v-if="ret.tracking_number" class="font-mono text-xs text-blue-400">{{ ret.tracking_number }}</span>
-              <span v-else class="text-gray-600 text-xs">—</span>
+              <span v-if="ret.tracking_number" class="font-mono text-xs text-blue-600">{{ ret.tracking_number }}</span>
+              <span v-else class="text-gray-400 text-xs">—</span>
             </td>
             <td class="py-3 px-4">
               <span class="text-xs px-2 py-1 rounded-sm"
                 :class="{
-                  'bg-yellow-500/20 text-yellow-400': ret.status === 'pending',
-                  'bg-green-500/20 text-green-400':  ret.status === 'approved',
-                  'bg-red-500/20 text-red-400':      ret.status === 'rejected',
-                  'bg-blue-500/20 text-blue-400':    ret.status === 'shipped',
-                  'bg-amber-500/20 text-amber-400':  ret.status === 'received',
-                  'bg-[#c9a84c]/20 text-[#c9a84c]':  ret.status === 'refunded',
+                  'bg-yellow-100 text-yellow-700': ret.status === 'pending',
+                  'bg-green-100 text-green-700':   ret.status === 'approved',
+                  'bg-red-100 text-red-700':        ret.status === 'rejected',
+                  'bg-blue-100 text-blue-700':      ret.status === 'shipped',
+                  'bg-amber-100 text-amber-700':    ret.status === 'received',
+                  'bg-[#c9a84c]/15 text-[#a07830]': ret.status === 'refunded',
                 }">
                 {{ statusLabel(ret.status) }}
               </span>
             </td>
-            <td class="py-3 px-4 text-gray-500 text-xs">{{ formatDate(ret.created_at) }}</td>
+            <td class="py-3 px-4 text-gray-600 text-xs">{{ formatDate(ret.created_at) }}</td>
             <td class="py-3 px-4">
               <button @click="openReturn(ret)"
-                class="text-xs text-[#c9a84c] border border-[#c9a84c]/30 px-3 py-1 hover:bg-[#c9a84c]/10 transition-colors">
+                class="text-xs text-[#c9a84c] border border-[#c9a84c]/40 px-3 py-1 hover:bg-[#c9a84c]/10 transition-colors">
                 Gestionar
               </button>
             </td>
@@ -206,11 +207,13 @@
       <button @click="lightboxImg = null" class="absolute top-4 right-4 text-white hover:text-[#c9a84c] text-2xl">×</button>
     </div>
   </div>
+  </AdminSidebar>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import AdminSidebar from '../../components/layout/AdminSidebar.vue'
 import api from '../../router/api'
 
 const { t } = useI18n()

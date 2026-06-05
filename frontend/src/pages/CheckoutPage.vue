@@ -115,9 +115,11 @@
             <section class="bg-gray-50 border border-gray-200 p-6 rounded-sm">
               <h2 class="font-display text-xl text-[#111010] mb-5">{{ $t('checkout.payment') }}</h2>
               <div class="border border-gray-200 rounded-sm overflow-hidden bg-white">
+
+                <!-- Opción: Tarjeta -->
                 <label class="flex items-center justify-between p-4 cursor-pointer border-b border-gray-100">
                   <div class="flex items-center gap-3">
-                    <input type="radio" v-model="form.payment_method" value="card" class="accent-gold" checked />
+                    <input type="radio" v-model="form.payment_method" value="card" class="accent-gold" />
                     <span class="text-sm text-[#111010] font-medium">{{ $t('checkout.credit_card') }}</span>
                   </div>
                   <div class="flex gap-1">
@@ -125,18 +127,79 @@
                     <div class="w-8 h-5 bg-orange-500 rounded-sm text-white text-[8px] flex items-center justify-center font-bold">MC</div>
                   </div>
                 </label>
-                <div v-if="form.payment_method === 'card'" class="p-4 space-y-3 bg-gray-50">
-                  <input v-model="form.card_number" type="text" placeholder="•••• •••• •••• ••••"
-                    class="w-full border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
-                  <div class="grid grid-cols-2 gap-3">
-                    <input v-model="form.card_expiry" placeholder="MM / AA"
-                      class="border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
-                    <input v-model="form.card_cvc" placeholder="CVC"
-                      class="border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
+
+                <!-- Panel de tarjeta seleccionada -->
+                <div v-if="form.payment_method === 'card'" class="border-b border-gray-100">
+
+                  <!-- CASO A: Tiene tarjetas guardadas -->
+                  <div v-if="savedCards.length > 0" class="p-4 space-y-3">
+                    <p class="text-[10px] tracking-widest uppercase text-gray-400 mb-3">Selecciona una tarjeta</p>
+
+                    <!-- Lista de tarjetas guardadas -->
+                    <label
+                      v-for="card in savedCards"
+                      :key="card.id"
+                      class="flex items-center gap-4 p-3 border rounded-sm cursor-pointer transition-colors"
+                      :class="selectedCardId === card.id ? 'border-gold bg-gold/5' : 'border-gray-200 hover:border-gray-300'"
+                    >
+                      <input type="radio" :value="card.id" v-model="selectedCardId" class="accent-gold" />
+                      <!-- Ícono de red -->
+                      <div
+                        class="w-10 h-6 rounded flex items-center justify-center text-white text-[9px] font-bold shrink-0"
+                        :class="card.brand === 'visa' ? 'bg-blue-600' : card.brand === 'mastercard' ? 'bg-orange-500' : 'bg-gray-600'"
+                      >
+                        {{ card.brand === 'visa' ? 'VISA' : card.brand === 'mastercard' ? 'MC' : card.brand.toUpperCase().slice(0,4) }}
+                      </div>
+                      <div class="flex-1">
+                        <p class="text-sm text-[#111010] font-medium">•••• •••• •••• {{ card.last4 }}</p>
+                        <p class="text-xs text-gray-400">Vence {{ String(card.exp_month).padStart(2,'0') }}/{{ card.exp_year }}</p>
+                      </div>
+                      <span v-if="card.is_default" class="text-[10px] text-gold tracking-widest uppercase border border-gold/30 px-2 py-0.5">Principal</span>
+                    </label>
+
+                    <!-- Enlace para usar otra tarjeta -->
+                    <button
+                      type="button"
+                      @click="useNewCard = !useNewCard"
+                      class="text-xs text-gray-400 hover:text-gold transition-colors flex items-center gap-1.5 mt-1"
+                    >
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                      </svg>
+                      {{ useNewCard ? 'Cancelar' : 'Usar una tarjeta diferente' }}
+                    </button>
+
+                    <!-- Formulario nueva tarjeta (colapsable) -->
+                    <div v-if="useNewCard" class="pt-3 border-t border-gray-100 space-y-3">
+                      <input v-model="form.card_number" type="text" placeholder="•••• •••• •••• ••••"
+                        class="w-full border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
+                      <div class="grid grid-cols-2 gap-3">
+                        <input v-model="form.card_expiry" placeholder="MM / AA"
+                          class="border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
+                        <input v-model="form.card_cvc" placeholder="CVC"
+                          class="border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
+                      </div>
+                      <input v-model="form.card_name" placeholder="Nombre en la tarjeta"
+                        class="w-full border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
+                    </div>
                   </div>
-                  <input v-model="form.card_name" placeholder="Nombre en la tarjeta"
-                    class="w-full border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
+
+                  <!-- CASO B: Sin tarjetas guardadas → formulario directo -->
+                  <div v-else class="p-4 space-y-3 bg-gray-50">
+                    <input v-model="form.card_number" type="text" placeholder="•••• •••• •••• ••••"
+                      class="w-full border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
+                    <div class="grid grid-cols-2 gap-3">
+                      <input v-model="form.card_expiry" placeholder="MM / AA"
+                        class="border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
+                      <input v-model="form.card_cvc" placeholder="CVC"
+                        class="border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
+                    </div>
+                    <input v-model="form.card_name" placeholder="Nombre en la tarjeta"
+                      class="w-full border border-gray-300 px-4 py-3 text-sm text-[#111010] bg-white focus:outline-none focus:border-gold rounded-sm" />
+                  </div>
                 </div>
+
+                <!-- Opción: PayPal -->
                 <label class="flex items-center justify-between p-4 cursor-pointer">
                   <div class="flex items-center gap-3">
                     <input type="radio" v-model="form.payment_method" value="paypal" class="accent-gold" />
@@ -230,16 +293,18 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import Header from '../components/layout/Header.vue'
 import Footer from '../components/layout/Footer.vue'
 import { useCartStore } from '../stores/cart'
+import { useAuthStore } from '../stores/auth'
 import { formatCOP } from '../utils/currency'
 import api from '../router/api'
 
 const router = useRouter()
 const cart = useCartStore()
+const auth = useAuthStore()
 
 const form = ref({
   email: '', first_name: '', last_name: '', address: '', city: '',
@@ -252,9 +317,27 @@ const discount = ref(0)
 const loading = ref(false)
 const error = ref('')
 
+// Tarjetas guardadas
+const savedCards = ref([])
+const selectedCardId = ref(null)
+const useNewCard = ref(false)
+
 const shippingCost = computed(() => form.value.shipping_method === 'express' ? 25000 : 0)
 const tax = computed(() => (cart.subtotal - discount.value) * 0.08)
 const grandTotal = computed(() => cart.subtotal - discount.value + shippingCost.value + tax.value)
+
+async function loadSavedCards() {
+  if (!auth.isAuthenticated) return
+  try {
+    const { data } = await api.get('/users/me/payment-methods')
+    savedCards.value = data || []
+    // Pre-seleccionar la tarjeta principal
+    const defaultCard = savedCards.value.find(c => c.is_default) || savedCards.value[0]
+    if (defaultCard) selectedCardId.value = defaultCard.id
+  } catch {
+    savedCards.value = []
+  }
+}
 
 async function applyCoupon() {
   try {
@@ -296,4 +379,14 @@ async function placeOrder() {
     loading.value = false
   }
 }
+
+onMounted(async () => {
+  await loadSavedCards()
+  // Pre-llenar datos del usuario autenticado
+  if (auth.user) {
+    form.value.email = auth.user.email || ''
+    form.value.first_name = auth.user.first_name || ''
+    form.value.last_name = auth.user.last_name || ''
+  }
+})
 </script>

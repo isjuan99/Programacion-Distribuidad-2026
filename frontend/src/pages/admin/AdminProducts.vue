@@ -433,8 +433,20 @@ function hasLowStock(product) {
 }
 
 async function handleSubmit() {
-  formLoading.value = true
   formError.value = ''
+  if (!form.value.brand_id) {
+    formError.value = 'Debes seleccionar una marca'
+    return
+  }
+  if (!form.value.category_id) {
+    formError.value = 'Debes seleccionar una categoría'
+    return
+  }
+  if (!form.value.name?.trim()) {
+    formError.value = 'El nombre del producto es obligatorio'
+    return
+  }
+  formLoading.value = true
   try {
     const v = mainVariant.value
     const cleanVariant = {
@@ -448,6 +460,8 @@ async function handleSubmit() {
     }
     const payload = {
       ...form.value,
+      brand_id: Number(form.value.brand_id),
+      category_id: Number(form.value.category_id),
       variants: [cleanVariant],
       olfactory_notes: notesInput.value.split(',').map(n => n.trim()).filter(Boolean),
     }
